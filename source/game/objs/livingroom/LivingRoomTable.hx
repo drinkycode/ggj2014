@@ -12,7 +12,9 @@ class LivingRoomTable extends BaseGObject
 	{
 		super(X, Y);
 		objName = "living_room_table";
-		//interactionMessage = "Shaking table";
+		preInteractionMessage = "*shake table*";
+		postInteractionMessage = "thing broke master upset";
+		requiredCalls = 3;
 		childObjName = "table_jar";
 	}
 	

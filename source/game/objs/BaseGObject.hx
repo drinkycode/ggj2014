@@ -17,9 +17,13 @@ class BaseGObject extends FlxSprite
 	public var interactionState:Int = -1;
 	
 	public var interactionMessage:String = "";
+	public var preInteractionMessage:String = "";
+	public var postInteractionMessage:String = "";
 
-	public var callOnce:Bool = true;
+	public var callOnce:Bool = false;
 	public var called:Bool = false;
+	public var calledTimes:Int = 0;
+	public var requiredCalls:Int = 1;
 	
 	public var childObjName:String = "";
 	public var childObject:BaseGObject;
@@ -38,7 +42,11 @@ class BaseGObject extends FlxSprite
 	override public function destroy():Void 
 	{
 		objName = null;
+		
 		interactionMessage = null;
+		preInteractionMessage = null;
+		postInteractionMessage = null;
+		
 		childObjName = null;
 		childObject = null;
 		super.destroy();
@@ -56,11 +64,23 @@ class BaseGObject extends FlxSprite
 		if (!callOnce || (callOnce && !called))
 		{
 			called = true;
-			doInteraction();
+			calledTimes++;
 			
-			if (childObject != null)
+			if (calledTimes == requiredCalls)
 			{
-				childObject.interact(true);
+				doInteraction();
+				if (childObject != null)
+				{
+					childObject.interact(true);
+				}
+			}
+			else if (calledTimes < requiredCalls)
+			{
+				doPreInteraction();
+			}
+			else
+			{
+				doPostInteraction();
 			}
 		}
 	}
@@ -70,6 +90,22 @@ class BaseGObject extends FlxSprite
 		if (interactionMessage != "")
 		{
 			G.playstate.gui.callTextbox(interactionMessage);
+		}
+	}
+	
+	private function doPreInteraction():Void
+	{
+		if (preInteractionMessage != "")
+		{
+			G.playstate.gui.callTextbox(preInteractionMessage);
+		}
+	}
+	
+	private function doPostInteraction():Void
+	{
+		if (postInteractionMessage != "")
+		{
+			G.playstate.gui.callTextbox(postInteractionMessage);
 		}
 	}
 	

@@ -15,6 +15,7 @@ class TableJar extends BaseGObject
 		super(X, Y);
 		objName = "table_jar";
 		interactionMessage = "Broke jar";
+		postInteractionMessage = "thing broke master upset";
 		canInteract = false;
 	}
 	
