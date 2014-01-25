@@ -169,7 +169,7 @@ class Player extends FlxGroup
 	
 	private function interactWithObject(P:Dynamic, Obj:Dynamic):Void
 	{
-		Reflect.callMethod(Obj, Reflect.field(Obj, "doInteraction"), []);
+		Reflect.callMethod(Obj, Reflect.field(Obj, "interact"), []);
 	}
 	
 }

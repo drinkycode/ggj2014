@@ -1,28 +1,28 @@
-package game.objs.misc;
+package game.objs.livingroom;
 
-import flixel.FlxSprite;
 import game.objs.BaseGObject;
 
 /**
- * Chew toy
+ * Jar on top of table
  * 
  * @author Michael Lee
  */
-class ChewToy extends BaseGObject
+class TableJar extends BaseGObject
 {
-
+	
 	public function new(X:Float = 0, Y:Float = 0) 
 	{
 		super(X, Y);
-		objName = "chew_toy";
-		interactionMessage = "Object message goes here";
+		objName = "table_jar";
+		interactionMessage = "Broke jar";
+		canInteract = false;
 	}
 	
 	override private function setupSprite():Void 
 	{
 		super.setupSprite();
 		
-		makeGraphic(20, 20, 0xffffffff);
+		makeGraphic(10, 10, 0xffffffff);
 		color = 0xff0000;
 	}
 	

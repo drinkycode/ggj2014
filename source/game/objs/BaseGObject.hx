@@ -11,6 +11,7 @@ class BaseGObject extends FlxSprite
 {
 	
 	public var location:Int = 0;
+	public var objName:String = "";
 	
 	public var canInteract:Bool = true;
 	public var interactionState:Int = -1;
@@ -19,6 +20,9 @@ class BaseGObject extends FlxSprite
 
 	public var callOnce:Bool = true;
 	public var called:Bool = false;
+	
+	public var childObjName:String = "";
+	public var childObject:BaseGObject;
 	
 	public function new(X:Float = 0, Y:Float = 0) 
 	{
@@ -31,19 +35,33 @@ class BaseGObject extends FlxSprite
 		
 	}
 	
+	override public function destroy():Void 
+	{
+		objName = null;
+		interactionMessage = null;
+		childObjName = null;
+		childObject = null;
+		super.destroy();
+	}
+	
 	override public function update():Void 
 	{
 		super.update();
 	}
 	
-	public function interact():Void
+	public function interact(Force:Bool = false):Void
 	{
-		if (!canInteract) return;
+		if (!Force && !canInteract) return;
 		
-		if (!callOnce || (callOnce && called))
+		if (!callOnce || (callOnce && !called))
 		{
 			called = true;
 			doInteraction();
+			
+			if (childObject != null)
+			{
+				childObject.interact(true);
+			}
 		}
 	}
 	

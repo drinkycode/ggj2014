@@ -1,17 +1,18 @@
 package game;
 
-//import haxe.xml.Fast;
-import flixel.util.FlxPoint;
-import game.objs.BaseGObject;
-import game.objs.misc.ChewToy;
-import util.GAssets;
 import flixel.FlxG;
 import flixel.FlxObject;
 import flixel.FlxCamera;
-import flixel.group.FlxGroup;
-import flixel.tile.FlxTilemap;
 import flixel.addons.editors.ogmo.FlxOgmoLoader;
-
+import flixel.group.FlxGroup;
+import flixel.group.FlxTypedGroup;
+import flixel.tile.FlxTilemap;
+import flixel.util.FlxPoint;
+import game.objs.BaseGObject;
+import game.objs.livingroom.LivingRoomTable;
+import game.objs.livingroom.TableJar;
+import game.objs.misc.ChewToy;
+import util.GAssets;
 
 /**
  * Level loader for game
@@ -72,6 +73,11 @@ class GameMap extends FlxGroup
 		//add(hitboxes);
 		
 		addGameObject(new ChewToy(580, 620));
+		
+		addGameObject(new LivingRoomTable(650, 600));
+		addGameObject(new TableJar(670, 590));
+		
+		linkGameObjects();
 	}
 	
 	override public function destroy():Void
@@ -123,6 +129,35 @@ class GameMap extends FlxGroup
 	private function addGameObject(Obj:BaseGObject):Void
 	{
 		gobjs.add(Obj);
+	}
+	
+	private function linkGameObjects():Void
+	{
+		var i:Int;
+		var j:Int;
+		var l:Int = gobjs.members.length;
+		
+		var gobj:BaseGObject;
+		for (i in 0 ... l)
+		{
+			gobj = cast gobjs.members[i];
+			if (gobj.childObjName != "")
+			{
+				var childObjName:String = gobj.childObjName;
+				
+				var childObj:BaseGObject = null;
+				for (j in 0 ... l)
+				{
+					if (i == j) continue;
+					childObj = cast gobjs.members[j];
+					if (childObj.objName == childObjName)
+					{
+						gobj.childObject = childObj;
+						break;
+					}
+				}
+			}
+		}
 	}
 	
 	override public function update():Void

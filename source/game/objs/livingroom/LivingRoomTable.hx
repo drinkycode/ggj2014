@@ -1,35 +1,33 @@
-package game.objs.misc;
-
-import flixel.FlxSprite;
+package game.objs.livingroom;
 import game.objs.BaseGObject;
 
 /**
- * Chew toy
- * 
+ * ...
  * @author Michael Lee
  */
-class ChewToy extends BaseGObject
+class LivingRoomTable extends BaseGObject
 {
 
 	public function new(X:Float = 0, Y:Float = 0) 
 	{
 		super(X, Y);
-		objName = "chew_toy";
-		interactionMessage = "Object message goes here";
+		objName = "living_room_table";
+		//interactionMessage = "Shaking table";
+		childObjName = "table_jar";
 	}
 	
 	override private function setupSprite():Void 
 	{
 		super.setupSprite();
 		
-		makeGraphic(20, 20, 0xffffffff);
+		makeGraphic(40, 40, 0xffffffff);
 		color = 0xff0000;
 	}
 	
 	override private function doInteraction():Void 
 	{
 		super.doInteraction();
-		color = 0x000000;
+		//color = 0x000000;
 	}
 	
 }
