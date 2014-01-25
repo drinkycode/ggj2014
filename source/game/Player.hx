@@ -1,14 +1,18 @@
 package game;
 
+import flixel.animation.FlxAnimationController;
 import flixel.FlxG;
+import flixel.FlxObject;
 import flixel.FlxSprite;
 import flixel.group.FlxSpriteGroup;
 import flixel.system.input.keyboard.FlxKey;
 import flixel.system.input.keyboard.FlxKeyboard;
 import flixel.system.input.keyboard.FlxKeyShortcuts;
+import util.GAssets;
 
 /**
- * ...
+ * Doggy doge
+ * 
  * @author Michael Lee
  */
 class Player extends FlxSpriteGroup
@@ -31,7 +35,12 @@ class Player extends FlxSpriteGroup
 		super();
 		
 		_sprite = new FlxSprite();
-		_sprite.makeGraphic(48, 48, 0xffff00ff);
+		
+		_sprite.loadGraphic(GAssets.getFile("player"), true, true, 64, 64);
+		_sprite.animation.add("idle", [0], 0, false);
+		_sprite.animation.play("idle");
+		
+		//_sprite.makeGraphic(48, 48, 0xffff00ff);
 		//_sprite.resetSize();
 		//_sprite.resetSizeFromFrame();
 		//_sprite.centerOffsets();
@@ -39,6 +48,7 @@ class Player extends FlxSpriteGroup
 		
 		interactionZone = new FlxSprite();
 		interactionZone.makeGraphic(24, 24, 0xffffffff);
+		interactionZone.alpha = 0.5;
 		//interactionZone.resetSize();
 		//interactionZone.centerOffsets();
 		//interactionZone.setOriginToCenter();
@@ -90,12 +100,14 @@ class Player extends FlxSpriteGroup
 			acceleration.x = -SPEED_X;
 			updateOrientation = true;
 			newOrientation = 6;
+			facing = FlxObject.RIGHT;
 		}
 		else if (FlxG.keyboard.anyPressed(["RIGHT"]))
 		{
 			acceleration.x = SPEED_X;
 			updateOrientation = true;
 			newOrientation = 2;
+			facing = FlxObject.LEFT;
 		}
 		
 		if (FlxG.keyboard.anyJustPressed(["X"]))
