@@ -66,7 +66,7 @@ class GameMap extends FlxGroup
 		add(gobjs);
 		add(player);
 		
-		addGameObject(new ChewToy(800, 1200));
+		addGameObject(new ChewToy(580, 620));
 	}
 	
 	override public function destroy():Void

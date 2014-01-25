@@ -15,6 +15,9 @@ class BaseGObject extends FlxSprite
 	public var canInteract:Bool = true;
 	public var interactionState:Int = -1;
 
+	public var callOnce:Bool = true;
+	public var called:Bool = false;
+	
 	public function new(X:Float = 0, Y:Float = 0) 
 	{
 		super(X, Y);
@@ -34,7 +37,12 @@ class BaseGObject extends FlxSprite
 	public function interact():Void
 	{
 		if (!canInteract) return;
-		doInteraction();
+		
+		if (!callOnce || (callOnce && called))
+		{
+			called = true;
+			doInteraction();
+		}
 	}
 	
 	private function doInteraction():Void

@@ -32,6 +32,8 @@ class PlayState extends FlxState
 	 */
 	override public function create():Void
 	{
+		G.playstate = this;
+		
 		// Set a background color
 		FlxG.cameras.bgColor = 0xff131c1b;
 		// Show the mouse (in case it hasn't been disabled)
@@ -54,6 +56,8 @@ class PlayState extends FlxState
 	 */
 	override public function destroy():Void
 	{
+		G.playstate = null;
+		
 		//hitboxes = null;
 		//player = null;
 		gui = null;

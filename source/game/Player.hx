@@ -52,7 +52,6 @@ class Player extends FlxSpriteGroup
 	override public function destroy():Void 
 	{
 		_sprite = null;
-		
 		super.destroy();
 	}
 	
@@ -99,6 +98,11 @@ class Player extends FlxSpriteGroup
 			newOrientation = 2;
 		}
 		
+		if (FlxG.keyboard.anyJustPressed(["X"]))
+		{
+			checkInteraction();
+		}
+		
 		var ix:Float = 0;
 		var iy:Float = 0;
 		
@@ -139,6 +143,16 @@ class Player extends FlxSpriteGroup
 		interactionZone.y = _sprite.y + iy;
 		
 		super.update();
+	}
+	
+	public function checkInteraction():Void
+	{
+		FlxG.overlap(interactionZone, G.playstate.gmap.gobjs, interactWithObject);
+	}
+	
+	private function interactWithObject(P:Dynamic, Obj:Dynamic):Void
+	{
+		Reflect.callMethod(Obj, Reflect.field(Obj, "doInteraction"), []);
 	}
 	
 }

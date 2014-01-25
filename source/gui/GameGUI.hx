@@ -29,4 +29,14 @@ class GameGUI extends FlxGroup
 		super.destroy();
 	}
 	
+	override public function update():Void
+	{
+		super.update();
+	}
+	
+	public function callTextbox(Message:String):Void
+	{
+		_textbox.show(Message);
+	}
+	
 }
