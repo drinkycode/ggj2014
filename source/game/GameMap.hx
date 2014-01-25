@@ -25,6 +25,8 @@ class GameMap extends FlxGroup
 	public var tilemap:FlxTilemap;
 	public var cameraFollow:FlxObject;
 	
+	public var hitboxes:FlxGroup;
+	
 	public function new():Void 
 	{
 		super();

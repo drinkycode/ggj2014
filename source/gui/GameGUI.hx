@@ -12,16 +12,20 @@ import flixel.text.FlxText;
  */
 class GameGUI extends FlxGroup
 {
+	
+	private var _textbox:Textbox;
 
 	public function new() 
 	{
 		super();
 		
-		
+		_textbox = new Textbox();
+		add(_textbox);
 	}
 	
 	override public function destroy():Void
 	{
+		_textbox = null;
 		super.destroy();
 	}
 	

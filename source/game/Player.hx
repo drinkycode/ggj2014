@@ -90,17 +90,13 @@ class Player extends FlxSpriteGroup
 		{
 			acceleration.x = -SPEED_X;
 			updateOrientation = true;
-			if (newOrientation == 4) orientation = 5;
-			else if (newOrientation == 0) orientation = 7;
-			else newOrientation = 6;
+			newOrientation = 6;
 		}
 		else if (FlxG.keyboard.anyPressed(["RIGHT"]))
 		{
 			acceleration.x = SPEED_X;
 			updateOrientation = true;
-			if (newOrientation == 4) orientation = 3;
-			else if (newOrientation == 0) orientation = 1;
-			else newOrientation = 2;
+			newOrientation = 2;
 		}
 		
 		var ix:Float = 0;
@@ -114,26 +110,26 @@ class Player extends FlxSpriteGroup
 		switch (orientation) 
 		{
 			case 0:
-				ix = 0;
+				ix = 12;
 				iy = -16;
 			case 1:
-				ix = 16;
+				ix = 40;
 				iy = -16;
 			case 2:
-				ix = 16;
-				iy = 0;
+				ix = 40;
+				iy = 12;
 			case 3:
-				ix = 16;
-				iy = 16;
+				ix = 40;
+				iy = 40;
 			case 4:
-				ix = 0;
-				iy = 16;
+				ix = 12;
+				iy = 40;
 			case 5:
 				ix = -16;
-				iy = 16;
+				iy = 40;
 			case 6:
 				ix = -16;
-				iy = 0;
+				iy = 12;
 			case 7:
 				ix = -16;
 				iy = -16;

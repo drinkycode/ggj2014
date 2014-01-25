@@ -42,18 +42,10 @@ class PlayState extends FlxState
 		super.create();
 		
 		gmap = new GameMap();
-		
-		/*hitboxes = new FlxGroup();
-		
-		player = new Player();
 		gui = new GameGUI();
 		
-		add(hitboxes); // Possibly comment out?
-		
-		add(player);
-		add(gui);*/
-		
 		add(gmap);
+		add(gui);
 	}
 	
 	/**
