@@ -2,6 +2,8 @@ package game;
 
 //import haxe.xml.Fast;
 import flixel.util.FlxPoint;
+import game.objs.BaseGObject;
+import game.objs.misc.ChewToy;
 import util.GAssets;
 import flixel.FlxG;
 import flixel.FlxObject;
@@ -23,8 +25,9 @@ class GameMap extends FlxGroup
 	
 	public var player:Player;
 	public var tilemap:FlxTilemap;
-	public var cameraFollow:FlxObject;
+	public var gobjs:FlxGroup;
 	
+	public var cameraFollow:FlxObject;
 	public var hitboxes:FlxGroup;
 	
 	public function new():Void 
@@ -48,6 +51,8 @@ class GameMap extends FlxGroup
 			tilemap.setTileProperties(i, FlxObject.ANY);
 		}*/	
 		
+		gobjs = new FlxGroup();
+		
 		/*load objects in lvl*/
 		level.loadEntities(loadEntity, "entities");
 		
@@ -58,13 +63,17 @@ class GameMap extends FlxGroup
 		FlxG.camera.follow(cameraFollow, FlxCamera.STYLE_TOPDOWN, new FlxPoint(0, 0), 2);
 		
 		add(tilemap);
+		add(gobjs);
 		add(player);
+		
+		addGameObject(new ChewToy(800, 1200));
 	}
 	
 	override public function destroy():Void
 	{
 		tilemap = null;
 		player = null;
+		gobjs = null;
 		cameraFollow = null;
 		
 		super.destroy();
@@ -94,6 +103,11 @@ class GameMap extends FlxGroup
 			default:
 				throw "Unrecognized actor type '" + EntType + "' detected in level file.";
 		}
+	}
+	
+	private function addGameObject(Obj:BaseGObject):Void
+	{
+		gobjs.add(Obj);
 	}
 	
 	override public function update():Void

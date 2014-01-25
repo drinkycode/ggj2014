@@ -18,7 +18,7 @@ class Textbox extends FlxSpriteGroup
 	{
 		super();
 		
-		text = new FlxText(0, 0, FlxG.width, "Only dog knows");
+		text = new FlxText(0, 480, FlxG.width, "Only dog knows");
 		text.setFormat(null, 16, 0xffffff, "center");
 		add(text);
 		
