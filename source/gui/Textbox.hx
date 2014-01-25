@@ -40,7 +40,7 @@ class Textbox extends FlxSpriteGroup
 		visible = true;
 		
 		text.text = Message;
-		_timer = 5;
+		_timer = 3;
 	}
 	
 	public function hide():Void

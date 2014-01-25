@@ -30,6 +30,9 @@ class Player extends FlxGroup
 	
 	public var interactionZone:FlxSprite; // Area for active interaction
 	public var sprite:FlxSprite;
+	public var shadow:FlxSprite;
+	
+	private var _interacted:Bool = false; // Helper bool flag
 	
 	public function new(X:Float = 0, Y:Float = 0) 
 	{
@@ -41,8 +44,8 @@ class Player extends FlxGroup
 		sprite.animation.add("idle", [0], 0, false);
 		sprite.animation.play("idle");
 		
-		sprite.width = 48;
-		sprite.height = 32;
+		sprite.width = 44;
+		sprite.height = 29;
 		//_sprite.resetSize();
 		//_sprite.resetSizeFromFrame();
 		sprite.centerOffsets();
@@ -164,12 +167,15 @@ class Player extends FlxGroup
 	
 	public function checkInteraction():Void
 	{
+		_interacted = false;
 		FlxG.overlap(interactionZone, G.playstate.gmap.gobjs, interactWithObject);
 	}
 	
 	private function interactWithObject(P:Dynamic, Obj:Dynamic):Void
 	{
+		if (_interacted) return;
 		Reflect.callMethod(Obj, Reflect.field(Obj, "interact"), []);
+		_interacted = true;
 	}
 	
 }

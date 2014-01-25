@@ -1,5 +1,6 @@
 package game.objs;
 
+import flixel.FlxG;
 import flixel.FlxSprite;
 
 /**
@@ -28,6 +29,8 @@ class BaseGObject extends FlxSprite
 	public var childObjName:String = "";
 	public var childObject:BaseGObject;
 	
+	private var _cooldown:Float = 0;
+	
 	public function new(X:Float = 0, Y:Float = 0) 
 	{
 		super(X, Y);
@@ -55,6 +58,7 @@ class BaseGObject extends FlxSprite
 	override public function update():Void 
 	{
 		super.update();
+		_cooldown -= FlxG.elapsed;
 	}
 	
 	public function interact(Force:Bool = false):Void
@@ -63,24 +67,29 @@ class BaseGObject extends FlxSprite
 		
 		if (!callOnce || (callOnce && !called))
 		{
-			called = true;
-			calledTimes++;
-			
-			if (calledTimes == requiredCalls)
+			if (_cooldown <= 0)
 			{
-				doInteraction();
-				if (childObject != null)
+				called = true;
+				calledTimes++;
+				
+				if (calledTimes == requiredCalls)
 				{
-					childObject.interact(true);
+					doInteraction();
+					if (childObject != null)
+					{
+						childObject.interact(true);
+					}
 				}
-			}
-			else if (calledTimes < requiredCalls)
-			{
-				doPreInteraction();
-			}
-			else
-			{
-				doPostInteraction();
+				else if (calledTimes < requiredCalls)
+				{
+					doPreInteraction();
+				}
+				else
+				{
+					doPostInteraction();
+				}
+				
+				_cooldown = 3;
 			}
 		}
 	}
