@@ -10,7 +10,7 @@ import flixel.system.frontEnds.SoundFrontEnd;
 import flixel.text.FlxText;
 import flixel.ui.FlxButton;
 import flixel.util.FlxMath;
-import game.LevelLoader;
+import game.GameMap;
 import game.Player;
 import gui.GameGUI;
 
@@ -25,7 +25,7 @@ class PlayState extends FlxState
 	
 	public var player:Player;
 	public var gui:GameGUI;
-	public var level_load:LevelLoader;
+	public var gmap:GameMap;
 	
 	/**
 	 * Function that is called up when to state is created to set it up. 
@@ -41,7 +41,7 @@ class PlayState extends FlxState
 		
 		super.create();
 		
-		level_load = new LevelLoader();
+		gmap = new GameMap();
 		
 		/*hitboxes = new FlxGroup();
 		
@@ -52,7 +52,7 @@ class PlayState extends FlxState
 		
 		add(player);
 		add(gui);*/
-		add(level_load);
+		add(gmap);
 	}
 	
 	/**
