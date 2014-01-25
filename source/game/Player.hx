@@ -100,14 +100,14 @@ class Player extends FlxSpriteGroup
 			acceleration.x = -SPEED_X;
 			updateOrientation = true;
 			newOrientation = 6;
-			facing = FlxObject.RIGHT;
+			facing = FlxObject.LEFT;
 		}
 		else if (FlxG.keyboard.anyPressed(["RIGHT"]))
 		{
 			acceleration.x = SPEED_X;
 			updateOrientation = true;
 			newOrientation = 2;
-			facing = FlxObject.LEFT;
+			facing = FlxObject.RIGHT;
 		}
 		
 		if (FlxG.keyboard.anyJustPressed(["X"]))
