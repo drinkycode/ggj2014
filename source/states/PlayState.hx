@@ -23,7 +23,7 @@ class PlayState extends FlxState
 	
 	public var hitboxes:FlxGroup;
 	
-	public var player:Player;
+	//public var player:Player;
 	public var gui:GameGUI;
 	public var gmap:GameMap;
 	
@@ -52,6 +52,7 @@ class PlayState extends FlxState
 		
 		add(player);
 		add(gui);*/
+		
 		add(gmap);
 	}
 	
@@ -61,11 +62,9 @@ class PlayState extends FlxState
 	 */
 	override public function destroy():Void
 	{
-		hitboxes = null;
-		
-		player = null;
+		//hitboxes = null;
+		//player = null;
 		gui = null;
-		
 		super.destroy();
 	}
 

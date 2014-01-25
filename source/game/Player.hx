@@ -34,6 +34,7 @@ class Player extends FlxSpriteGroup
 		_sprite = new FlxSprite();
 		_sprite.makeGraphic(48, 48, 0xffff00ff);
 		_sprite.resetSize();
+		_sprite.resetFrameSize();
 		_sprite.centerOffsets();
 		_sprite.setOriginToCenter();
 		

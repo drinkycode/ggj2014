@@ -19,16 +19,9 @@ class GameMap extends FlxGroup
 {
 
 	public var level:FlxOgmoLoader;
-	public var tilemap:FlxTilemap;
-	private static var _created:Bool = false;
 	
 	public var player:Player;
-	
-	public static function createMap():Void
-	{
-		if (_created) return;
-		_created = true;
-	}
+	public var tilemap:FlxTilemap;
 	
 	public function new():Void 
 	{
@@ -38,17 +31,18 @@ class GameMap extends FlxGroup
 		// IMPORTANT: Always collide the map with objects, not the other way around. 
 		// This prevents odd collision errors (collision separation code off by 1 px). FlxG.collide(map, obj, notifyCallback);
 		tilemap = level.loadTilemap(GAssets.getFile("tiles"), 64, 64, "tiles");
+		
 		/*set any other tile layers*/
 		
-		
 		/*set collisions*/
-	/*	for(i in 0...2) {
+		/*for(i in 0...2) 
+		{
 			tilemap.setTileProperties(i, FlxObject.NONE);
 		}
-		for(i in 2...4) {
+		for(i in 2...4) 
+		{
 			tilemap.setTileProperties(i, FlxObject.ANY);
-		}
-	*/	
+		}*/	
 		
 		/*load objects in lvl*/
 		level.loadEntities(loadEntity, "entities");
@@ -59,8 +53,14 @@ class GameMap extends FlxGroup
 		
 		add(tilemap);
 		add(player);
+	}
+	
+	override public function destroy():Void
+	{
+		tilemap = null;
+		player = null;
 		
-		
+		super.destroy();
 	}
 	
 	public function loadEntity(EntType:String, Data:Xml):Void
