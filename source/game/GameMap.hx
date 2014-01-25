@@ -1,6 +1,7 @@
 package game;
 
 //import haxe.xml.Fast;
+import flixel.util.FlxPoint;
 import util.GAssets;
 import flixel.FlxG;
 import flixel.FlxObject;
@@ -22,6 +23,7 @@ class GameMap extends FlxGroup
 	
 	public var player:Player;
 	public var tilemap:FlxTilemap;
+	public var cameraFollow:FlxObject;
 	
 	public function new():Void 
 	{
@@ -47,9 +49,11 @@ class GameMap extends FlxGroup
 		/*load objects in lvl*/
 		level.loadEntities(loadEntity, "entities");
 		
+		cameraFollow = new FlxObject(0, 0, 1, 1);
+		
 		FlxG.worldBounds.set(0, 0, 2048, 2048);
-		FlxG.camera.follow(player, FlxCamera.STYLE_TOPDOWN);
 		FlxG.camera.setBounds(0, 0, 2048, 2048);
+		FlxG.camera.follow(cameraFollow, FlxCamera.STYLE_TOPDOWN, new FlxPoint(0, 0), 2);
 		
 		add(tilemap);
 		add(player);
@@ -59,6 +63,7 @@ class GameMap extends FlxGroup
 	{
 		tilemap = null;
 		player = null;
+		cameraFollow = null;
 		
 		super.destroy();
 	}
@@ -92,6 +97,8 @@ class GameMap extends FlxGroup
 	override public function update():Void
 	{
 		super.update();
+		cameraFollow.x = player.x + 48;
+		cameraFollow.y = player.y + 48;
 		
 		FlxG.collide(tilemap, player);
 	}	

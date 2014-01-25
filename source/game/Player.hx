@@ -24,7 +24,6 @@ class Player extends FlxSpriteGroup
 	public var orientation:Int;
 	
 	public var interactionZone:FlxSprite; // Area for active interaction
-	
 	public var _sprite:FlxSprite;
 	
 	public function new(X:Float = 0, Y:Float = 0) 
@@ -33,16 +32,16 @@ class Player extends FlxSpriteGroup
 		
 		_sprite = new FlxSprite();
 		_sprite.makeGraphic(48, 48, 0xffff00ff);
-		_sprite.resetSize();
-		_sprite.resetFrameSize();
-		_sprite.centerOffsets();
-		_sprite.setOriginToCenter();
+		//_sprite.resetSize();
+		//_sprite.resetSizeFromFrame();
+		//_sprite.centerOffsets();
+		//_sprite.setOriginToCenter();
 		
 		interactionZone = new FlxSprite();
 		interactionZone.makeGraphic(24, 24, 0xffffffff);
-		interactionZone.resetSize();
-		interactionZone.centerOffsets();
-		interactionZone.setOriginToCenter();
+		//interactionZone.resetSize();
+		//interactionZone.centerOffsets();
+		//interactionZone.setOriginToCenter();
 		
 		add(_sprite);
 		add(interactionZone);
@@ -140,10 +139,10 @@ class Player extends FlxSpriteGroup
 				iy = -16;
 		}
 		
-		super.update();
-		
 		interactionZone.x = _sprite.x + ix;
 		interactionZone.y = _sprite.y + iy;
+		
+		super.update();
 	}
 	
 }
