@@ -20,7 +20,7 @@ class Textbox extends FlxSpriteGroup
 	{
 		super();
 		
-		text = new FlxText(0, 480, FlxG.width, "");
+		text = new FlxText(0, 280, FlxG.width, "");
 		text.setFormat(null, 16, 0xffffff, "center");
 		add(text);
 		

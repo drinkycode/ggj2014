@@ -4,6 +4,7 @@ import flixel.animation.FlxAnimationController;
 import flixel.FlxG;
 import flixel.FlxObject;
 import flixel.FlxSprite;
+import flixel.group.FlxGroup;
 import flixel.group.FlxSpriteGroup;
 import flixel.system.input.keyboard.FlxKey;
 import flixel.system.input.keyboard.FlxKeyboard;
@@ -15,35 +16,37 @@ import util.GAssets;
  * 
  * @author Michael Lee
  */
-class Player extends FlxSpriteGroup
+class Player extends FlxGroup
 {
 
-	public static inline var SPEED_X:Float = 384;
-	public static inline var SPEED_Y:Float = 384;
-	public static inline var MAX_VELOCITY_X:Float = 256;
-	public static inline var MAX_VELOCITY_Y:Float = 256;
+	public static inline var SPEED_X:Float = 272;
+	public static inline var SPEED_Y:Float = 272;
+	public static inline var MAX_VELOCITY_X:Float = 198;
+	public static inline var MAX_VELOCITY_Y:Float = 198;
 	public static inline var DRAG_X:Float = 2048;
 	public static inline var DRAG_Y:Float = 2048;
 	
 	public var orientation:Int;
 	
 	public var interactionZone:FlxSprite; // Area for active interaction
-	public var _sprite:FlxSprite;
+	public var sprite:FlxSprite;
 	
 	public function new(X:Float = 0, Y:Float = 0) 
 	{
 		super();
 		
-		_sprite = new FlxSprite();
+		sprite = new FlxSprite();
 		
-		_sprite.loadGraphic(GAssets.getFile("player"), true, true, 64, 64);
-		_sprite.animation.add("idle", [0], 0, false);
-		_sprite.animation.play("idle");
+		sprite.loadGraphic(GAssets.getFile("player"), true, true, 64, 64);
+		sprite.animation.add("idle", [0], 0, false);
+		sprite.animation.play("idle");
 		
-		//_sprite.makeGraphic(48, 48, 0xffff00ff);
+		sprite.width = 48;
+		sprite.height = 32;
 		//_sprite.resetSize();
 		//_sprite.resetSizeFromFrame();
-		//_sprite.centerOffsets();
+		sprite.centerOffsets();
+		sprite.offset.y += 4;
 		//_sprite.setOriginToCenter();
 		
 		interactionZone = new FlxSprite();
@@ -52,8 +55,9 @@ class Player extends FlxSpriteGroup
 		//interactionZone.resetSize();
 		//interactionZone.centerOffsets();
 		//interactionZone.setOriginToCenter();
+		interactionZone.moves = false;
 		
-		add(_sprite);
+		add(sprite);
 		add(interactionZone);
 		
 		reset(X, Y);
@@ -61,53 +65,54 @@ class Player extends FlxSpriteGroup
 	
 	override public function destroy():Void 
 	{
-		_sprite = null;
+		sprite = null;
 		super.destroy();
 	}
 	
-	override public function reset(X:Float, Y:Float):Void 
+	public function reset(X:Float, Y:Float):Void 
 	{
-		super.reset(X, Y);
+		sprite.x = X;
+		sprite.y = Y;
 		
-		maxVelocity.x = MAX_VELOCITY_X;
-		maxVelocity.y = MAX_VELOCITY_Y;
-		drag.x = DRAG_X;
-		drag.y = DRAG_Y;
+		sprite.maxVelocity.x = MAX_VELOCITY_X;
+		sprite.maxVelocity.y = MAX_VELOCITY_Y;
+		sprite.drag.x = DRAG_X;
+		sprite.drag.y = DRAG_Y;
 	}
 	
 	override public function update():Void 
 	{
-		acceleration.x = acceleration.y = 0; // Reset acceleration
+		sprite.acceleration.x = sprite.acceleration.y = 0; // Reset acceleration
 		
 		var updateOrientation:Bool = false;
 		var newOrientation:Int = -1;
 		
 		if (FlxG.keyboard.anyPressed(["DOWN"]))
 		{
-			acceleration.y = SPEED_Y;
+			sprite.acceleration.y = SPEED_Y;
 			updateOrientation = true;
 			newOrientation = 4;
 		}
 		else if (FlxG.keyboard.anyPressed(["UP"]))
 		{
-			acceleration.y = -SPEED_Y;
+			sprite.acceleration.y = -SPEED_Y;
 			updateOrientation = true;
 			newOrientation = 0;
 		}
 		
 		if (FlxG.keyboard.anyPressed(["LEFT"]))
 		{
-			acceleration.x = -SPEED_X;
+			sprite.acceleration.x = -SPEED_X;
 			updateOrientation = true;
 			newOrientation = 6;
-			facing = FlxObject.LEFT;
+			sprite.facing = FlxObject.LEFT;
 		}
 		else if (FlxG.keyboard.anyPressed(["RIGHT"]))
 		{
-			acceleration.x = SPEED_X;
+			sprite.acceleration.x = SPEED_X;
 			updateOrientation = true;
 			newOrientation = 2;
-			facing = FlxObject.RIGHT;
+			sprite.facing = FlxObject.RIGHT;
 		}
 		
 		if (FlxG.keyboard.anyJustPressed(["X"]))
@@ -151,8 +156,8 @@ class Player extends FlxSpriteGroup
 				iy = -16;
 		}
 		
-		interactionZone.x = _sprite.x + ix;
-		interactionZone.y = _sprite.y + iy;
+		interactionZone.x = sprite.x + ix;
+		interactionZone.y = sprite.y + iy;
 		
 		super.update();
 	}

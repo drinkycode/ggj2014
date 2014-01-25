@@ -11,10 +11,9 @@ import flixel.FlxObject;
 class Hitbox extends FlxObject
 {
 
-	public static function create(X:Float, Y:Float, Width:Int, Height:Int):Void
+	public static function create(X:Float, Y:Float, Width:Int, Height:Int):Hitbox
 	{
 		var h:Hitbox = new Hitbox(X, Y, Width, Height);
-		G.playstate.hitboxes.add(h);
 		h.resetHitbox(X, Y, Width, Height);
 		return h;
 	}
@@ -22,7 +21,12 @@ class Hitbox extends FlxObject
 	public function new(X:Float, Y:Float, Width:Int, Height:Int) 
 	{
 		super();
-		
+		immovable = true;
+	}
+	
+	override public function reset(X:Float, Y:Float):Void 
+	{
+		super.reset(X, Y);
 		//active = false;
 		moves = false;
 	}

@@ -33,6 +33,7 @@ class GameMap extends FlxGroup
 	public function new():Void 
 	{
 		super();
+		
 		level = new FlxOgmoLoader(GAssets.getFile("house", GAssets.LOC_DATA, "oel")); 
 		
 		// IMPORTANT: Always collide the map with objects, not the other way around. 
@@ -52,8 +53,10 @@ class GameMap extends FlxGroup
 		}*/	
 		
 		gobjs = new FlxGroup();
+		hitboxes = new FlxGroup();
 		
-		/*load objects in lvl*/
+		// Load objects in lvl
+		level.loadEntities(loadHitbox, "collide");
 		level.loadEntities(loadEntity, "entities");
 		
 		cameraFollow = new FlxObject(0, 0, 1, 1);
@@ -65,6 +68,8 @@ class GameMap extends FlxGroup
 		add(tilemap);
 		add(gobjs);
 		add(player);
+		
+		//add(hitboxes);
 		
 		addGameObject(new ChewToy(580, 620));
 	}
@@ -79,16 +84,26 @@ class GameMap extends FlxGroup
 		super.destroy();
 	}
 	
+	public function loadHitbox(HitType:String, Data:Xml):Void
+	{
+		var hx:Float = Std.parseFloat(Data.get("x"));
+		var hy:Float = Std.parseFloat(Data.get("y"));
+		var hw:Int = Std.parseInt(Data.get("w"));
+		var hh:Int = Std.parseInt(Data.get("h"));
+		
+		hitboxes.add(Hitbox.create(hx, hy, hw, hh));
+	}
+	
 	public function loadEntity(EntType:String, Data:Xml):Void
 	{
-		var x:Float = Std.parseFloat(Data.get("x"));
-		var y:Float = Std.parseFloat(Data.get("y"));
+		var ex:Float = Std.parseFloat(Data.get("x"));
+		var ey:Float = Std.parseFloat(Data.get("y"));
 		
 		switch (EntType.toLowerCase())	
 		{
 			case "player":
 				//add player to group or playstate
-				player = new Player(x, y);
+				player = new Player(ex, ey);
 				
 			case "rocket":
 				
@@ -113,9 +128,10 @@ class GameMap extends FlxGroup
 	override public function update():Void
 	{
 		super.update();
-		cameraFollow.x = player.x + 48;
-		cameraFollow.y = player.y + 48;
+		cameraFollow.x = player.sprite.x + 48;
+		cameraFollow.y = player.sprite.y + 48;
 		
-		FlxG.collide(tilemap, player);
+		//FlxG.collide(tilemap, player);
+		FlxG.collide(hitboxes, player.sprite);
 	}	
 }
