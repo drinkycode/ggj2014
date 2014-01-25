@@ -14,6 +14,7 @@ class ChewToy extends BaseGObject
 	public function new(X:Float = 0, Y:Float = 0) 
 	{
 		super(X, Y);
+		interactionMessage = "Object message goes here";
 	}
 	
 	override private function setupSprite():Void 
@@ -26,9 +27,8 @@ class ChewToy extends BaseGObject
 	
 	override private function doInteraction():Void 
 	{
+		super.doInteraction();
 		color = 0x000000;
-		
-		G.playstate.gui.callTextbox("Object message goes here");
 	}
 	
 }

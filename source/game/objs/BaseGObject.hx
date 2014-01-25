@@ -14,6 +14,8 @@ class BaseGObject extends FlxSprite
 	
 	public var canInteract:Bool = true;
 	public var interactionState:Int = -1;
+	
+	public var interactionMessage:String = "";
 
 	public var callOnce:Bool = true;
 	public var called:Bool = false;
@@ -47,7 +49,10 @@ class BaseGObject extends FlxSprite
 	
 	private function doInteraction():Void
 	{
-		// Override this
+		if (interactionMessage != "")
+		{
+			G.playstate.gui.callTextbox(interactionMessage);
+		}
 	}
 	
 }
