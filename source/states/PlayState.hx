@@ -32,7 +32,7 @@ import util.GAssets;
 class PlayState extends FlxState
 {
 	
-	public var state:Int = 2;
+	public var state:Int = 1;
 	public var gameTimer:Float = 105; // Seconds
 	
 	public var gui:GameGUI;
@@ -74,6 +74,11 @@ class PlayState extends FlxState
 		//blur.scrollFactor.x = blur.scrollFactor.y = 0;
 		//blur.alpha = 0.15;
 		//add(blur);
+		
+		FlxG.camera.fade(0xff000000, 3, true, startGame);
+		
+		gmap.player.allowInput = false;
+		FlxG.sound.playMusic(GAssets.getFile("sneaky_adventure", GAssets.LOC_MUSIC, "mp3"), 0.5);
 	}
 	
 	/**
@@ -137,6 +142,12 @@ class PlayState extends FlxState
 		{
 			
 		}
+	}
+	
+	private function startGame():Void
+	{
+		state = 2;
+		gmap.player.allowInput = true;
 	}
 	
 	private function onFadeComplete():Void

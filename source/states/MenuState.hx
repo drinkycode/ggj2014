@@ -3,16 +3,21 @@ package states;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxState;
+import flixel.system.input.keyboard.FlxKeyboard;
 import flixel.system.input.mouse.FlxMouse;
 import flixel.text.FlxText;
 import flixel.ui.FlxButton;
 import flixel.util.FlxMath;
+import util.GAssets;
 
 /**
  * A FlxState which can be used for the game's menu.
  */
 class MenuState extends FlxState
 {
+	
+	private var _playGame:Bool = false;
+	
 	/**
 	 * Function that is called up when to state is created to set it up. 
 	 */
@@ -26,6 +31,10 @@ class MenuState extends FlxState
 		#end
 		
 		super.create();
+		
+		var title:FlxSprite = new FlxSprite();
+		title.loadGraphic(GAssets.getFile("title"));
+		add(title);
 	}
 	
 	/**
@@ -42,7 +51,7 @@ class MenuState extends FlxState
 	 */
 	override public function update():Void
 	{
-		if (FlxG.mouse.justPressed)
+		if (FlxG.mouse.justPressed || FlxG.keyboard.anyJustPressed(["X", "UP", "DOWN", "LEFT", "RIGHT"]))
 		{
 			playGame();
 		}
@@ -51,6 +60,13 @@ class MenuState extends FlxState
 	}
 	
 	public function playGame():Void
+	{
+		if (_playGame) return;
+		_playGame = true;
+		FlxG.camera.fade(0xff000000, 1.5, false, gotoGame);
+	}
+	
+	private function gotoGame():Void 
 	{
 		FlxG.switchState(new PlayState());
 	}
