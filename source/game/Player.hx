@@ -10,6 +10,7 @@ import flixel.system.input.keyboard.FlxKey;
 import flixel.system.input.keyboard.FlxKeyboard;
 import flixel.system.input.keyboard.FlxKeyShortcuts;
 import flixel.util.FlxMath;
+import flixel.util.loaders.TexturePackerData;
 import util.GAssets;
 import util.Util;
 
@@ -47,9 +48,16 @@ class Player extends FlxGroup
 		
 		
 		sprite = new FlxSprite();
-		sprite.loadGraphic(GAssets.getFile("player"), true, true, 64, 64);
-		sprite.animation.add("idle", [0], 0, false);
-		sprite.animation.play("idle");
+		
+		sprite.loadImageFromTexture(new TexturePackerData(GAssets.getFile("player", GAssets.LOC_IMGS, "json"), GAssets.getFile("player")), false, false, "idle_left1.png");
+		sprite.animation.addByIndicies("idle_left", 	"idle_left", [1, 2], ".png", 10, true);
+		sprite.animation.addByIndicies("idle_right", 	"idle_right", [1, 2], ".png", 10, true);
+		sprite.animation.addByIndicies("run_left", 		"run_left", [1, 2, 3, 4, 5, 6], ".png", 10, true);
+		sprite.animation.addByIndicies("run_right", 	"run_right", [1, 2, 3, 4, 5, 6], ".png", 10, true);
+		
+		//sprite.loadGraphic(GAssets.getFile("player"), true, true, 64, 64);
+		//sprite.animation.add("idle", [0], 0, false);
+		//sprite.animation.play("idle");
 		
 		sprite.width = 44;
 		sprite.height = 9;
@@ -96,14 +104,19 @@ class Player extends FlxGroup
 		var updateOrientation:Bool = false;
 		var newOrientation:Int = -1;
 		
+		var moving:Bool = false;
+		var newAnim:String = "";
+		
 		if (FlxG.keyboard.anyPressed(["DOWN"]))
 		{
+			moving = true;
 			sprite.acceleration.y = SPEED_Y;
 			updateOrientation = true;
 			newOrientation = 4;
 		}
 		else if (FlxG.keyboard.anyPressed(["UP"]))
 		{
+			moving = true;
 			sprite.acceleration.y = -SPEED_Y;
 			updateOrientation = true;
 			newOrientation = 0;
@@ -111,17 +124,23 @@ class Player extends FlxGroup
 		
 		if (FlxG.keyboard.anyPressed(["LEFT"]))
 		{
+			moving = true;
 			sprite.acceleration.x = -SPEED_X;
 			updateOrientation = true;
 			newOrientation = 6;
+			
 			sprite.facing = FlxObject.LEFT;
+			newAnim = "run_left";
 		}
 		else if (FlxG.keyboard.anyPressed(["RIGHT"]))
 		{
+			moving = true;
 			sprite.acceleration.x = SPEED_X;
 			updateOrientation = true;
 			newOrientation = 2;
+			
 			sprite.facing = FlxObject.RIGHT;
+			newAnim = "run_right";
 		}
 		
 		var ix:Float = 0;
@@ -160,8 +179,39 @@ class Player extends FlxGroup
 				//iy = -16;
 		}
 		
+		if (newAnim == "")
+		{
+			if (sprite.facing == FlxObject.LEFT)
+			{
+				if (moving)
+				{
+					newAnim = "run_left";
+				}
+				else
+				{
+					newAnim = "idle_left";
+				}
+			}
+			else
+			{
+				if (moving)
+				{
+					newAnim = "run_right";
+				}
+				else
+				{
+					newAnim = "idle_right";
+				}
+			}
+		}
+		
 		super.update();
 		updateMotionExt();
+		
+		if (newAnim != "")
+		{
+			sprite.animation.play(newAnim);
+		}
 		
 		shadow.x = sprite.x + 4;
 		shadow.y = sprite.y + 2;
