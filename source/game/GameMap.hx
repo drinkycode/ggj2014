@@ -11,8 +11,14 @@ import flixel.group.FlxTypedGroup;
 import flixel.tile.FlxTilemap;
 import flixel.util.FlxPoint;
 import game.objs.BaseGObject;
+import game.objs.kitchen.Apple;
+import game.objs.kitchen.KitchenTable;
+import game.objs.livingroom.Books;
+import game.objs.livingroom.CoffeeTable;
 import game.objs.livingroom.LivingRoomTable;
 import game.objs.livingroom.TableJar;
+import game.objs.livingroom.TV;
+import game.objs.livingroom.TVTable;
 import game.objs.misc.ChewToy;
 import util.GAssets;
 
@@ -93,10 +99,10 @@ class GameMap extends FlxGroup
 		
 		add(hitboxes);
 		
-		addGameObject(new ChewToy(680, 620));
+		/*addGameObject(new ChewToy(680, 620));
 		
 		addGameObject(new LivingRoomTable(750, 600));
-		addGameObject(new TableJar(750, 592));
+		addGameObject(new TableJar(750, 592));*/
 		
 		linkGameObjects(); // Links parent-child objects together
 	}
@@ -129,6 +135,8 @@ class GameMap extends FlxGroup
 	{
 		var ex:Float = Std.parseFloat(Data.get("x"));
 		var ey:Float = Std.parseFloat(Data.get("y"));
+		var ewidth:Int = Std.parseInt(Data.get("width"));
+		var eheight:Int = Std.parseInt(Data.get("height"));
 		
 		switch (EntType.toLowerCase())	
 		{
@@ -136,18 +144,96 @@ class GameMap extends FlxGroup
 				//add player to group or playstate
 				player = new Player(ex, ey);
 				
-			case "human":
+			case "dog_bed":
+				addGameObject(new BaseGObject(ex, ey, EntType, ewidth, eheight, "me awake", "no tired"));
 				
-			case "rocket":
+			case "bed":
+				addGameObject(new BaseGObject(ex, ey, EntType, ewidth, eheight, "no master", "bed cold"));
 				
-			case "star":
+			case "clothes_a":
+				addGameObject(new BaseGObject(ex, ey, EntType, ewidth, eheight, "master's smell", "master's smell"));
 				
-			case "home":
+			case "clothes_b":
+				addGameObject(new BaseGObject(ex, ey, EntType, ewidth, eheight, "young master smell", "young master smell"));
 				
-			case "instruct":
+			case "chew_toy_a":
+				addGameObject(new BaseGObject(ex, ey, EntType, ewidth, eheight, "my friend", "my friend"));
 				
-			case "bird":
+			case "chew_toy_b":
+				addGameObject(new BaseGObject(ex, ey, EntType, ewidth, eheight, "my enemy", "my enemy"));
 				
+			case "toilet":
+				addGameObject(new BaseGObject(ex, ey, EntType, ewidth, eheight, "drink water", "very tasty"));
+				
+			case "bathtub":
+				addGameObject(new BaseGObject(ex, ey, EntType, ewidth, eheight, "no wet now", "i hate tub"));
+				
+			case "sink":
+				addGameObject(new BaseGObject(ex, ey, EntType, ewidth, eheight));
+				
+			case "bath_mat":
+				addGameObject(new BaseGObject(ex, ey, EntType, ewidth, eheight));
+				
+			case "picture_a":
+				addGameObject(new BaseGObject(ex, ey, EntType, ewidth, eheight, "look like master and young master", "look like master and young master"));
+				
+			case "picture_b":
+				addGameObject(new BaseGObject(ex, ey, EntType, ewidth, eheight));
+				
+			case "sidetable":
+				addGameObject(new LivingRoomTable(ex, ey));
+				
+			case "vase":
+				addGameObject(new TableJar(ex, ey));
+				
+			case "kid_bed":
+				addGameObject(new BaseGObject(ex, ey, EntType, ewidth, eheight, "young master no here", "young master no here"));
+				
+			case "stuffed_animal":
+				addGameObject(new BaseGObject(ex, ey, EntType, ewidth, eheight, "where young master", "no tell me"));
+				
+			case "toy":
+				addGameObject(new BaseGObject(ex, ey, EntType, ewidth, eheight, "where young master", "young master upset"));
+				
+			case "ducky":
+				addGameObject(new BaseGObject(ex, ey, EntType, ewidth, eheight, "ducky friend", "no tell me"));
+				
+			case "dog_bowl":
+				addGameObject(new BaseGObject(ex, ey, EntType, ewidth, eheight, "master give food!", "i ate it"));
+				
+			case "water_bowl":
+				addGameObject(new BaseGObject(ex, ey, EntType, ewidth, eheight, "water here too", "more tasty"));
+				
+			case "dining_table":
+				addGameObject(new KitchenTable(ex, ey));
+				
+			case "apple":
+				addGameObject(new Apple(ex, ey));
+				
+			case "chair":
+				addGameObject(new BaseGObject(ex, ey, EntType, ewidth, eheight, "", ""));
+				
+			case "tv_table":
+				addGameObject(new TVTable(ex,ey));
+				
+			case "tv":
+				addGameObject(new TV(ex,ey));
+				
+			case "couch":
+				addGameObject(new BaseGObject(ex, ey, EntType, ewidth, eheight, "where is master", "no master upset"));
+				
+			case "recliner":
+				addGameObject(new BaseGObject(ex, ey, EntType, ewidth, eheight, "master not here", "me upset"));
+				
+			case "coffee_table":
+				addGameObject(new CoffeeTable(ex, ey));
+				
+			case "books":
+				addGameObject(new Books(ex, ey));
+				
+			case "tree":
+				addGameObject(new BaseGObject(ex, ey, EntType, ewidth, eheight, "", ""));
+							
 			default:
 				throw "Unrecognized actor type '" + EntType + "' detected in level file.";
 		}

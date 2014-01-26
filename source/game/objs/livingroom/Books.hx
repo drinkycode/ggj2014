@@ -6,16 +6,16 @@ import game.objs.BaseGObject;
 import util.GAssets;
 
 /**
- * tv on top of tv table
+ * Books on top of coffee table
  * 
  * @author Michael Lee
  */
-class TV extends BaseGObject
+class Books extends BaseGObject
 {
 	
 	public function new(X:Float = 0, Y:Float = 0) 
 	{
-		super(X, Y, "tv", 64, 128, "people in here", "master not here");
+		super(X, Y, "books", 64, 128, "grgrgrgrn", "no master");
 		canInteract = false;
 	}
 	
