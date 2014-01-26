@@ -274,7 +274,7 @@ class PlayState extends FlxState
 	private function goodEnding3(T:FlxTween = null):Void
 	{
 		gmap.human.sprite.animation.play("cry");
-		callHumanPopup("At a time like this...", 5);
+		callHumanPopup("I'm glad you're here, Echo...", 5);
 	}
 	private function goodEnding4(T:FlxTween = null):Void
 	{
@@ -290,7 +290,7 @@ class PlayState extends FlxState
 	}
 	private function goodEnding7(T:FlxTween = null):Void
 	{
-		callHumanPopup("We can get through this Echo. Definitely.", 5);
+		callHumanPopup("We can get through this, Echo. Definitely.", 5);
 	}
 	private function goodEnding8(T:FlxTween = null):Void
 	{
@@ -312,11 +312,11 @@ class PlayState extends FlxState
 	}
 	private function badEnding3(T:FlxTween = null):Void
 	{
-		callHumanPopup("Don't look at me like that....", 5);
+		callHumanPopup("Don't look at me like that...", 5);
 	}
 	private function badEnding4(T:FlxTween = null):Void
 	{
-		callHumanPopup("I can't do anything...", 5);
+		callHumanPopup("I need to deal with you first...", 5);
 	}
 	private function badEnding5(T:FlxTween = null):Void
 	{
@@ -325,7 +325,7 @@ class PlayState extends FlxState
 	private function badEnding6(T:FlxTween = null):Void
 	{
 		gmap.human.sprite.animation.play("cry");
-		callHumanPopup("We'll get through this somehow...", 99);
+		callHumanPopup("Ohh... We'll get through this somehow...", 99);
 	}
 	
 	private function runawayEnding1(T:FlxTween = null):Void
