@@ -15,7 +15,7 @@ class Books extends BaseGObject
 	
 	public function new(X:Float = 0, Y:Float = 0) 
 	{
-		super(X, Y, "books", 64, 128, "grgrgrgrn", "no master");
+		super(X, Y, "books", 64, 64, "grgrgrgrn", "no master");
 		canInteract = false;
 	}
 	
