@@ -27,7 +27,7 @@ class LivingRoomTable extends BaseGObject
 		preInteractionMessage = "*shake table*";
 		postInteractionMessage = "thing broke master upset";
 		requiredCalls = 3;
-		childObjName = "table_jar";
+		childObjName = "flower_vase";
 		
 		interactionCooldown = 1;
 		

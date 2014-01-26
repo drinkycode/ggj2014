@@ -15,10 +15,7 @@ class TableJar extends BaseGObject
 	
 	public function new(X:Float = 0, Y:Float = 0) 
 	{
-		super(X, Y, "flower_vase", 64, 128);
-		objName = "table_jar";
-		interactionMessage = "Broke jar";
-		postInteractionMessage = "thing broke master upset";
+		super(X, Y, "flower_vase", 64, 128, "Broke jar", "thing broke master upset");
 		canInteract = false;
 	}
 	

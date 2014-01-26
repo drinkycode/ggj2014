@@ -38,13 +38,16 @@ class BaseGObject extends FlxSprite
 	
 	private var _cooldown:Float = 0;
 	
-	public function new(X:Float = 0, Y:Float = 0, ImageFile:String = "", ImageWidth:Int = 0, ImageHeight:Int = 0) 
+	public function new(X:Float = 0, Y:Float = 0, ImageFile:String = "", ImageWidth:Int = 0, ImageHeight:Int = 0, InteractionMessage:String = "", PostInteractionMessage = "") 
 	{
 		super(X, Y);
 		
-		_imageFile = ImageFile;
+		objName = _imageFile = ImageFile;
 		_imageWidth = ImageWidth;
 		_imageHeight = ImageHeight;
+		
+		interactionMessage = InteractionMessage;
+		postInteractionMessage = PostInteractionMessage;
 		
 		setupSprite();
 	}
