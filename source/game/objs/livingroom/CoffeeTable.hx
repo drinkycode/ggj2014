@@ -31,7 +31,7 @@ class CoffeeTable extends BaseGObject
 		
 		preSndFile = sndFile = GAssets.getFile("wood_rattle", GAssets.LOC_SOUNDS, "mp3");
 		
-		interactionCooldown = 1;
+		interactionCooldown = .7;
 		
 		_x = X;
 	}
