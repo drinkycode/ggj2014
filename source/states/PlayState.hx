@@ -116,6 +116,10 @@ class PlayState extends FlxState
 				{
 					_ending = forceEnding;
 				}
+				else if (!gmap.player.movedOnce)
+				{
+					_ending = 4;
+				}
 				else if (badInteractions <= 3)
 				{
 					_ending = 2;
@@ -143,17 +147,18 @@ class PlayState extends FlxState
 		// Setup endings
 		switch (_ending) 
 		{
+			// Runaway ending
 			case 1: 
-				gmap.player.sprite.x = 150;
-				gmap.player.sprite.y = 150;
-				gmap.player.sprite.facing = FlxObject.RIGHT;
+				gmap.player.sprite.visible = false;
 				
-				positionHuman(220, 100);
+				positionHuman(1732, 1484);
+				gmap.human.sprite.facing = FlxObject.RIGHT;
+				gmap.human.sprite.animation.play("idle");
 				
-				gui.callPopup(220, 100, "Where did Echo go? I'm so alone now...");
+				FlxG.camera.scroll.x = 1520;
+				FlxG.camera.scroll.y = 1360;
 				
-				FlxG.camera.scroll.x = 100;
-				FlxG.camera.scroll.y = 100;
+				callHumanPopup("ECHO? ECHO!", 6.5);
 				
 			// Good ending
 			case 2: 
@@ -180,6 +185,22 @@ class PlayState extends FlxState
 				
 				FlxG.camera.scroll.x = 1340;
 				FlxG.camera.scroll.y = 340;
+				
+			// Death ending
+			case 4:
+				gmap.player.sprite.x -= 23;
+				//positionPlayer(1454, 544);
+				gmap.player.active = false;
+				gmap.player.sprite.animation.play("dead");
+				
+				positionHuman(710, 312);
+				gmap.human.sprite.facing = FlxObject.LEFT;
+				gmap.human.sprite.animation.play("cry");
+				
+				//FlxG.camera.scroll.x = 1520;
+				//FlxG.camera.scroll.y = 1360;
+				
+				callHumanPopup("ECHO! ECHO!", 6.5);
 		}
 	}
 	
@@ -198,7 +219,7 @@ class PlayState extends FlxState
 	
 	private function callHumanPopup(Message:String, Duration:Float = 5):Void
 	{
-		gui.callPopup(gmap.human.sprite.x + 35, gmap.human.sprite.y - 34, Message, Duration);
+		gui.callPopup(gmap.human.sprite.x + 34, gmap.human.sprite.y - 34, Message, Duration);
 	}
 	
 	private function gotoEnding():Void
@@ -206,6 +227,9 @@ class PlayState extends FlxState
 		switch (_ending) 
 		{
 			case 1:
+				FlxTween.manager.add(new FlxTween(6, FlxTween.ONESHOT, runawayEnding1), true);
+				FlxTween.manager.add(new FlxTween(12, FlxTween.ONESHOT, runawayEnding2), true);
+				FlxTween.manager.add(new FlxTween(20, FlxTween.ONESHOT, fadeToMenu), true);
 				
 			case 2:
 				//callHumanPopup("Echo come here!", 5);
@@ -229,6 +253,13 @@ class PlayState extends FlxState
 				FlxTween.manager.add(new FlxTween(28, FlxTween.ONESHOT, badEnding5), true);
 				FlxTween.manager.add(new FlxTween(32, FlxTween.ONESHOT, badEnding6), true);
 				FlxTween.manager.add(new FlxTween(40, FlxTween.ONESHOT, fadeToMenu), true);
+				
+			case 4:
+				FlxTween.manager.add(new FlxTween(6, FlxTween.ONESHOT, deathEnding1), true);
+				FlxTween.manager.add(new FlxTween(12, FlxTween.ONESHOT, deathEnding2), true);
+				FlxTween.manager.add(new FlxTween(18, FlxTween.ONESHOT, deathEnding3), true);
+				FlxTween.manager.add(new FlxTween(24, FlxTween.ONESHOT, deathEnding4), true);
+				FlxTween.manager.add(new FlxTween(32, FlxTween.ONESHOT, fadeToMenu), true);
 		}
 	}
 	
@@ -297,9 +328,36 @@ class PlayState extends FlxState
 		callHumanPopup("We'll get through this somehow...", 99);
 	}
 	
+	private function runawayEnding1(T:FlxTween = null):Void
+	{
+		callHumanPopup("Where did Echo go?", 5);
+	}
+	private function runawayEnding2(T:FlxTween = null):Void
+	{
+		callHumanPopup("I'm so alone...", 5);
+	}
+	
+	private function deathEnding1(T:FlxTween = null):Void
+	{
+		callHumanPopup("Oh my god, what happened?", 5);
+	}
+	private function deathEnding2(T:FlxTween = null):Void
+	{
+		callHumanPopup("I was only gone for the morning...", 5);
+	}
+	private function deathEnding3(T:FlxTween = null):Void
+	{
+		callHumanPopup("First Maggie and now Echo...", 5);
+	}
+	private function deathEnding4(T:FlxTween = null):Void
+	{
+		gmap.human.sprite.animation.play("cry");
+		callHumanPopup("*sob*", 5);
+	}
+	
 	private function fadeToMenu(T:FlxTween = null):Void
 	{
-		FlxG.camera.fade(0xff000000, 2.5, false, gotoMenu);
+		FlxG.camera.fade(0xff000000, 3.5, false, gotoMenu);
 	}
 	
 	private function gotoMenu():Void

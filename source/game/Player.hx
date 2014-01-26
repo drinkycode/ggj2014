@@ -38,6 +38,7 @@ class Player extends FlxGroup
 	public var shadow:FlxSprite;
 	
 	public var allowInput:Bool = true;
+	public var movedOnce:Bool = false;
 	
 	private var _interacted:Bool = false; // Helper bool flag
 	private var _pressed:Bool = false;
@@ -47,7 +48,8 @@ class Player extends FlxGroup
 		super();
 		
 		shadow = new FlxSprite();
-		shadow.makeGraphic(36, 14, 0xff000000);
+		shadow.loadGraphic(GAssets.getFile("shadow"));
+		//shadow.makeGraphic(36, 14, 0xff000000);
 		shadow.alpha = 0.44;
 		shadow.allowCollisions = FlxObject.NONE;
 		
@@ -61,7 +63,7 @@ class Player extends FlxGroup
 		sprite.animation.addByIndicies("run_right", 	"run_right", [1, 2, 3, 4, 5, 6], ".png", 10, true);
 		sprite.animation.addByIndicies("run_down", 		"run_down", [1, 2], ".png", 10, true);
 		sprite.animation.addByIndicies("run_up", 		"run_up", [1, 2], ".png", 10, true);
-		sprite.animation.addByNames("death", 		["dog_dead.png"], 0, false);
+		sprite.animation.addByNames("dead", 		["dog_dead.png"], 0, false);
 		
 		//sprite.loadGraphic(GAssets.getFile("player"), true, true, 64, 64);
 		//sprite.animation.add("idle", [0], 0, false);
@@ -77,6 +79,7 @@ class Player extends FlxGroup
 		interactionZone = new FlxSprite();
 		interactionZone.makeGraphic(24, 24, 0xffffffff);
 		interactionZone.alpha = 0.5;
+		interactionZone.visible = false;
 		interactionZone.active = false;
 		interactionZone.moves = false;
 		
@@ -114,12 +117,15 @@ class Player extends FlxGroup
 		
 		var moving:Bool = false;
 		var newAnim:String = "";
+		var facingOffset:Int = 0;
 		
 		if (allowInput)
 		{
 			if (FlxG.keyboard.anyPressed(["DOWN"]))
 			{
 				moving = true;
+				movedOnce = true;
+				
 				sprite.acceleration.y = SPEED_Y;
 				updateOrientation = true;
 				newOrientation = 4;
@@ -128,6 +134,8 @@ class Player extends FlxGroup
 			else if (FlxG.keyboard.anyPressed(["UP"]))
 			{
 				moving = true;
+				movedOnce = true;
+				
 				sprite.acceleration.y = -SPEED_Y;
 				updateOrientation = true;
 				newOrientation = 0;
@@ -137,22 +145,30 @@ class Player extends FlxGroup
 			if (FlxG.keyboard.anyPressed(["LEFT"]))
 			{
 				moving = true;
+				movedOnce = true;
+				
 				sprite.acceleration.x = -SPEED_X;
 				updateOrientation = true;
 				newOrientation = 6;
 				
 				sprite.facing = FlxObject.LEFT;
 				newAnim = "run_left";
+				
+				facingOffset = 2;
 			}
 			else if (FlxG.keyboard.anyPressed(["RIGHT"]))
 			{
 				moving = true;
+				movedOnce = true;
+				
 				sprite.acceleration.x = SPEED_X;
 				updateOrientation = true;
 				newOrientation = 2;
 				
 				sprite.facing = FlxObject.RIGHT;
 				newAnim = "run_right";
+				
+				facingOffset = -1;
 			}
 		}
 		
@@ -203,6 +219,7 @@ class Player extends FlxGroup
 				else
 				{
 					newAnim = "idle_left";
+					facingOffset = 2;
 				}
 			}
 			else
@@ -214,6 +231,7 @@ class Player extends FlxGroup
 				else
 				{
 					newAnim = "idle_right";
+					facingOffset = -1;
 				}
 			}
 		}
@@ -226,8 +244,8 @@ class Player extends FlxGroup
 			sprite.animation.play(newAnim);
 		}
 		
-		shadow.x = sprite.x + 4;
-		shadow.y = sprite.y + 2;
+		shadow.x = sprite.x + 2 + facingOffset;
+		shadow.y = sprite.y - 2;
 		
 		interactionZone.x = sprite.x + ix;
 		interactionZone.y = sprite.y + iy;
@@ -250,6 +268,11 @@ class Player extends FlxGroup
 		if ((sprite.velocity.x != 0) || (sprite.velocity.y != 0))
 		{
 			checkTextAreas();
+		}
+		
+		if (sprite.x >= 2048)
+		{
+			G.playstate.forceEnding = 1;
 		}
 	}
 	
