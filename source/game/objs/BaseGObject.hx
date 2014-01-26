@@ -146,7 +146,7 @@ class BaseGObject extends FlxSprite
 					if (badInteraction)
 					{
 						G.playstate.badInteractions++;
-						trace("Bad interactions: " + G.playstate.badInteractions);
+						//trace("Bad interactions: " + G.playstate.badInteractions);
 					}
 				}
 				else if (calledTimes < requiredCalls)
