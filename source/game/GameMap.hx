@@ -173,6 +173,18 @@ class GameMap extends FlxGroup
 				
 			case "bath_mat":
 				addGameObject(new BaseGObject(ex, ey, EntType, ewidth, eheight));
+						
+			case "kid_toilet":
+				addGameObject(new BaseGObject(ex, ey, EntType, ewidth, eheight, "drink water", "very tasty"));
+				
+			case "kid_bathtub":
+				addGameObject(new BaseGObject(ex, ey, EntType, ewidth, eheight, "no wet now", "i hate tub"));
+				
+			case "kid_sink":
+				addGameObject(new BaseGObject(ex, ey, EntType, ewidth, eheight));
+				
+			case "kid_bath_mat":
+				addGameObject(new BaseGObject(ex, ey, EntType, ewidth, eheight));
 				
 			case "picture_a":
 				addGameObject(new BaseGObject(ex, ey, EntType, ewidth, eheight, "look like master and young master", "look like master and young master"));
