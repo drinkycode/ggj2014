@@ -14,7 +14,7 @@ class Apple extends BaseGObject
 	
 	public function new(X:Float = 0, Y:Float = 0) 
 	{
-		super(X, Y, "apple", 64, 128, "food?", "i eat");
+		super(X, Y, "apple", 64, 64, "food?", "i eat");
 		canInteract = false;
 	}
 	

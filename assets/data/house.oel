@@ -89,5 +89,16 @@
     <clothes_b id="21" x="608" y="1248" />
     <couch id="22" x="1664" y="416" />
     <recliner id="23" x="1568" y="576" />
+    <candy id="24" x="672" y="1824" />
+    <ducky id="25" x="928" y="1248" />
+    <dining_table id="26" x="1216" y="512" />
+    <apple id="27" x="1248" y="512" />
+    <stuffed_animal id="28" x="512" y="1312" />
+    <chair id="29" x="1280" y="384" />
+    <toy id="30" x="416" y="1184" />
+    <dog_bowl id="32" x="1088" y="288" />
+    <water_bowl id="34" x="1152" y="288" />
+    <picture_a id="31" x="832" y="832" />
+    <picture_b id="33" x="896" y="832" />
   </entities>
 </level>

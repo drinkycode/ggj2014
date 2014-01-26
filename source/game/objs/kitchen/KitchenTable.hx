@@ -21,11 +21,11 @@ class KitchenTable extends BaseGObject
 	
 	public function new(X:Float = 0, Y:Float = 0) 
 	{
-		super(X, Y);
+		super(X, Y, "kitchen_table", 128, 128);
 		
-		objName = "dining_table";
-		preInteractionMessage = "*shake table*";
-		postInteractionMessage = "food?";
+		objName = "kitchen_table";
+		preInteractionMessage = "food?";
+		postInteractionMessage = "i eat";
 		requiredCalls = 3;
 		childObjName = "apple";
 		
@@ -37,7 +37,7 @@ class KitchenTable extends BaseGObject
 	override private function setupSprite():Void 
 	{
 		super.setupSprite();
-		loadGraphic(GAssets.getFile("dining_table"));
+		//loadGraphic(GAssets.getFile("kitchen_table"));
 		
 		G.playstate.gmap.addHitbox(x, y, 64, 96);
 	}
