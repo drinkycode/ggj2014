@@ -165,7 +165,7 @@ class GameMap extends FlxGroup
 				
 			case "clothes_a":
 				o = new BaseGObject(ex, ey, "clothes1", 0, 0, "master's smell", "master's smell", false, 32, 32);
-				o.sndFile = GAssets.getFile("clothes_rustle", GAssets.LOC_SOUNDS, "mp3");
+				o.sndFile = o.postSndFile = GAssets.getFile("clothes_rustle", GAssets.LOC_SOUNDS, "mp3");
 				addGameObject(o);
 				
 			case "clothes_b":
@@ -173,7 +173,7 @@ class GameMap extends FlxGroup
 				
 			case "chew_toy_a":
 				o = new BaseGObject(ex, ey, "chewtoy1", 0, 0, "my friend", "my friend");
-				o.sndFile = GAssets.getFile("squeeky_toy", GAssets.LOC_SOUNDS, "mp3");
+				o.sndFile = o.postSndFile = GAssets.getFile("squeeky_toy", GAssets.LOC_SOUNDS, "mp3");
 				addGameObject(o);
 				
 			case "chew_toy_b":
@@ -185,7 +185,7 @@ class GameMap extends FlxGroup
 				o = new BaseGObject(ex, ey, EntType, 64, 64, "drink water", "very tasty", false);
 				o.setupHitbox(40, 48, 12, 16);
 				o.badInteraction = true;
-				o.sndFile = GAssets.getFile("toilet", GAssets.LOC_SOUNDS, "mp3");
+				o.sndFile = o.postSndFile = GAssets.getFile("toilet", GAssets.LOC_SOUNDS, "mp3");
 				addGameObject(o);
 				
 			case "bathtub":
@@ -203,7 +203,7 @@ class GameMap extends FlxGroup
 				o = new BaseGObject(ex, ey, EntType, 64, 64, "drink water", "very tasty", false);
 				o.setupHitbox(40, 48, 12, 16);
 				o.badInteraction = true;
-				o.sndFile = GAssets.getFile("toilet", GAssets.LOC_SOUNDS, "mp3");
+				o.sndFile = o.postSndFile = GAssets.getFile("toilet", GAssets.LOC_SOUNDS, "mp3");
 				addGameObject(o);
 				
 			case "kid_bathtub":
@@ -248,7 +248,7 @@ class GameMap extends FlxGroup
 				
 			case "ducky":
 				o = new BaseGObject(ex, ey, EntType, 0, 0, "ducky friend", "no tell me");
-				o.sndFile = GAssets.getFile("squeeky_toy", GAssets.LOC_SOUNDS, "mp3");
+				o.sndFile = o.postSndFile = GAssets.getFile("squeeky_toy", GAssets.LOC_SOUNDS, "mp3");
 				addGameObject(o);
 				
 			case "dog_bowl":

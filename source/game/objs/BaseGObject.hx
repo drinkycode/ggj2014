@@ -37,6 +37,7 @@ class BaseGObject extends FlxSprite
 	
 	public var sndFile:String = "";
 	public var preSndFile:String = "";
+	public var postSndFile:String = "";
 	
 	private var _imageFile:String = "";
 	private var _imageWidth:Int = 0;
@@ -198,6 +199,11 @@ class BaseGObject extends FlxSprite
 		if (postInteractionMessage != "")
 		{
 			G.playstate.gui.callTextbox(postInteractionMessage);
+		}
+		
+		if (postSndFile != "")
+		{
+			FlxG.sound.play(postSndFile);
 		}
 	}
 	
