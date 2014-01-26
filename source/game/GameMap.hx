@@ -161,6 +161,7 @@ class GameMap extends FlxGroup
 			case "bed":
 				o = new BaseGObject(ex, ey, "bed1", 128, 128, "no master", "bed cold", false);
 				o.setupHitbox(96, 128, 16, 0);
+				o.sndFile = o.postSndFile = GAssets.getFile("clothes_rustle", GAssets.LOC_SOUNDS, "mp3");
 				addGameObject(o);
 				
 			case "clothes_a":
@@ -169,7 +170,9 @@ class GameMap extends FlxGroup
 				addGameObject(o);
 				
 			case "clothes_b":
-				addGameObject(new BaseGObject(ex, ey, "clothes2", 0, 0, "young master smell", "young master smell", false, 32, 32));
+				o = new BaseGObject(ex, ey, "clothes2", 0, 0, "young master smell", "young master smell", false, 32, 32);
+				o.sndFile = o.postSndFile = GAssets.getFile("clothes_rustle", GAssets.LOC_SOUNDS, "mp3");
+				addGameObject(o);
 				
 			case "chew_toy_a":
 				o = new BaseGObject(ex, ey, "chewtoy1", 0, 0, "my friend", "my friend");
@@ -232,6 +235,7 @@ class GameMap extends FlxGroup
 			case "kid_bed":
 				o = new BaseGObject(ex, ey, "bed2", 0, 0, "young master no here", "young master no here", false);
 				o.setupHitbox(96, 64, 16, 0);
+				o.sndFile = o.postSndFile = GAssets.getFile("clothes_rustle", GAssets.LOC_SOUNDS, "mp3");
 				addGameObject(o);
 				
 			case "stuffed_animal":
