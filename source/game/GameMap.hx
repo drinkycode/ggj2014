@@ -70,12 +70,12 @@ class GameMap extends FlxGroup
 		add(gobjs);
 		add(player);
 		
-		//add(hitboxes);
+		add(hitboxes);
 		
-		addGameObject(new ChewToy(580, 620));
+		addGameObject(new ChewToy(680, 620));
 		
-		addGameObject(new LivingRoomTable(650, 600));
-		addGameObject(new TableJar(670, 590));
+		addGameObject(new LivingRoomTable(750, 600));
+		addGameObject(new TableJar(770, 590));
 		
 		linkGameObjects();
 	}
