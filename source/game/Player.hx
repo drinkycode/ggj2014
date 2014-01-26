@@ -37,6 +37,7 @@ class Player extends FlxGroup
 	public var shadow:FlxSprite;
 	
 	private var _interacted:Bool = false; // Helper bool flag
+	private var _pressed:Bool = false;
 	
 	public function new(X:Float = 0, Y:Float = 0) 
 	{
@@ -220,16 +221,12 @@ class Player extends FlxGroup
 		interactionZone.x = sprite.x + ix;
 		interactionZone.y = sprite.y + iy;
 		
-		/*if (interactionZone.overlaps(G.playstate.gmap.gobjs))
+		if (interactionZone.overlaps(G.playstate.gmap.gobjs))
 		{
-			G.playstate.gui.showInteractionButton(interactionZone.x, interactionZone.y);
-			if (FlxG.keyboard.anyJustPressed(["X"]))
-			{
-				checkInteraction();
-			}
+			//G.playstate.gui.showInteractionButton(interactionZone.x, interactionZone.y);
+			checkInteraction();
 		}
-		else*/
-		if (!FlxG.overlap(interactionZone, G.playstate.gmap.gobjs, interactionPopup))
+		else
 		{
 			G.playstate.gui.hideInteractionButton();
 		}
@@ -240,16 +237,19 @@ class Player extends FlxGroup
 		}
 	}
 	
-	private function interactionPopup(A:FlxObject, B:FlxObject):Void {
+	/*private function interactionPopup(A:FlxObject, B:FlxObject):Void 
+	{
 		var gobj:BaseGObject = cast(B, BaseGObject);
-		if (gobj != null) {
-			G.playstate.gui.showInteractionButton(gobj.x+gobj.width/2, gobj.y - 24);
+		if (gobj != null) 
+		{
+			G.playstate.gui.showInteractionButton(gobj.x + (gobj.width / 2), gobj.y - 24);
 			if (FlxG.keyboard.anyJustPressed(["X"]))
 			{
 				checkInteraction();
 			}
 		}
-	}
+	}*/
+	
 	private function updateMotionExt():Void
 	{
 		var delta:Float;
@@ -327,6 +327,7 @@ class Player extends FlxGroup
 		sprite.allowCollisions = FlxObject.NONE;
 		
 		_interacted = false;
+		_pressed = FlxG.keyboard.anyJustPressed(["X"]);
 		FlxG.overlap(interactionZone, G.playstate.gmap.gobjs, interactWithObject);
 		
 		sprite.allowCollisions = FlxObject.ANY;
@@ -339,7 +340,11 @@ class Player extends FlxGroup
 		if (!Reflect.field(Obj, "canInteract")) return;
 		if (interactionZone.overlaps(Obj))
 		{
-			Reflect.callMethod(Obj, Reflect.field(Obj, "interact"), []);
+			if (_pressed)
+			{
+				Reflect.callMethod(Obj, Reflect.field(Obj, "interact"), []);
+			}
+			G.playstate.gui.showInteractionButton(Obj.x + (Obj.width / 2), Obj.y);
 			_interacted = true;
 		}
 	}

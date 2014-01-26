@@ -302,7 +302,7 @@ class GameMap extends FlxGroup
 	{
 		super.update();
 		cameraFollow.x = player.sprite.x + 12;
-		cameraFollow.y = player.sprite.y + 0;
+		cameraFollow.y = player.sprite.y - 16;
 		
 		//FlxG.collide(tilemap, player);
 		
