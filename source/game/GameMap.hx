@@ -161,7 +161,7 @@ class GameMap extends FlxGroup
 				addGameObject(new BaseGObject(ex, ey, EntType, 64, 64, "my enemy", "my enemy"));
 				
 			case "toilet":
-				addGameObject(new BaseGObject(ex, ey, EntType, 64, 64, "drink water", "very tasty"));
+				addGameObject(new BaseGObject(ex, ey, EntType, 0, 0, "drink water", "very tasty"));
 				
 			case "bathtub":
 				addGameObject(new BaseGObject(ex, ey, EntType, 0, 0, "no wet now", "i hate tub"));
@@ -173,7 +173,7 @@ class GameMap extends FlxGroup
 				addGameObject(new BaseGObject(ex, ey, "bathroom_mat"));
 						
 			case "kid_toilet":
-				addGameObject(new BaseGObject(ex, ey, EntType, 64, 64, "drink water", "very tasty"));
+				addGameObject(new BaseGObject(ex, ey, EntType, 0, 0, "drink water", "very tasty"));
 				
 			case "kid_bathtub":
 				addGameObject(new BaseGObject(ex, ey, EntType, 0, 0, "no wet now", "i hate tub"));
