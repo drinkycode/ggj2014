@@ -42,6 +42,7 @@ class Player extends FlxGroup
 	
 	private var _interacted:Bool = false; // Helper bool flag
 	private var _pressed:Bool = false;
+	private var _notMoveTimer:Float = 0;
 	
 	public function new(X:Float = 0, Y:Float = 0) 
 	{
@@ -268,6 +269,15 @@ class Player extends FlxGroup
 		if ((sprite.velocity.x != 0) || (sprite.velocity.y != 0))
 		{
 			checkTextAreas();
+		}
+		
+		if (!movedOnce)
+		{
+			_notMoveTimer += FlxG.elapsed;
+			if (_notMoveTimer >= 45)
+			{
+				G.playstate.forceEnding = 4;
+			}
 		}
 		
 		if (sprite.x >= 2048)

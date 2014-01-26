@@ -120,7 +120,7 @@ class PlayState extends FlxState
 				{
 					_ending = 4;
 				}
-				else if (badInteractions <= 3)
+				else if (badInteractions <= 6)
 				{
 					_ending = 2;
 				}
