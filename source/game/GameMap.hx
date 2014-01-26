@@ -1,9 +1,11 @@
 package game;
 
+import flixel.FlxBasic;
 import flixel.FlxG;
 import flixel.FlxObject;
 import flixel.FlxCamera;
 import flixel.addons.editors.ogmo.FlxOgmoLoader;
+import flixel.FlxSprite;
 import flixel.group.FlxGroup;
 import flixel.group.FlxTypedGroup;
 import flixel.tile.FlxTilemap;
@@ -62,7 +64,7 @@ class GameMap extends FlxGroup
 		}*/	
 		
 		gobjs = new FlxGroup();
-		hitboxes = new FlxGroup();
+		hitboxes = new FlxGroup();		
 		
 		// Load objects in lvl
 		level.loadEntities(loadHitbox, "collide");
@@ -198,5 +200,6 @@ class GameMap extends FlxGroup
 		{
 			FlxG.collide(hitboxes, player.sprite);
 		}
-	}	
+	}
+	
 }

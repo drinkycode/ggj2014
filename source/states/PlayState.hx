@@ -1,7 +1,11 @@
 package states;
 
+import flash.display.BlendMode;
+import flash.display.Stage;
+import flash.filters.BlurFilter;
 import flixel.FlxCamera;
 import flixel.FlxG;
+import flixel.FlxGame;
 import flixel.FlxSprite;
 import flixel.FlxState;
 import flixel.group.FlxGroup;
@@ -15,6 +19,7 @@ import flixel.util.FlxMath;
 import game.GameMap;
 import game.Player;
 import gui.GameGUI;
+import util.GAssets;
 
 
 /**
@@ -48,10 +53,18 @@ class PlayState extends FlxState
 		gmap = new GameMap();
 		gmap.create();
 		
+		
 		gui = new GameGUI();
 		
 		add(gmap);
 		add(gui);
+		
+		
+		//var blur:FlxSprite = new FlxSprite();
+		//blur.loadGraphic(GAssets.getFile("blur"));
+		//blur.scrollFactor.x = blur.scrollFactor.y = 0;
+		//blur.alpha = 0.15;
+		//add(blur);
 	}
 	
 	/**

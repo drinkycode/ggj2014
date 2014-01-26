@@ -3,6 +3,7 @@ package states;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxState;
+import flixel.system.input.mouse.FlxMouse;
 import flixel.text.FlxText;
 import flixel.ui.FlxButton;
 import flixel.util.FlxMath;
@@ -41,6 +42,16 @@ class MenuState extends FlxState
 	 */
 	override public function update():Void
 	{
+		if (FlxG.mouse.justPressed)
+		{
+			playGame();
+		}
+		
 		super.update();
-	}	
+	}
+	
+	public function playGame():Void
+	{
+		FlxG.switchState(new PlayState());
+	}
 }
