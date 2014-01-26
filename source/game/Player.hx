@@ -6,6 +6,7 @@ import flixel.FlxObject;
 import flixel.FlxSprite;
 import flixel.group.FlxGroup;
 import flixel.group.FlxSpriteGroup;
+import flixel.system.frontEnds.SoundFrontEnd;
 import flixel.system.input.keyboard.FlxKey;
 import flixel.system.input.keyboard.FlxKeyboard;
 import flixel.system.input.keyboard.FlxKeyShortcuts;
@@ -234,6 +235,11 @@ class Player extends FlxGroup
 		else
 		{
 			G.playstate.gui.hideInteractionButton();
+			
+			if (allowInput && FlxG.keyboard.anyJustPressed(["X"]))
+			{
+				FlxG.sound.play(GAssets.getFile("bark", GAssets.LOC_SOUNDS, "mp3"));
+			}
 		}
 		
 		if ((sprite.velocity.x != 0) || (sprite.velocity.y != 0))

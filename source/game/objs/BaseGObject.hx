@@ -19,6 +19,8 @@ class BaseGObject extends FlxSprite
 	public var canInteract:Bool = true;
 	public var interactionState:Int = -1;
 	
+	public var badInteraction:Bool = false;
+	
 	public var interactionMessage:String = "";
 	public var preInteractionMessage:String = "";
 	public var postInteractionMessage:String = "";
@@ -94,6 +96,11 @@ class BaseGObject extends FlxSprite
 		if ((HitboxWidth != 0) && (HitboxHeight != 0))
 		{
 			G.playstate.gmap.addHitbox(x + HitboxOffsetX, y + HitboxOffsetY, HitboxWidth, HitboxHeight);
+			
+			//width = HitboxWidth;
+			//height = HitboxHeight;
+			//offset.x = HitboxOffsetX;
+			//offset.y = HitboxOffsetY;
 		}
 	}
 	
@@ -133,6 +140,11 @@ class BaseGObject extends FlxSprite
 					if (childObject != null)
 					{
 						childObject.interact(true);
+					}
+					
+					if (badInteraction)
+					{
+						
 					}
 				}
 				else if (calledTimes < requiredCalls)

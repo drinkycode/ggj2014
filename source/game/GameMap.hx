@@ -154,24 +154,32 @@ class GameMap extends FlxGroup
 				player = new Player(ex, ey);
 				
 			case "dog_bed":
-				o = new BaseGObject(ex, ey, "dogbed", 64, 64, "me awake", "no tired");
-				o.setupHitbox(50, 64, 7, 0);
+				o = new BaseGObject(ex, ey, "dogbed", 64, 64, "me awake", "no tired", false);
+				//o.setupHitbox(50, 64, 7, 0);
 				addGameObject(o);
 				
 			case "bed":
-				addGameObject(new BaseGObject(ex, ey, "bed1", 128, 128, "no master", "bed cold"));
+				o = new BaseGObject(ex, ey, "bed1", 128, 128, "no master", "bed cold", false);
+				o.setupHitbox(96, 128, 16, 0);
+				addGameObject(o);
 				
 			case "clothes_a":
-				addGameObject(new BaseGObject(ex, ey, "clothes1", 0, 0, "master's smell", "master's smell", true, 32, 32));
+				o = new BaseGObject(ex, ey, "clothes1", 0, 0, "master's smell", "master's smell", false, 32, 32);
+				o.sndFile = GAssets.getFile("clothes_rustle", GAssets.LOC_SOUNDS, "mp3");
+				addGameObject(o);
 				
 			case "clothes_b":
-				addGameObject(new BaseGObject(ex, ey, "clothes2", 0, 0, "young master smell", "young master smell", true, 32, 32));
+				addGameObject(new BaseGObject(ex, ey, "clothes2", 0, 0, "young master smell", "young master smell", false, 32, 32));
 				
 			case "chew_toy_a":
-				addGameObject(new BaseGObject(ex, ey, "chewtoy1", 0, 0, "my friend", "my friend"));
+				o = new BaseGObject(ex, ey, "chewtoy1", 0, 0, "my friend", "my friend");
+				o.sndFile = GAssets.getFile("squeeky_toy", GAssets.LOC_SOUNDS, "mp3");
+				addGameObject(o);
 				
 			case "chew_toy_b":
-				addGameObject(new BaseGObject(ex, ey, "chewtoy2", 0, 0, "...my enemy", "...my enemy"));
+				o = new BaseGObject(ex, ey, "chewtoy2", 0, 0, "...my enemy", "...my enemy");
+				o.sndFile = GAssets.getFile("squeeky_toy", GAssets.LOC_SOUNDS, "mp3");
+				addGameObject(o);
 				
 			case "toilet":
 				o = new BaseGObject(ex, ey, EntType, 64, 64, "drink water", "very tasty", false);
@@ -220,16 +228,24 @@ class GameMap extends FlxGroup
 				addGameObject(new TableJar(ex, ey));
 				
 			case "kid_bed":
-				addGameObject(new BaseGObject(ex, ey, "bed2", 0, 0, "young master no here", "young master no here", true, 128, 64));
+				o = new BaseGObject(ex, ey, "bed2", 0, 0, "young master no here", "young master no here", false);
+				o.setupHitbox(96, 64, 16, 0);
+				addGameObject(o);
 				
 			case "stuffed_animal":
-				addGameObject(new BaseGObject(ex, ey, EntType, 32, 32, "where young master", "no tell me"));
+				o = new BaseGObject(ex, ey, EntType, 32, 32, "where young master", "no tell me", false);
+				o.sndFile = GAssets.getFile("clothes_rip", GAssets.LOC_SOUNDS, "mp3");
+				addGameObject(o);
 				
 			case "toy":
-				addGameObject(new BaseGObject(ex, ey, EntType, 32, 32, "where young master", "young master upset"));
+				o = new BaseGObject(ex, ey, EntType, 32, 32, "where young master", "young master upset");
+				o.sndFile = GAssets.getFile("wood_crack", GAssets.LOC_SOUNDS, "mp3");
+				addGameObject(o);
 				
 			case "ducky":
-				addGameObject(new BaseGObject(ex, ey, EntType, 0, 0, "ducky friend", "no tell me"));
+				o = new BaseGObject(ex, ey, EntType, 0, 0, "ducky friend", "no tell me");
+				o.sndFile = GAssets.getFile("squeeky_toy", GAssets.LOC_SOUNDS, "mp3");
+				addGameObject(o);
 				
 			case "dog_bowl":
 				addGameObject(new BaseGObject(ex, ey, EntType, 64, 64, "master give food!", "i ate it"));
@@ -244,7 +260,10 @@ class GameMap extends FlxGroup
 				addGameObject(new Apple(ex, ey));
 				
 			case "chair":
-				addGameObject(new BaseGObject(ex, ey, "kitchen_chair", 64, 64, "i let go", "territory me"));
+				o = new BaseGObject(ex, ey, "kitchen_chair", 64, 64, "i let go", "territory me", false);
+				o.setupHitbox(48, 64, 8, 0);
+				o.sndFile = GAssets.getFile("pee", GAssets.LOC_SOUNDS, "mp3");
+				addGameObject(o);
 				
 			case "tv_table":
 				addGameObject(new TVTable(ex,ey));
@@ -253,10 +272,14 @@ class GameMap extends FlxGroup
 				addGameObject(new TV(ex,ey));
 				
 			case "couch":
-				addGameObject(new BaseGObject(ex, ey, EntType, 64, 128, "where is master", "no master upset"));
+				o = new BaseGObject(ex, ey, EntType, 64, 128, "where is master", "no master upset");
+				o.sndFile = GAssets.getFile("clothes_rip", GAssets.LOC_SOUNDS, "mp3");
+				addGameObject(o);
 				
 			case "recliner":
-				addGameObject(new BaseGObject(ex, ey, EntType, 64, 64, "master not here", "me upset"));
+				o = new BaseGObject(ex, ey, EntType, 64, 64, "master not here", "me upset");
+				o.sndFile = GAssets.getFile("clothes_rip", GAssets.LOC_SOUNDS, "mp3");
+				addGameObject(o);
 				
 			case "coffee_table":
 				addGameObject(new CoffeeTable(ex, ey));
@@ -266,10 +289,10 @@ class GameMap extends FlxGroup
 				
 			case "tree":
 				addGameObject(new BaseGObject(ex, ey, EntType, 64, 64, "", ""));
-							
+				
 			case "candy":
 				addGameObject(new BaseGObject(ex, ey, EntType, 64, 64, "CANDY!", "sweet"));
-							
+				
 			default:
 				throw "Unrecognized actor type '" + EntType + "' detected in level file.";
 		}

@@ -21,13 +21,15 @@ class CoffeeTable extends BaseGObject
 	
 	public function new(X:Float = 0, Y:Float = 0) 
 	{
-		super(X, Y);
+		super(X, Y, "", 0, 0, "", "", false);
 		
 		objName = "coffee_table";
 		preInteractionMessage = "*shake table*";
 		postInteractionMessage = "no master me upset";
 		requiredCalls = 3;
 		childObjName = "books";
+		
+		preSndFile = sndFile = GAssets.getFile("wood_rattle", GAssets.LOC_SOUNDS, "mp3");
 		
 		interactionCooldown = 1;
 		

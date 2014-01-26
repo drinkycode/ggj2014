@@ -21,13 +21,17 @@ class TVTable extends BaseGObject
 	
 	public function new(X:Float = 0, Y:Float = 0) 
 	{
-		super(X, Y);
+		super(X, Y, "", 0, 0, "", "", false);
 		
 		objName = "tv_table";
 		preInteractionMessage = "people in here";
 		postInteractionMessage = "thing fell off";
 		requiredCalls = 3;
 		childObjName = "tv";
+		
+		setupHitbox(48, 100);
+		
+		preSndFile = sndFile = GAssets.getFile("wood_rattle", GAssets.LOC_SOUNDS, "mp3");
 		
 		interactionCooldown = 1;
 		
@@ -40,7 +44,8 @@ class TVTable extends BaseGObject
 		loadGraphic(GAssets.getFile("tv_table"));
 		_imageWidth = 32;
 		_imageHeight = 64;
-		G.playstate.gmap.addHitbox(x, y, 32, 64);
+		
+		//G.playstate.gmap.addHitbox(x, y, 32, 64);
 	}
 	
 	override private function doInteraction():Void 

@@ -21,7 +21,7 @@ class LivingRoomTable extends BaseGObject
 	
 	public function new(X:Float = 0, Y:Float = 0) 
 	{
-		super(X, Y);
+		super(X, Y, "", 0, 0, "", "", false);
 		
 		objName = "living_room_table";
 		preInteractionMessage = "*shake table*";

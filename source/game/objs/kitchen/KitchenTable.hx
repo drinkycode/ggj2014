@@ -21,13 +21,17 @@ class KitchenTable extends BaseGObject
 	
 	public function new(X:Float = 0, Y:Float = 0) 
 	{
-		super(X, Y, "kitchen_table", 128, 128);
+		super(X, Y, "kitchen_table", 128, 128, "", "", false);
 		
 		objName = "kitchen_table";
 		preInteractionMessage = "food?";
 		postInteractionMessage = "i eat";
 		requiredCalls = 3;
 		childObjName = "apple";
+		
+		setupHitbox(96, 128, 16, 0);
+		
+		preSndFile = sndFile = GAssets.getFile("wood_rattle", GAssets.LOC_SOUNDS, "mp3");
 		
 		interactionCooldown = 1;
 		
@@ -39,7 +43,7 @@ class KitchenTable extends BaseGObject
 		super.setupSprite();
 		//loadGraphic(GAssets.getFile("kitchen_table"));
 		
-		G.playstate.gmap.addHitbox(x, y, 64, 96);
+		//G.playstate.gmap.addHitbox(x, y, 64, 96);
 	}
 	
 	override private function doInteraction():Void 
