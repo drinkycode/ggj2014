@@ -32,7 +32,7 @@ class PlayState extends FlxState
 {
 	
 	public var state:Int = 2;
-	public var gameTimer:Float = 2 * 60; // Seconds
+	public var gameTimer:Float = 105; // Seconds
 	
 	public var gui:GameGUI;
 	public var gmap:GameMap;
@@ -157,15 +157,17 @@ class PlayState extends FlxState
 				
 			// Good ending
 			case 2: 
-				positionPlayer(1454, 544);
+				positionPlayer(1554, 948);
 				gmap.player.sprite.facing = FlxObject.RIGHT;
 				
-				positionHuman(1500, 500);
+				positionHuman(1582, 904);
 				gmap.human.sprite.facing = FlxObject.LEFT;
-				gmap.human.sprite.animation.play("scold");
+				gmap.human.sprite.animation.play("idle");
 				
 				FlxG.camera.scroll.x = 1340;
-				FlxG.camera.scroll.y = 340;
+				FlxG.camera.scroll.y = 750;
+				
+				callHumanPopup("Echo come here!", 4.5);
 				
 			// Bad ending
 			case 3:
@@ -196,7 +198,7 @@ class PlayState extends FlxState
 	
 	private function callHumanPopup(Message:String, Duration:Float = 5):Void
 	{
-		gui.callPopup(gmap.human.sprite.x, gmap.human.sprite.y, Message, Duration);
+		gui.callPopup(gmap.human.sprite.x + 35, gmap.human.sprite.y - 34, Message, Duration);
 	}
 	
 	private function gotoEnding():Void
@@ -206,13 +208,17 @@ class PlayState extends FlxState
 			case 1:
 				
 			case 2:
-				callHumanPopup("Echo come here!", 5);
-				FlxTween.manager.add(new FlxTween(5, FlxTween.ONESHOT, goodEnding1), true);
-				FlxTween.manager.add(new FlxTween(9, FlxTween.ONESHOT, goodEnding2), true);
-				FlxTween.manager.add(new FlxTween(15, FlxTween.ONESHOT, goodEnding3), true);
-				FlxTween.manager.add(new FlxTween(21, FlxTween.ONESHOT, goodEnding4), true);
-				FlxTween.manager.add(new FlxTween(25, FlxTween.ONESHOT, goodEnding5), true);
-				FlxTween.manager.add(new FlxTween(31, FlxTween.ONESHOT, fadeToMenu), true);
+				//callHumanPopup("Echo come here!", 5);
+				FlxTween.manager.add(new FlxTween(4, FlxTween.ONESHOT, goodEnding1), true);
+				FlxTween.manager.add(new FlxTween(8, FlxTween.ONESHOT, goodEnding2), true);
+				FlxTween.manager.add(new FlxTween(14, FlxTween.ONESHOT, goodEnding3), true);
+				FlxTween.manager.add(new FlxTween(20, FlxTween.ONESHOT, goodEnding4), true);
+				FlxTween.manager.add(new FlxTween(24, FlxTween.ONESHOT, goodEnding5), true);
+				FlxTween.manager.add(new FlxTween(30, FlxTween.ONESHOT, goodEnding6), true);
+				FlxTween.manager.add(new FlxTween(36, FlxTween.ONESHOT, goodEnding7), true);
+				FlxTween.manager.add(new FlxTween(42, FlxTween.ONESHOT, goodEnding8), true);
+				FlxTween.manager.add(new FlxTween(43, FlxTween.ONESHOT, goodEnding9), true);
+				FlxTween.manager.add(new FlxTween(51, FlxTween.ONESHOT, fadeToMenu), true);
 				
 			case 3:
 				callHumanPopup("ECHO! BAD DOG!", 5);
@@ -232,20 +238,37 @@ class PlayState extends FlxState
 	}
 	private function goodEnding2(T:FlxTween = null):Void
 	{
-		callHumanPopup("Don't look at me like that....", 5);
+		callHumanPopup("I don't know what I would do with you...", 5);
 	}
 	private function goodEnding3(T:FlxTween = null):Void
 	{
-		callHumanPopup("I can't do anything...", 5);
+		gmap.human.sprite.animation.play("cry");
+		callHumanPopup("At a time like this...", 5);
 	}
 	private function goodEnding4(T:FlxTween = null):Void
 	{
-		gui.callTextbox("yay master");
+		gui.callTextbox("where young master?");
 	}
 	private function goodEnding5(T:FlxTween = null):Void
 	{
-		gmap.human.sprite.animation.play("cry");
-		gui.callPopup(gmap.human.sprite.x, gmap.human.sprite.y, "We'll get through this somehow...", 99);
+		callHumanPopup("Maggie... she'll be okay...", 5);
+	}
+	private function goodEnding6(T:FlxTween = null):Void
+	{
+		callHumanPopup("She wants to see you.", 5);
+	}
+	private function goodEnding7(T:FlxTween = null):Void
+	{
+		callHumanPopup("We can get through this Echo. Definitely.", 5);
+	}
+	private function goodEnding8(T:FlxTween = null):Void
+	{
+		FlxG.sound.play(GAssets.getFile("bark", GAssets.LOC_SOUNDS, "mp3"));
+		gui.callTextbox("bark bark");
+	}
+	private function goodEnding9(T:FlxTween = null):Void
+	{
+		FlxG.sound.play(GAssets.getFile("bark", GAssets.LOC_SOUNDS, "mp3"));
 	}
 	
 	private function badEnding1(T:FlxTween = null):Void
@@ -271,7 +294,7 @@ class PlayState extends FlxState
 	private function badEnding6(T:FlxTween = null):Void
 	{
 		gmap.human.sprite.animation.play("cry");
-		gui.callPopup(gmap.human.sprite.x, gmap.human.sprite.y, "We'll get through this somehow...", 99);
+		callHumanPopup("We'll get through this somehow...", 99);
 	}
 	
 	private function fadeToMenu(T:FlxTween = null):Void

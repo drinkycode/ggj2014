@@ -22,7 +22,7 @@ class TextPopup extends FlxSpriteGroup
 		super();
 		
 		text = new FlxText(-80, 0, 160, "");
-		text.setFormat(GAssets.getFile("awesome",GAssets.LOC_DATA,"ttf"), 20, 0xffffff, "center", FlxText.BORDER_OUTLINE, 0x000000, true);
+		text.setFormat(GAssets.getFile("HelvetiHand", GAssets.LOC_DATA, "ttf"), 16, 0xffffff, "center", FlxText.BORDER_OUTLINE, 0x000000, true);
 		add(text);
 		
 		hide();

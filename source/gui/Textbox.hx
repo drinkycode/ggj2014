@@ -15,23 +15,24 @@ class Textbox extends FlxSpriteGroup
 
 	public static inline var DOG:Int = 0;
 	public static inline var HUMAN:Int = 1;
+	
 	public var text:FlxText;
 	
 	private var _timer:Float = 0;
 	
-	public function new(type:Int = HUMAN) 
+	public function new(FontType:Int = DOG) 
 	{
 		super();
 		
-		if(type == DOG) {
-		text = new FlxText(0, 270, FlxG.width, "");
-		text.setFormat(GAssets.getFile("awesome", GAssets.LOC_DATA, "ttf"), 24, 0xffffff, "center", FlxText.BORDER_OUTLINE, 0x000000, true);
-		
-		} else {
-			
+		if (FontType == DOG) 
+		{
+			text = new FlxText(0, 270, FlxG.width, "");
+			text.setFormat(GAssets.getFile("awesome", GAssets.LOC_DATA, "ttf"), 28, 0xffffff, "center", FlxText.BORDER_OUTLINE, 0x000000, true);
+		} 
+		else 
+		{
 			text = new FlxText(0, 270, FlxG.width, "");
 			text.setFormat(GAssets.getFile("HelvetiHand", GAssets.LOC_DATA, "ttf"), 24, 0xffffff, "center", FlxText.BORDER_OUTLINE, 0x000000, true);
-		
 		}
 		
 		
