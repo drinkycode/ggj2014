@@ -17,6 +17,7 @@ class GameGUI extends FlxGroup
 	
 	private var _textbox:Textbox;
 	private var _interact:FlxSprite;
+	private var _t:Float;
 
 	public function new() 
 	{
@@ -27,7 +28,7 @@ class GameGUI extends FlxGroup
 		
 		_interact = new FlxSprite(7, 286);
 		_interact.loadGraphic(GAssets.getFile("gui_interact"));
-		_interact.scrollFactor.x = _interact.scrollFactor.y = 0;
+		//_interact.scrollFactor.x = _interact.scrollFactor.y = 0;
 		_interact.active = false;
 		_interact.moves = false;
 		_interact.visible = false;
@@ -46,6 +47,7 @@ class GameGUI extends FlxGroup
 	override public function update():Void
 	{
 		super.update();
+		_t += FlxG.elapsed; // not used, but have interaction button bounce a bit
 	}
 	
 	public function callTextbox(Message:String):Void
@@ -53,8 +55,10 @@ class GameGUI extends FlxGroup
 		_textbox.show(Message);
 	}
 	
-	public function showInteractionButton():Void
+	public function showInteractionButton(X:Float, Y:Float):Void
 	{
+		_interact.x = X;
+		_interact.y = Y;
 		_interact.visible = true;
 	}
 	

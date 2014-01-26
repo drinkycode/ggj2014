@@ -21,8 +21,8 @@ class Textbox extends FlxSpriteGroup
 	{
 		super();
 		
-		text = new FlxText(0, 280, FlxG.width, "");
-		text.setFormat(GAssets.FNT_FONT, 16, 0xffffff, "center", FlxText.BORDER_NONE, 0x000000, true);
+		text = new FlxText(0, 270, FlxG.width, "");
+		text.setFormat(GAssets.getFile("awesome",GAssets.LOC_DATA,"ttf"), 24, 0xffffff, "center", FlxText.BORDER_OUTLINE, 0x000000, true);
 		add(text);
 		
 		scrollFactor.x = scrollFactor.y = 0;

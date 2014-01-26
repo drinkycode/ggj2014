@@ -8,9 +8,6 @@ import flixel.FlxSprite;
  */
 class GAssets
 {
-	
-	public static inline var FNT_FONT:String 	= "assets/data/DKBergelmir.ttf";
-	
 	public static inline var LOC_DATA:String = "assets/data/";
 	public static inline var LOC_IMGS:String = "assets/images/";
 	public static inline var LOC_MUSIC:String = "assets/music/";

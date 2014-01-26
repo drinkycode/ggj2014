@@ -15,12 +15,7 @@
 	<classpath name="source" />
 	
 	<!--You can use rename="newName" to shorten the paths to the individual subdirectories!-->
-	<assets path="assets">
-	
-		<!-- Fonts -->
-		<!--<font path="data/DKBergelmir.ttf" id="DKBergelmir" />-->
-		
-	</assets>
+	<assets path="assets" />
 	
 	<haxelib name="openfl" />
 	<haxelib name="flixel"/>

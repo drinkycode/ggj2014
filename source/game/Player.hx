@@ -11,6 +11,7 @@ import flixel.system.input.keyboard.FlxKeyboard;
 import flixel.system.input.keyboard.FlxKeyShortcuts;
 import flixel.util.FlxMath;
 import flixel.util.loaders.TexturePackerData;
+import game.objs.BaseGObject;
 import util.GAssets;
 import util.Util;
 
@@ -219,15 +220,16 @@ class Player extends FlxGroup
 		interactionZone.x = sprite.x + ix;
 		interactionZone.y = sprite.y + iy;
 		
-		if (interactionZone.overlaps(G.playstate.gmap.gobjs))
+		/*if (interactionZone.overlaps(G.playstate.gmap.gobjs))
 		{
-			G.playstate.gui.showInteractionButton();
+			G.playstate.gui.showInteractionButton(interactionZone.x, interactionZone.y);
 			if (FlxG.keyboard.anyJustPressed(["X"]))
 			{
 				checkInteraction();
 			}
 		}
-		else
+		else*/
+		if (!FlxG.overlap(interactionZone, G.playstate.gmap.gobjs, interactionPopup))
 		{
 			G.playstate.gui.hideInteractionButton();
 		}
@@ -238,6 +240,16 @@ class Player extends FlxGroup
 		}
 	}
 	
+	private function interactionPopup(A:FlxObject, B:FlxObject):Void {
+		var gobj:BaseGObject = cast(B, BaseGObject);
+		if (gobj != null) {
+			G.playstate.gui.showInteractionButton(gobj.x+gobj.width/2, gobj.y - 24);
+			if (FlxG.keyboard.anyJustPressed(["X"]))
+			{
+				checkInteraction();
+			}
+		}
+	}
 	private function updateMotionExt():Void
 	{
 		var delta:Float;
