@@ -38,7 +38,8 @@ class TVTable extends BaseGObject
 	{
 		super.setupSprite();
 		loadGraphic(GAssets.getFile("tv_table"));
-		
+		_imageWidth = 32;
+		_imageHeight = 64;
 		G.playstate.gmap.addHitbox(x, y, 32, 64);
 	}
 	

@@ -160,16 +160,16 @@ class GameMap extends FlxGroup
 				addGameObject(new BaseGObject(ex, ey, "bed1", 128, 128, "no master", "bed cold"));
 				
 			case "clothes_a":
-				addGameObject(new BaseGObject(ex, ey, EntType, 64, 64, "master's smell", "master's smell"));
+				addGameObject(new BaseGObject(ex, ey, "clothes1", 0, 0, "master's smell", "master's smell", true, 32, 32));
 				
 			case "clothes_b":
-				addGameObject(new BaseGObject(ex, ey, EntType, 64, 64, "young master smell", "young master smell"));
+				addGameObject(new BaseGObject(ex, ey, "clothes2", 0, 0, "young master smell", "young master smell", true, 32, 32));
 				
 			case "chew_toy_a":
-				addGameObject(new BaseGObject(ex, ey, EntType, 64, 64, "my friend", "my friend"));
+				addGameObject(new BaseGObject(ex, ey, "chewtoy1", 0, 0, "my friend", "my friend"));
 				
 			case "chew_toy_b":
-				addGameObject(new BaseGObject(ex, ey, EntType, 64, 64, "my enemy", "my enemy"));
+				addGameObject(new BaseGObject(ex, ey, "chewtoy2", 0, 0, "my enemy", "my enemy"));
 				
 			case "toilet":
 				o = new BaseGObject(ex, ey, EntType, 0, 0, "drink water", "very tasty", false);
@@ -246,7 +246,7 @@ class GameMap extends FlxGroup
 				addGameObject(new TV(ex,ey));
 				
 			case "couch":
-				addGameObject(new BaseGObject(ex, ey, EntType, 64, 64, "where is master", "no master upset"));
+				addGameObject(new BaseGObject(ex, ey, EntType, 64, 128, "where is master", "no master upset"));
 				
 			case "recliner":
 				addGameObject(new BaseGObject(ex, ey, EntType, 64, 64, "master not here", "me upset"));
