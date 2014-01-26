@@ -38,9 +38,12 @@ class BaseGObject extends FlxSprite
 	private var _imageWidth:Int = 0;
 	private var _imageHeight:Int = 0;
 	
+	private var _hitboxWidth:Int = 0;
+	private var _hitboxHeight:Int = 0;
+	
 	private var _cooldown:Float = 0;
 	
-	public function new(X:Float = 0, Y:Float = 0, ImageFile:String = "", ImageWidth:Int = 0, ImageHeight:Int = 0, InteractionMessage:String = "", PostInteractionMessage = "", CreateHitbox:Bool = true) 
+	public function new(X:Float = 0, Y:Float = 0, ImageFile:String = "", ImageWidth:Int = 0, ImageHeight:Int = 0, InteractionMessage:String = "", PostInteractionMessage = "", CreateHitbox:Bool = true, HitboxWidth:Int = 0, HitboxHeight:Int = 0) 
 	{
 		super(X, Y);
 		
@@ -52,6 +55,14 @@ class BaseGObject extends FlxSprite
 		postInteractionMessage = PostInteractionMessage;
 		
 		createHitbox = CreateHitbox;
+		if (HitboxWidth == 0)
+		{
+			_hitboxWidth = ImageWidth;
+		}
+		if (HitboxHeight == 0)
+		{
+			_hitboxHeight = ImageHeight;
+		}
 		
 		setupSprite();
 		setupHitbox();
@@ -77,9 +88,9 @@ class BaseGObject extends FlxSprite
 	
 	private function setupHitbox():Void
 	{
-		if (createHitbox && (_imageWidth != 0) && (_imageHeight != 0))
+		if (createHitbox && (_hitboxWidth != 0) && (_hitboxHeight != 0))
 		{
-			G.playstate.gmap.addHitbox(x, y, _imageWidth, _imageHeight);
+			G.playstate.gmap.addHitbox(x, y, _hitboxWidth, _hitboxHeight);
 		}
 	}
 	
