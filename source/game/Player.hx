@@ -334,7 +334,7 @@ class Player extends FlxGroup
 	
 	public function checkTextAreas():Void
 	{
-		//FlxG.overlap(sprite, G.playstate.gmap.gtextareas, triggerTextArea);
+		FlxG.overlap(sprite, G.playstate.gmap.gtextareas, triggerTextArea);
 	}
 	
 	private function triggerTextArea(P:Dynamic, Obj:Dynamic):Void

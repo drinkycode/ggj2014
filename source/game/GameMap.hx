@@ -37,6 +37,7 @@ class GameMap extends FlxGroup
 	
 	public var tilemap:FlxTilemap;
 	public var gobjs:FlxGroup;
+	public var gtextareas:FlxGroup;
 	
 	public var cameraFollow:FlxObject;
 	public var hitboxes:FlxGroup;
@@ -69,7 +70,15 @@ class GameMap extends FlxGroup
 			tilemap.setTileProperties(i, FlxObject.ANY);
 		}*/	
 		
+		
+		human = new Human(1800, 900);
+		human.addWaypoint(1340, 900);
+		human.addWaypoint(1340, 500);
+		human.move();
+		
+		
 		gobjs = new FlxGroup();
+		gtextareas = new FlxGroup();
 		hitboxes = new FlxGroup();		
 		
 		// Load objects in lvl
@@ -84,14 +93,7 @@ class GameMap extends FlxGroup
 		
 		add(tilemap);
 		add(gobjs);
-		
-		
-		human = new Human(1800, 900);
-		
-		human.addWaypoint(1340, 900);
-		human.addWaypoint(1340, 500);
-		
-		human.move();
+		add(gtextareas);
 		
 		
 		add(human);
@@ -110,8 +112,14 @@ class GameMap extends FlxGroup
 	override public function destroy():Void
 	{
 		tilemap = null;
-		player = null;
 		gobjs = null;
+		gtextareas = null;
+		
+		player = null;
+		human = null;
+		
+		hitboxes = null;
+		
 		cameraFollow = null;
 		
 		super.destroy();
