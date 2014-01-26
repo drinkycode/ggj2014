@@ -32,14 +32,14 @@ class PlayState extends FlxState
 {
 	
 	public var state:Int = 2;
-	public var gameTimer:Float = 3 * 60; // Seconds
-	//public var gameTimer:Float = 3; // Seconds
+	public var gameTimer:Float = 2 * 60; // Seconds
 	
 	public var gui:GameGUI;
 	public var gmap:GameMap;
 	
 	public var badInteractions:Int = 0;
 	
+	public var forceEnding:Int = -1;
 	private var _ending:Int = -1;
 	
 	/**
@@ -106,21 +106,24 @@ class PlayState extends FlxState
 		else if (state == 2) // Main game loop
 		{
 			gameTimer -= FlxG.elapsed;
-			if (gameTimer <= 0)
+			if ((gameTimer <= 0) || (forceEnding != -1))
 			{
 				// Fire ending here
 				state = 3;
 				gmap.player.allowInput = false;
 				
-				if (badInteractions <= 3)
+				if (forceEnding != -1)
 				{
-					_ending = 1;
+					_ending = forceEnding;
+				}
+				else if (badInteractions <= 3)
+				{
+					_ending = 2;
 				}
 				else
 				{
-					_ending = 1;
+					_ending = 3;
 				}
-				_ending = 2;
 				
 				FlxG.camera.fade(0xff000000, 1.5, false, onFadeComplete, true);
 			}
@@ -145,17 +148,27 @@ class PlayState extends FlxState
 				gmap.player.sprite.y = 150;
 				gmap.player.sprite.facing = FlxObject.RIGHT;
 				
-				gmap.human.sprite.visible = true;
-				gmap.human.sprite.x = 220;
-				gmap.human.sprite.y = 100;
+				positionHuman(220, 100);
 				
 				gui.callPopup(220, 100, "Where did Echo go? I'm so alone now...");
 				
 				FlxG.camera.scroll.x = 100;
 				FlxG.camera.scroll.y = 100;
 				
-			// Bad ending
+			// Good ending
 			case 2: 
+				positionPlayer(1454, 544);
+				gmap.player.sprite.facing = FlxObject.RIGHT;
+				
+				positionHuman(1500, 500);
+				gmap.human.sprite.facing = FlxObject.LEFT;
+				gmap.human.sprite.animation.play("scold");
+				
+				FlxG.camera.scroll.x = 1340;
+				FlxG.camera.scroll.y = 340;
+				
+			// Bad ending
+			case 3:
 				positionPlayer(1454, 544);
 				gmap.player.sprite.facing = FlxObject.RIGHT;
 				
@@ -194,34 +207,81 @@ class PlayState extends FlxState
 				
 			case 2:
 				callHumanPopup("Echo come here!", 5);
-				FlxTween.manager.add(new FlxTween(5, FlxTween.ONESHOT, badEnding1), true);
-				FlxTween.manager.add(new FlxTween(9, FlxTween.ONESHOT, badEnding2), true);
-				FlxTween.manager.add(new FlxTween(15, FlxTween.ONESHOT, badEnding3), true);
-				FlxTween.manager.add(new FlxTween(21, FlxTween.ONESHOT, badEnding4), true);
-				FlxTween.manager.add(new FlxTween(25, FlxTween.ONESHOT, badEnding5), true);
+				FlxTween.manager.add(new FlxTween(5, FlxTween.ONESHOT, goodEnding1), true);
+				FlxTween.manager.add(new FlxTween(9, FlxTween.ONESHOT, goodEnding2), true);
+				FlxTween.manager.add(new FlxTween(15, FlxTween.ONESHOT, goodEnding3), true);
+				FlxTween.manager.add(new FlxTween(21, FlxTween.ONESHOT, goodEnding4), true);
+				FlxTween.manager.add(new FlxTween(25, FlxTween.ONESHOT, goodEnding5), true);
+				FlxTween.manager.add(new FlxTween(31, FlxTween.ONESHOT, fadeToMenu), true);
+				
+			case 3:
+				callHumanPopup("ECHO! BAD DOG!", 5);
+				FlxTween.manager.add(new FlxTween(6, FlxTween.ONESHOT, badEnding1), true);
+				FlxTween.manager.add(new FlxTween(12, FlxTween.ONESHOT, badEnding2), true);
+				FlxTween.manager.add(new FlxTween(16, FlxTween.ONESHOT, badEnding3), true);
+				FlxTween.manager.add(new FlxTween(22, FlxTween.ONESHOT, badEnding4), true);
+				FlxTween.manager.add(new FlxTween(28, FlxTween.ONESHOT, badEnding5), true);
+				FlxTween.manager.add(new FlxTween(32, FlxTween.ONESHOT, badEnding6), true);
+				FlxTween.manager.add(new FlxTween(40, FlxTween.ONESHOT, fadeToMenu), true);
 		}
+	}
+	
+	private function goodEnding1(T:FlxTween = null):Void
+	{
+		gui.callTextbox("master is back!");
+	}
+	private function goodEnding2(T:FlxTween = null):Void
+	{
+		callHumanPopup("Don't look at me like that....", 5);
+	}
+	private function goodEnding3(T:FlxTween = null):Void
+	{
+		callHumanPopup("I can't do anything...", 5);
+	}
+	private function goodEnding4(T:FlxTween = null):Void
+	{
+		gui.callTextbox("yay master");
+	}
+	private function goodEnding5(T:FlxTween = null):Void
+	{
+		gmap.human.sprite.animation.play("cry");
+		gui.callPopup(gmap.human.sprite.x, gmap.human.sprite.y, "We'll get through this somehow...", 99);
 	}
 	
 	private function badEnding1(T:FlxTween = null):Void
 	{
-		gui.callTextbox("master is here!");
+		callHumanPopup("What should I do with you?!", 5);
 	}
 	private function badEnding2(T:FlxTween = null):Void
 	{
-		callHumanPopup("Don't look at me like that....", 5);
+		gui.callTextbox("master is here!");
 	}
 	private function badEnding3(T:FlxTween = null):Void
 	{
-		callHumanPopup("I can't do anything...", 5);
+		callHumanPopup("Don't look at me like that....", 5);
 	}
 	private function badEnding4(T:FlxTween = null):Void
 	{
-		gui.callTextbox("yay master");
+		callHumanPopup("I can't do anything...", 5);
 	}
 	private function badEnding5(T:FlxTween = null):Void
 	{
+		gui.callTextbox("yay master");
+	}
+	private function badEnding6(T:FlxTween = null):Void
+	{
 		gmap.human.sprite.animation.play("cry");
 		gui.callPopup(gmap.human.sprite.x, gmap.human.sprite.y, "We'll get through this somehow...", 99);
+	}
+	
+	private function fadeToMenu(T:FlxTween = null):Void
+	{
+		FlxG.camera.fade(0xff000000, 2.5, false, gotoMenu);
+	}
+	
+	private function gotoMenu():Void
+	{
+		FlxG.switchState(new MenuState());
 	}
 
 	
