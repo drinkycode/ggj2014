@@ -39,7 +39,7 @@ class CoffeeTable extends BaseGObject
 		super.setupSprite();
 		loadGraphic(GAssets.getFile("coffee_table"));
 		
-		G.playstate.gmap.addHitbox(x, y, 64, 96);
+		G.playstate.gmap.addHitbox(x, y, 64, 128);
 	}
 	
 	override private function doInteraction():Void 

@@ -24,7 +24,7 @@ class TVTable extends BaseGObject
 		super(X, Y);
 		
 		objName = "tv_table";
-		preInteractionMessage = "*shake table*";
+		preInteractionMessage = "people in here";
 		postInteractionMessage = "thing fell off";
 		requiredCalls = 3;
 		childObjName = "tv";
@@ -39,7 +39,7 @@ class TVTable extends BaseGObject
 		super.setupSprite();
 		loadGraphic(GAssets.getFile("tv_table"));
 		
-		G.playstate.gmap.addHitbox(x, y, 64, 96);
+		G.playstate.gmap.addHitbox(x, y, 32, 64);
 	}
 	
 	override private function doInteraction():Void 

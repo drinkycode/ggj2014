@@ -15,7 +15,7 @@ class TV extends BaseGObject
 	
 	public function new(X:Float = 0, Y:Float = 0) 
 	{
-		super(X, Y, "tv", 64, 128, "people in here", "master not here");
+		super(X, Y, "tv", 100, 100, "people in here", "master not here");
 		canInteract = false;
 	}
 	

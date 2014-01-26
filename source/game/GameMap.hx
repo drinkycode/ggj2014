@@ -153,10 +153,10 @@ class GameMap extends FlxGroup
 				player = new Player(ex, ey);
 				
 			case "dog_bed":
-				addGameObject(new BaseGObject(ex, ey, EntType, 64, 64, "me awake", "no tired"));
+				addGameObject(new BaseGObject(ex, ey, "dogbed", 64, 64, "me awake", "no tired"));
 				
 			case "bed":
-				addGameObject(new BaseGObject(ex, ey, EntType, 64, 64, "no master", "bed cold"));
+				addGameObject(new BaseGObject(ex, ey, "bed1", 128, 128, "no master", "bed cold"));
 				
 			case "clothes_a":
 				addGameObject(new BaseGObject(ex, ey, EntType, 64, 64, "master's smell", "master's smell"));
@@ -211,7 +211,7 @@ class GameMap extends FlxGroup
 				addGameObject(new TableJar(ex, ey));
 				
 			case "kid_bed":
-				addGameObject(new BaseGObject(ex, ey, EntType, 64, 64, "young master no here", "young master no here"));
+				addGameObject(new BaseGObject(ex, ey, "bed2", 0, 0, "young master no here", "young master no here", true, 128, 64));
 				
 			case "stuffed_animal":
 				addGameObject(new BaseGObject(ex, ey, EntType, 64, 64, "where young master", "no tell me"));
