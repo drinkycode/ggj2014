@@ -37,6 +37,7 @@ class BaseGObject extends FlxSprite
 	private var _imageFile:String = "";
 	private var _imageWidth:Int = 0;
 	private var _imageHeight:Int = 0;
+	private var _hasAnimation:Bool = false;
 	
 	private var _hitboxWidth:Int = 0;
 	private var _hitboxHeight:Int = 0;
@@ -74,6 +75,7 @@ class BaseGObject extends FlxSprite
 		{
 			if ((_imageWidth != 0) && (_imageHeight != 0))
 			{
+				_hasAnimation = true;
 				loadGraphic(GAssets.getFile(_imageFile), true, false, _imageWidth, _imageHeight);
 				animation.add("idle", [0], 0, false);
 				animation.add("interacted", [1], 0, false);
@@ -153,7 +155,7 @@ class BaseGObject extends FlxSprite
 			G.playstate.gui.callTextbox(interactionMessage);
 		}
 		
-		if (_imageFile != "")
+		if ((_imageFile != "") && _hasAnimation)
 		{
 			animation.play("interacted");
 		}
