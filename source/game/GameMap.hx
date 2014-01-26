@@ -185,13 +185,15 @@ class GameMap extends FlxGroup
 				addGameObject(new BaseGObject(ex, ey, "bathroom_mat"));
 				
 			case "kid_toilet":
-				addGameObject(new BaseGObject(ex, ey, EntType, 0, 0, "drink water", "very tasty"));
+				o = new BaseGObject(ex, ey, EntType, 0, 0, "drink water", "very tasty", false);
+				o.setupHitbox(40, 48, 12, 16);
+				addGameObject(o);
 				
 			case "kid_bathtub":
 				addGameObject(new BaseGObject(ex, ey, EntType, 0, 0, "no wet now", "i hate tub", true, 128, 64));
 				
 			case "kid_sink":
-				addGameObject(new BaseGObject(ex, ey, EntType));
+				addGameObject(new BaseGObject(ex, ey, EntType, 0, 0, "" ,"", true, 64, 128));
 				
 			case "kid_bath_mat":
 				addGameObject(new BaseGObject(ex, ey, EntType));
