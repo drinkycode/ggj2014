@@ -269,7 +269,7 @@ class PlayState extends FlxState
 	}
 	private function goodEnding2(T:FlxTween = null):Void
 	{
-		callHumanPopup("I don't know what I would do with you...", 5);
+		callHumanPopup("I don't know what I would do without you...", 5);
 	}
 	private function goodEnding3(T:FlxTween = null):Void
 	{
