@@ -57,8 +57,8 @@ class GameGUI extends FlxGroup
 	
 	public function showInteractionButton(X:Float, Y:Float):Void
 	{
-		_interact.x = X - 52;
-		_interact.y = Y - 14;
+		_interact.x = X - 13;
+		_interact.y = Y - 13;
 		_interact.visible = true;
 	}
 	
