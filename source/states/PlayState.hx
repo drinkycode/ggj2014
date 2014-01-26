@@ -10,11 +10,13 @@ import flixel.FlxObject;
 import flixel.FlxSprite;
 import flixel.FlxState;
 import flixel.group.FlxGroup;
+import flixel.plugin.TweenManager;
 import flixel.system.frontEnds.CameraFrontEnd;
 import flixel.system.frontEnds.SoundFrontEnd;
 import flixel.system.input.keyboard.FlxKey;
 import flixel.system.input.keyboard.FlxKeyboard;
 import flixel.text.FlxText;
+import flixel.tweens.FlxTween;
 import flixel.ui.FlxButton;
 import flixel.util.FlxMath;
 import game.GameMap;
@@ -31,7 +33,7 @@ class PlayState extends FlxState
 	
 	public var state:Int = 2;
 	public var gameTimer:Float = 3 * 60; // Seconds
-	//public var gameTimer:Float = 5; // Seconds
+	//public var gameTimer:Float = 3; // Seconds
 	
 	public var gui:GameGUI;
 	public var gmap:GameMap;
@@ -110,7 +112,16 @@ class PlayState extends FlxState
 				state = 3;
 				gmap.player.allowInput = false;
 				
-				_ending = 1;
+				if (badInteractions <= 3)
+				{
+					_ending = 1;
+				}
+				else
+				{
+					_ending = 1;
+				}
+				_ending = 2;
+				
 				FlxG.camera.fade(0xff000000, 1.5, false, onFadeComplete, true);
 			}
 		}
@@ -123,6 +134,8 @@ class PlayState extends FlxState
 	private function onFadeComplete():Void
 	{
 		FlxG.camera.fade(0xff000000, 1.5, true, gotoEnding, true);
+		
+		gmap.stopCameraFollow();
 		
 		// Setup endings
 		switch (_ending) 
@@ -140,7 +153,37 @@ class PlayState extends FlxState
 				
 				FlxG.camera.scroll.x = 100;
 				FlxG.camera.scroll.y = 100;
+				
+			// Bad ending
+			case 2: 
+				positionPlayer(1454, 544);
+				gmap.player.sprite.facing = FlxObject.RIGHT;
+				
+				positionHuman(1500, 500);
+				gmap.human.sprite.facing = FlxObject.LEFT;
+				gmap.human.sprite.animation.play("scold");
+				
+				FlxG.camera.scroll.x = 1340;
+				FlxG.camera.scroll.y = 340;
 		}
+	}
+	
+	private function positionPlayer(X:Float, Y:Float):Void
+	{
+		gmap.player.sprite.x = X;
+		gmap.player.sprite.y = Y;
+	}
+	
+	private function positionHuman(X:Float, Y:Float):Void
+	{
+		gmap.human.sprite.visible = true;
+		gmap.human.sprite.x = X;
+		gmap.human.sprite.y = Y;
+	}
+	
+	private function callHumanPopup(Message:String, Duration:Float = 5):Void
+	{
+		gui.callPopup(gmap.human.sprite.x, gmap.human.sprite.y, Message, Duration);
 	}
 	
 	private function gotoEnding():Void
@@ -149,8 +192,36 @@ class PlayState extends FlxState
 		{
 			case 1:
 				
-				
+			case 2:
+				callHumanPopup("Echo come here!", 5);
+				FlxTween.manager.add(new FlxTween(5, FlxTween.ONESHOT, badEnding1), true);
+				FlxTween.manager.add(new FlxTween(9, FlxTween.ONESHOT, badEnding2), true);
+				FlxTween.manager.add(new FlxTween(15, FlxTween.ONESHOT, badEnding3), true);
+				FlxTween.manager.add(new FlxTween(21, FlxTween.ONESHOT, badEnding4), true);
+				FlxTween.manager.add(new FlxTween(25, FlxTween.ONESHOT, badEnding5), true);
 		}
+	}
+	
+	private function badEnding1(T:FlxTween = null):Void
+	{
+		gui.callTextbox("master is here!");
+	}
+	private function badEnding2(T:FlxTween = null):Void
+	{
+		callHumanPopup("Don't look at me like that....", 5);
+	}
+	private function badEnding3(T:FlxTween = null):Void
+	{
+		callHumanPopup("I can't do anything...", 5);
+	}
+	private function badEnding4(T:FlxTween = null):Void
+	{
+		gui.callTextbox("yay master");
+	}
+	private function badEnding5(T:FlxTween = null):Void
+	{
+		gmap.human.sprite.animation.play("cry");
+		gui.callPopup(gmap.human.sprite.x, gmap.human.sprite.y, "We'll get through this somehow...", 99);
 	}
 
 	

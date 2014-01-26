@@ -34,12 +34,12 @@ class TextPopup extends FlxSpriteGroup
 		super.destroy();
 	}
 	
-	public function show(X:Float, Y:Float, Message:String):Void
+	public function show(X:Float, Y:Float, Message:String, Duration:Float = 5):Void
 	{
 		visible = true;
 		
 		text.text = Message;
-		_timer = 7;
+		_timer = Duration;
 		
 		x = X;
 		y = Y;

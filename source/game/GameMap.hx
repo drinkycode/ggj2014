@@ -342,6 +342,11 @@ class GameMap extends FlxGroup
 		}
 	}
 	
+	public function stopCameraFollow():Void
+	{
+		FlxG.camera.follow(null);
+	}
+	
 	override public function update():Void
 	{
 		super.update();

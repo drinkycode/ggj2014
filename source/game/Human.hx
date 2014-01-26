@@ -38,7 +38,7 @@ class Human extends FlxGroup
 		sprite = new FlxSprite();
 		//sprite.makeGraphic(32, 74, 0xfff3c487);
 		
-		sprite.loadImageFromTexture(new TexturePackerData(GAssets.getFile("human", GAssets.LOC_IMGS, "json"), GAssets.getFile("human")), false, false, "human_base.png");
+		sprite.loadImageFromTexture(new TexturePackerData(GAssets.getFile("human", GAssets.LOC_IMGS, "json"), GAssets.getFile("human")), true, false, "human_base.png");
 		sprite.animation.addByNames("idle", ["human_base.png"], 0, false);
 		sprite.animation.addByNames("cry", ["human_cry.png"], 0, false);
 		sprite.animation.addByNames("scold", ["human_scold.png"], 0, false);
