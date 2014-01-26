@@ -100,10 +100,10 @@ class PlayState extends FlxState
 	{
 		super.update();
 		
-		if (FlxG.keyboard.anyJustPressed(["ONE"]))
-		{
-			gmap.useHitboxes = !gmap.useHitboxes;
-		}
+		//if (FlxG.keyboard.anyJustPressed(["ONE"]))
+		//{
+			//gmap.useHitboxes = !gmap.useHitboxes;
+		//}
 		
 		if (state == 1) // Intro
 		{

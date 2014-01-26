@@ -32,7 +32,7 @@ class Player extends FlxGroup
 	public static inline var DRAG_Y:Float = 1750;
 	
 	public var ending:Bool = false;
-	public var orientation:Int;
+	public var orientation:Int = 2;
 	
 	public var interactionZone:FlxSprite; // Area for active interaction
 	public var sprite:FlxSprite;
