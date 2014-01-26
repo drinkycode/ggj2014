@@ -36,6 +36,8 @@ class Player extends FlxGroup
 	public var sprite:FlxSprite;
 	public var shadow:FlxSprite;
 	
+	public var allowInput:Bool = true;
+	
 	private var _interacted:Bool = false; // Helper bool flag
 	private var _pressed:Bool = false;
 	
@@ -109,40 +111,43 @@ class Player extends FlxGroup
 		var moving:Bool = false;
 		var newAnim:String = "";
 		
-		if (FlxG.keyboard.anyPressed(["DOWN"]))
+		if (allowInput)
 		{
-			moving = true;
-			sprite.acceleration.y = SPEED_Y;
-			updateOrientation = true;
-			newOrientation = 4;
-		}
-		else if (FlxG.keyboard.anyPressed(["UP"]))
-		{
-			moving = true;
-			sprite.acceleration.y = -SPEED_Y;
-			updateOrientation = true;
-			newOrientation = 0;
-		}
-		
-		if (FlxG.keyboard.anyPressed(["LEFT"]))
-		{
-			moving = true;
-			sprite.acceleration.x = -SPEED_X;
-			updateOrientation = true;
-			newOrientation = 6;
+			if (FlxG.keyboard.anyPressed(["DOWN"]))
+			{
+				moving = true;
+				sprite.acceleration.y = SPEED_Y;
+				updateOrientation = true;
+				newOrientation = 4;
+			}
+			else if (FlxG.keyboard.anyPressed(["UP"]))
+			{
+				moving = true;
+				sprite.acceleration.y = -SPEED_Y;
+				updateOrientation = true;
+				newOrientation = 0;
+			}
 			
-			sprite.facing = FlxObject.LEFT;
-			newAnim = "run_left";
-		}
-		else if (FlxG.keyboard.anyPressed(["RIGHT"]))
-		{
-			moving = true;
-			sprite.acceleration.x = SPEED_X;
-			updateOrientation = true;
-			newOrientation = 2;
-			
-			sprite.facing = FlxObject.RIGHT;
-			newAnim = "run_right";
+			if (FlxG.keyboard.anyPressed(["LEFT"]))
+			{
+				moving = true;
+				sprite.acceleration.x = -SPEED_X;
+				updateOrientation = true;
+				newOrientation = 6;
+				
+				sprite.facing = FlxObject.LEFT;
+				newAnim = "run_left";
+			}
+			else if (FlxG.keyboard.anyPressed(["RIGHT"]))
+			{
+				moving = true;
+				sprite.acceleration.x = SPEED_X;
+				updateOrientation = true;
+				newOrientation = 2;
+				
+				sprite.facing = FlxObject.RIGHT;
+				newAnim = "run_right";
+			}
 		}
 		
 		var ix:Float = 0;
@@ -221,7 +226,7 @@ class Player extends FlxGroup
 		interactionZone.x = sprite.x + ix;
 		interactionZone.y = sprite.y + iy;
 		
-		if (interactionZone.overlaps(G.playstate.gmap.gobjs))
+		if (allowInput && interactionZone.overlaps(G.playstate.gmap.gobjs))
 		{
 			//G.playstate.gui.showInteractionButton(interactionZone.x, interactionZone.y);
 			checkInteraction();

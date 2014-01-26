@@ -2,6 +2,7 @@ package game.objs;
 
 import flixel.FlxG;
 import flixel.FlxSprite;
+import flixel.system.frontEnds.SoundFrontEnd;
 import util.GAssets;
 
 /**
@@ -31,6 +32,9 @@ class BaseGObject extends FlxSprite
 	public var childObject:BaseGObject;
 	
 	public var interactionCooldown:Float = 3;
+	
+	public var sndFile:String = "";
+	public var preSndFile:String = "";
 	
 	private var _imageFile:String = "";
 	private var _imageWidth:Int = 0;
@@ -156,6 +160,11 @@ class BaseGObject extends FlxSprite
 		{
 			animation.play("interacted");
 		}
+		
+		if (sndFile != "")
+		{
+			FlxG.sound.play(sndFile);
+		}
 	}
 	
 	private function doPreInteraction():Void
@@ -163,6 +172,11 @@ class BaseGObject extends FlxSprite
 		if (preInteractionMessage != "")
 		{
 			G.playstate.gui.callTextbox(preInteractionMessage);
+		}
+		
+		if (preSndFile != "")
+		{
+			FlxG.sound.play(preSndFile);
 		}
 	}
 	

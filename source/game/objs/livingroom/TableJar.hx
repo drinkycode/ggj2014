@@ -17,6 +17,7 @@ class TableJar extends BaseGObject
 	{
 		super(X, Y, "flower_vase", 64, 128, "Broke jar", "thing broke master upset");
 		canInteract = false;
+		sndFile = GAssets.getFile("jar_break", GAssets.LOC_SOUNDS, "mp3");
 	}
 	
 	override private function setupSprite():Void 

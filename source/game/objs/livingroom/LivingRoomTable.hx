@@ -29,6 +29,8 @@ class LivingRoomTable extends BaseGObject
 		requiredCalls = 3;
 		childObjName = "flower_vase";
 		
+		preSndFile = sndFile = GAssets.getFile("wood_rattle", GAssets.LOC_SOUNDS, "mp3");
+		
 		interactionCooldown = 1;
 		
 		_x = X;

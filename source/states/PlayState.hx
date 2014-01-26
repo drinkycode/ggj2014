@@ -6,6 +6,7 @@ import flash.filters.BlurFilter;
 import flixel.FlxCamera;
 import flixel.FlxG;
 import flixel.FlxGame;
+import flixel.FlxObject;
 import flixel.FlxSprite;
 import flixel.FlxState;
 import flixel.group.FlxGroup;
@@ -28,11 +29,13 @@ import util.GAssets;
 class PlayState extends FlxState
 {
 	
-	public var state:Int = 1;
+	public var state:Int = 2;
 	public var gameTimer:Float = 3 * 60; // Seconds
 	
 	public var gui:GameGUI;
 	public var gmap:GameMap;
+	
+	private var _ending:Int = -1;
 	
 	/**
 	 * Function that is called up when to state is created to set it up. 
@@ -102,13 +105,48 @@ class PlayState extends FlxState
 			{
 				// Fire ending here
 				state = 3;
+				gmap.player.allowInput = false;
+				
+				_ending = 1;
+				FlxG.camera.fade(0xff000000, 1.5, false, onFadeComplete, true);
 			}
 		}
 		else if (state == 3) // End
 		{
 			
 		}
+	}
+	
+	private function onFadeComplete():Void
+	{
+		FlxG.camera.fade(0xff000000, 1.5, true, gotoEnding, true);
 		
-		//FlxG.collide(player, hitboxes);
-	}	
+		// Setup endings
+		switch (_ending) 
+		{
+			case 1: 
+				gmap.player.sprite.x = 150;
+				gmap.player.sprite.y = 150;
+				gmap.player.sprite.facing = FlxObject.RIGHT;
+				
+				gmap.human.sprite.visible = true;
+				gmap.human.sprite.x = 220;
+				gmap.human.sprite.y = 100;
+				
+				FlxG.camera.scroll.x = 100;
+				FlxG.camera.scroll.y = 100;
+		}
+	}
+	
+	private function gotoEnding():Void
+	{
+		switch (_ending) 
+		{
+			case 1:
+				
+				
+		}
+	}
+
+	
 }

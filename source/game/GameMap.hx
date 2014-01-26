@@ -71,10 +71,11 @@ class GameMap extends FlxGroup
 		}*/	
 		
 		
-		human = new Human(1800, 900);
-		human.addWaypoint(1340, 900);
-		human.addWaypoint(1340, 500);
-		human.move();
+		human = new Human(0, 0);
+		human.sprite.visible = false;
+		//human.addWaypoint(1340, 900);
+		//human.addWaypoint(1340, 500);
+		//human.move();
 		
 		
 		gobjs = new FlxGroup();
@@ -173,6 +174,7 @@ class GameMap extends FlxGroup
 			case "toilet":
 				o = new BaseGObject(ex, ey, EntType, 0, 0, "drink water", "very tasty", false);
 				o.setupHitbox(40, 48, 12, 16);
+				o.sndFile = GAssets.getFile("toilet", GAssets.LOC_SOUNDS, "mp3");
 				addGameObject(o);
 				
 			case "bathtub":

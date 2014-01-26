@@ -15,7 +15,11 @@
 	<classpath name="source" />
 	
 	<!--You can use rename="newName" to shorten the paths to the individual subdirectories!-->
-	<assets path="assets" />
+	<assets path="assets" if="flash">
+		
+		<!--<sound path="sounds/toilet.mp3" id="SndToilet" />-->
+		
+	</assets>
 	
 	<haxelib name="openfl" />
 	<haxelib name="flixel"/>
