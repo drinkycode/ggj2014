@@ -23,6 +23,7 @@ class GameGUI extends FlxGroup
 		super();
 		
 		_textbox = new Textbox();
+	
 		
 		_interact = new FlxSprite(7, 286);
 		_interact.loadGraphic(GAssets.getFile("gui_interact"));

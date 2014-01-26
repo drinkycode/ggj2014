@@ -16,6 +16,7 @@
 	
 	<!--You can use rename="newName" to shorten the paths to the individual subdirectories!-->
 	<assets path="assets" />
+		<!-- Fonts -->
 	
 	<haxelib name="openfl" />
 	<haxelib name="flixel"/>

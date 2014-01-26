@@ -3,6 +3,7 @@ package gui;
 import flixel.FlxG;
 import flixel.group.FlxSpriteGroup;
 import flixel.text.FlxText;
+import util.GAssets;
 
 /**
  * Textbox
@@ -21,7 +22,7 @@ class Textbox extends FlxSpriteGroup
 		super();
 		
 		text = new FlxText(0, 280, FlxG.width, "");
-		text.setFormat(null, 16, 0xffffff, "center");
+		text.setFormat(GAssets.FNT_FONT, 16, 0xffffff, "center", FlxText.BORDER_NONE, 0x000000, true);
 		add(text);
 		
 		scrollFactor.x = scrollFactor.y = 0;
