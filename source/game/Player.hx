@@ -21,12 +21,12 @@ import util.Util;
 class Player extends FlxGroup
 {
 
-	public static inline var SPEED_X:Float = 272;
-	public static inline var SPEED_Y:Float = 272;
-	public static inline var MAX_VELOCITY_X:Float = 150;
+	public static inline var SPEED_X:Float = 384;
+	public static inline var SPEED_Y:Float = 364;
+	public static inline var MAX_VELOCITY_X:Float = 162;
 	public static inline var MAX_VELOCITY_Y:Float = 150;
-	public static inline var DRAG_X:Float = 2048;
-	public static inline var DRAG_Y:Float = 2048;
+	public static inline var DRAG_X:Float = 1750;
+	public static inline var DRAG_Y:Float = 1750;
 	
 	public var orientation:Int;
 	

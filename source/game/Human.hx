@@ -1,10 +1,15 @@
 package game;
 
-import flash.display.Sprite;
 import flixel.FlxG;
 import flixel.FlxObject;
 import flixel.FlxSprite;
 import flixel.group.FlxGroup;
+import flixel.plugin.TweenManager;
+import flixel.tweens.FlxTween;
+import flixel.util.FlxMath;
+import flixel.util.FlxPath;
+import flixel.util.FlxPoint;
+import flixel.util.FlxVelocity;
 
 /**
  * Human characters
@@ -14,10 +19,12 @@ import flixel.group.FlxGroup;
 class Human extends FlxGroup
 {
 
+	public var allowInteraction:Bool = false;
+	
 	public var sprite:FlxSprite;
 	
-	public var waypoints:Array<FlxObject>;
-	public var currentWaypoint:FlxObject;
+	public var waypoints:Array<FlxPoint>;
+	public var currentWaypoint:FlxPoint;
 	
 	private var _waypointIndex:Int = 0;
 	
@@ -28,7 +35,7 @@ class Human extends FlxGroup
 		sprite = new FlxSprite();
 		sprite.makeGraphic(32, 74, 0xfff3c487);
 		
-		waypoints = new Array<FlxObject>();
+		waypoints = new Array<FlxPoint>();
 		
 		add(sprite);
 		
@@ -51,12 +58,13 @@ class Human extends FlxGroup
 	
 	public function addWaypoint(X:Float, Y:Float):Void
 	{
+		var p:FlxPoint = new FlxPoint(X, Y);
+		waypoints.push(p);
+		
+		#if debug
 		var o:FlxObject = new FlxObject(X, Y, 4, 4);
 		o.moves = false;
 		o.active = false;
-		
-		waypoints.push(o);
-		#if debug
 		add(o);
 		#end
 	}
@@ -73,7 +81,21 @@ class Human extends FlxGroup
 		
 		if (currentWaypoint != null)
 		{
-			//sprite
+			FlxVelocity.moveTowardsPoint(sprite, currentWaypoint, 40);
+			//trace(Math.abs(sprite.x + sprite.origin.x - currentWaypoint.x));
+			if ((Math.abs(sprite.x + sprite.origin.x - currentWaypoint.x) < 2) && (Math.abs(sprite.y + sprite.origin.y - currentWaypoint.y) < 2))
+			{
+				_waypointIndex++;
+				if (_waypointIndex < waypoints.length)
+				{
+					currentWaypoint = waypoints[_waypointIndex];
+				}
+				else
+				{
+					currentWaypoint = null;
+					sprite.velocity.x = sprite.velocity.y = 0;
+				}
+			}
 		}
 	}
 	

@@ -77,7 +77,10 @@ class GameMap extends FlxGroup
 		
 		human = new Human(1800, 900);
 		
-		human.addWaypoint(1300, 900);
+		human.addWaypoint(1340, 900);
+		human.addWaypoint(1340, 500);
+		
+		human.move();
 		
 		
 		add(human);
