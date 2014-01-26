@@ -29,6 +29,8 @@ class LivingRoomTable extends BaseGObject
 		requiredCalls = 3;
 		childObjName = "table_jar";
 		
+		interactionCooldown = 1;
+		
 		_x = X;
 	}
 	
