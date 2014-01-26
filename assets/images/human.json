@@ -1,0 +1,55 @@
+ {"frames":  [
+
+
+{
+	"filename": "human_base.png",
+	"frame": {"x":34, "y":0, "w":23, "h":52},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":17, "y":7, "w":23, "h":52},
+	"sourceSize": {"w":64, "h":64}
+},
+{
+	"filename": "human_cry.png",
+	"frame": {"x":33, "y":54, "w":30, "h":50},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":17, "y":9, "w":30, "h":50},
+	"sourceSize": {"w":64, "h":64}
+},
+{
+	"filename": "human_scold.png",
+	"frame": {"x":0, "y":0, "w":32, "h":52},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":17, "y":7, "w":32, "h":52},
+	"sourceSize": {"w":64, "h":64}
+},
+{
+	"filename": "human_walk1.png",
+	"frame": {"x":0, "y":54, "w":31, "h":53},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":17, "y":7, "w":31, "h":53},
+	"sourceSize": {"w":64, "h":64}
+},
+{
+	"filename": "human_walk2.png",
+	"frame": {"x":65, "y":0, "w":28, "h":57},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":18, "y":7, "w":28, "h":57},
+	"sourceSize": {"w":64, "h":64}
+},
+{
+	"filename": "empty.png",
+	"frame": {"x":0, "y":0, "w":1, "h":1},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0, "y":0, "w":1, "h":1},
+	"sourceSize": {"w":1, "h":1}
+ }],
+"meta": {
+	"size": {"w":128, "h":128}
+}
+}
