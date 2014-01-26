@@ -31,6 +31,7 @@ class Player extends FlxGroup
 	public static inline var DRAG_X:Float = 1750;
 	public static inline var DRAG_Y:Float = 1750;
 	
+	public var ending:Bool = false;
 	public var orientation:Int;
 	
 	public var interactionZone:FlxSprite; // Area for active interaction
@@ -39,6 +40,8 @@ class Player extends FlxGroup
 	
 	public var allowInput:Bool = true;
 	public var movedOnce:Bool = false;
+	
+	public var facing:Int = FlxObject.LEFT;
 	
 	private var _interacted:Bool = false; // Helper bool flag
 	private var _pressed:Bool = false;
@@ -57,14 +60,22 @@ class Player extends FlxGroup
 		
 		sprite = new FlxSprite();
 		
-		sprite.loadImageFromTexture(new TexturePackerData(GAssets.getFile("player", GAssets.LOC_IMGS, "json"), GAssets.getFile("player")), false, false, "idle_left1.png");
+		sprite.loadImageFromTexture(new TexturePackerData(GAssets.getFile("player", GAssets.LOC_IMGS, "json"), GAssets.getFile("player")), true, false, "idle_left1.png");
 		sprite.animation.addByIndicies("idle_left", 	"idle_left", [1, 2], ".png", 5, true);
 		sprite.animation.addByIndicies("idle_right", 	"idle_right", [1, 2], ".png", 5, true);
 		sprite.animation.addByIndicies("run_left", 		"run_left", [1, 2, 3, 4, 5, 6], ".png", 10, true);
 		sprite.animation.addByIndicies("run_right", 	"run_right", [1, 2, 3, 4, 5, 6], ".png", 10, true);
 		sprite.animation.addByIndicies("run_down", 		"run_down", [1, 2], ".png", 10, true);
 		sprite.animation.addByIndicies("run_up", 		"run_up", [1, 2], ".png", 10, true);
-		sprite.animation.addByNames("dead", 		["dog_dead.png"], 0, false);
+		
+		sprite.animation.addByIndicies("action_up", 	"action_up", [1, 2], ".png", 10, false);
+		sprite.animation.addByIndicies("action_down", 	"action_down", [1, 2], ".png", 10, false);
+		sprite.animation.addByIndicies("action_right", 	"action_right", [1, 2], ".png", 10, false);
+		sprite.animation.addByIndicies("action_left", 	"action_right", [1, 2], ".png", 10, false);
+		
+		sprite.animation.addByIndicies("hug", 	"human_hug", [1, 2], ".png", 5, true);
+		
+		sprite.animation.addByNames("dead", 			["dog_dead.png"], 0, false);
 		
 		//sprite.loadGraphic(GAssets.getFile("player"), true, true, 64, 64);
 		//sprite.animation.add("idle", [0], 0, false);
@@ -111,6 +122,24 @@ class Player extends FlxGroup
 	
 	override public function update():Void 
 	{
+		if (ending)
+		{
+			var facingOffset:Int = 0;
+			if (facing == FlxObject.LEFT)
+			{
+				facingOffset = 2;
+			}
+			else
+			{
+				facingOffset = -1;
+			}
+			
+			super.update();
+			shadow.x = sprite.x + 2 + facingOffset;
+			shadow.y = sprite.y - 2;
+			return;
+		}
+		
 		sprite.acceleration.x = sprite.acceleration.y = 0; // Reset acceleration
 		
 		var updateOrientation:Bool = false;
@@ -152,7 +181,8 @@ class Player extends FlxGroup
 				updateOrientation = true;
 				newOrientation = 6;
 				
-				sprite.facing = FlxObject.LEFT;
+				//sprite.facing = FlxObject.LEFT;
+				facing = FlxObject.LEFT;
 				newAnim = "run_left";
 				
 				facingOffset = 2;
@@ -166,7 +196,8 @@ class Player extends FlxGroup
 				updateOrientation = true;
 				newOrientation = 2;
 				
-				sprite.facing = FlxObject.RIGHT;
+				//sprite.facing = FlxObject.RIGHT;
+				facing = FlxObject.RIGHT;
 				newAnim = "run_right";
 				
 				facingOffset = -1;
@@ -211,7 +242,7 @@ class Player extends FlxGroup
 		
 		if (newAnim == "")
 		{
-			if (sprite.facing == FlxObject.LEFT)
+			if (facing == FlxObject.LEFT)
 			{
 				if (moving)
 				{

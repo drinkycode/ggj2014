@@ -11,6 +11,7 @@ import flixel.FlxSprite;
 import flixel.FlxState;
 import flixel.group.FlxGroup;
 import flixel.plugin.TweenManager;
+import flixel.system.FlxSound;
 import flixel.system.frontEnds.CameraFrontEnd;
 import flixel.system.frontEnds.SoundFrontEnd;
 import flixel.system.input.keyboard.FlxKey;
@@ -140,9 +141,17 @@ class PlayState extends FlxState
 	
 	private function onFadeComplete():Void
 	{
+		if (FlxG.sound.music != null)
+		{
+			FlxG.sound.music.stop();
+		}
+		FlxG.sound.playMusic(GAssets.getFile("light_thought", GAssets.LOC_MUSIC, "mp3"), 0.5);
+		
 		FlxG.camera.fade(0xff000000, 1.5, true, gotoEnding, true);
 		
 		gmap.stopCameraFollow();
+		
+		gmap.player.ending = true;
 		
 		// Setup endings
 		switch (_ending) 
@@ -163,7 +172,8 @@ class PlayState extends FlxState
 			// Good ending
 			case 2: 
 				positionPlayer(1554, 948);
-				gmap.player.sprite.facing = FlxObject.RIGHT;
+				gmap.player.sprite.animation.play("idle_right");
+				gmap.player.facing = FlxObject.RIGHT;
 				
 				positionHuman(1582, 904);
 				gmap.human.sprite.facing = FlxObject.LEFT;
@@ -177,7 +187,8 @@ class PlayState extends FlxState
 			// Bad ending
 			case 3:
 				positionPlayer(1454, 544);
-				gmap.player.sprite.facing = FlxObject.RIGHT;
+				gmap.player.sprite.animation.play("idle_right");
+				gmap.player.facing = FlxObject.RIGHT;
 				
 				positionHuman(1500, 500);
 				gmap.human.sprite.facing = FlxObject.LEFT;
@@ -241,8 +252,8 @@ class PlayState extends FlxState
 				FlxTween.manager.add(new FlxTween(30, FlxTween.ONESHOT, goodEnding6), true);
 				FlxTween.manager.add(new FlxTween(36, FlxTween.ONESHOT, goodEnding7), true);
 				FlxTween.manager.add(new FlxTween(42, FlxTween.ONESHOT, goodEnding8), true);
-				FlxTween.manager.add(new FlxTween(43, FlxTween.ONESHOT, goodEnding9), true);
-				FlxTween.manager.add(new FlxTween(51, FlxTween.ONESHOT, fadeToMenu), true);
+				FlxTween.manager.add(new FlxTween(42.5, FlxTween.ONESHOT, goodEnding9), true);
+				FlxTween.manager.add(new FlxTween(50, FlxTween.ONESHOT, fadeToMenu), true);
 				
 			case 3:
 				callHumanPopup("ECHO! BAD DOG!", 5);
@@ -290,6 +301,9 @@ class PlayState extends FlxState
 	}
 	private function goodEnding7(T:FlxTween = null):Void
 	{
+		gmap.player.sprite.facing = FlxObject.LEFT;
+		gmap.player.sprite.animation.play("hug");
+		gmap.human.sprite.visible = false;
 		callHumanPopup("We can get through this, Echo. Definitely.", 5);
 	}
 	private function goodEnding8(T:FlxTween = null):Void
