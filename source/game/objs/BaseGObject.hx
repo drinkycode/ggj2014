@@ -33,7 +33,7 @@ class BaseGObject extends FlxSprite
 	public var childObjName:String = "";
 	public var childObject:BaseGObject;
 	
-	public var interactionCooldown:Float = 3;
+	public var interactionCooldown:Float = 1.5;
 	
 	public var sndFile:String = "";
 	public var preSndFile:String = "";
