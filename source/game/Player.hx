@@ -23,8 +23,8 @@ class Player extends FlxGroup
 
 	public static inline var SPEED_X:Float = 272;
 	public static inline var SPEED_Y:Float = 272;
-	public static inline var MAX_VELOCITY_X:Float = 198;
-	public static inline var MAX_VELOCITY_Y:Float = 198;
+	public static inline var MAX_VELOCITY_X:Float = 150;
+	public static inline var MAX_VELOCITY_Y:Float = 150;
 	public static inline var DRAG_X:Float = 2048;
 	public static inline var DRAG_Y:Float = 2048;
 	
@@ -43,6 +43,7 @@ class Player extends FlxGroup
 		shadow = new FlxSprite();
 		shadow.makeGraphic(36, 14, 0xff000000);
 		shadow.alpha = 0.44;
+		shadow.allowCollisions = FlxObject.NONE;
 		
 		
 		sprite = new FlxSprite();
@@ -51,7 +52,7 @@ class Player extends FlxGroup
 		sprite.animation.play("idle");
 		
 		sprite.width = 44;
-		sprite.height = 4;
+		sprite.height = 9;
 		sprite.centerOffsets();
 		sprite.offset.y += 14;
 		sprite.moves = false;
@@ -123,11 +124,6 @@ class Player extends FlxGroup
 			sprite.facing = FlxObject.RIGHT;
 		}
 		
-		if (FlxG.keyboard.anyJustPressed(["X"]))
-		{
-			checkInteraction();
-		}
-		
 		var ix:Float = 0;
 		var iy:Float = 0;
 		
@@ -164,14 +160,27 @@ class Player extends FlxGroup
 				//iy = -16;
 		}
 		
-		interactionZone.x = sprite.x + ix;
-		interactionZone.y = sprite.y + iy;
-		
 		super.update();
 		updateMotionExt();
 		
 		shadow.x = sprite.x + 4;
 		shadow.y = sprite.y + 2;
+		
+		interactionZone.x = sprite.x + ix;
+		interactionZone.y = sprite.y + iy;
+		
+		if (interactionZone.overlaps(G.playstate.gmap.gobjs))
+		{
+			G.playstate.gui.showInteractionButton();
+			if (FlxG.keyboard.anyJustPressed(["X"]))
+			{
+				checkInteraction();
+			}
+		}
+		else
+		{
+			G.playstate.gui.hideInteractionButton();
+		}
 	}
 	
 	private function updateMotionExt():Void
@@ -248,15 +257,24 @@ class Player extends FlxGroup
 	
 	public function checkInteraction():Void
 	{
+		sprite.allowCollisions = FlxObject.NONE;
+		
 		_interacted = false;
 		FlxG.overlap(interactionZone, G.playstate.gmap.gobjs, interactWithObject);
+		
+		sprite.allowCollisions = FlxObject.ANY;
 	}
 	
 	private function interactWithObject(P:Dynamic, Obj:Dynamic):Void
 	{
 		if (_interacted) return;
-		Reflect.callMethod(Obj, Reflect.field(Obj, "interact"), []);
-		_interacted = true;
+		
+		if (!Reflect.field(Obj, "canInteract")) return;
+		if (interactionZone.overlaps(Obj))
+		{
+			Reflect.callMethod(Obj, Reflect.field(Obj, "interact"), []);
+			_interacted = true;
+		}
 	}
 	
 }

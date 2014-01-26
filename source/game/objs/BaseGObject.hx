@@ -29,6 +29,8 @@ class BaseGObject extends FlxSprite
 	public var childObjName:String = "";
 	public var childObject:BaseGObject;
 	
+	public var interactionCooldown:Float = 3;
+	
 	private var _cooldown:Float = 0;
 	
 	public function new(X:Float = 0, Y:Float = 0) 
@@ -89,7 +91,7 @@ class BaseGObject extends FlxSprite
 					doPostInteraction();
 				}
 				
-				_cooldown = 3;
+				_cooldown = interactionCooldown;
 			}
 		}
 	}

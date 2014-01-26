@@ -21,9 +21,9 @@ import gui.GameGUI;
 class PlayState extends FlxState
 {
 	
-	public var hitboxes:FlxGroup;
+	public var state:Int = 1;
+	public var gameTimer:Float = 3 * 60; // Seconds
 	
-	//public var player:Player;
 	public var gui:GameGUI;
 	public var gmap:GameMap;
 	
@@ -57,9 +57,7 @@ class PlayState extends FlxState
 	override public function destroy():Void
 	{
 		G.playstate = null;
-		
-		//hitboxes = null;
-		//player = null;
+		gmap = null;
 		gui = null;
 		super.destroy();
 	}
@@ -70,6 +68,24 @@ class PlayState extends FlxState
 	override public function update():Void
 	{
 		super.update();
+		
+		if (state == 1) // Intro
+		{
+			
+		}
+		else if (state == 2) // Main game loop
+		{
+			gameTimer -= FlxG.elapsed;
+			if (gameTimer <= 0)
+			{
+				// Fire ending here
+				state = 3;
+			}
+		}
+		else if (state == 3) // End
+		{
+			
+		}
 		
 		//FlxG.collide(player, hitboxes);
 	}	

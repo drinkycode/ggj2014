@@ -163,8 +163,8 @@ class GameMap extends FlxGroup
 	override public function update():Void
 	{
 		super.update();
-		cameraFollow.x = player.sprite.x + 48;
-		cameraFollow.y = player.sprite.y + 48;
+		cameraFollow.x = player.sprite.x + 12;
+		cameraFollow.y = player.sprite.y + 0;
 		
 		//FlxG.collide(tilemap, player);
 		FlxG.collide(hitboxes, player.sprite);
