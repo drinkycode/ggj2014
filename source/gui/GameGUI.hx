@@ -5,6 +5,7 @@ import flixel.FlxSprite;
 import flixel.group.FlxGroup;
 import flixel.group.FlxSpriteGroup;
 import flixel.text.FlxText;
+import source.gui.TextPopup;
 import util.GAssets;
 
 /**
@@ -16,6 +17,7 @@ class GameGUI extends FlxGroup
 {
 	
 	private var _textbox:Textbox;
+	private var _popup:TextPopup;
 	private var _interact:FlxSprite;
 	private var _t:Float;
 
@@ -24,7 +26,7 @@ class GameGUI extends FlxGroup
 		super();
 		
 		_textbox = new Textbox();
-	
+		_popup = new TextPopup();
 		
 		_interact = new FlxSprite(7, 286);
 		_interact.loadGraphic(GAssets.getFile("gui_interact"));
@@ -34,6 +36,7 @@ class GameGUI extends FlxGroup
 		_interact.visible = false;
 		
 		add(_interact);
+		add(_popup);
 		add(_textbox);
 	}
 	
@@ -53,6 +56,11 @@ class GameGUI extends FlxGroup
 	public function callTextbox(Message:String):Void
 	{
 		_textbox.show(Message);
+	}
+	
+	public function callPopup(X:Float, Y:Float, Message:String):Void
+	{
+		_popup.show(X, Y, Message);
 	}
 	
 	public function showInteractionButton(X:Float, Y:Float):Void

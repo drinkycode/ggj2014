@@ -1,5 +1,6 @@
 package game;
 
+import flixel.animation.FlxAnimationController;
 import flixel.FlxG;
 import flixel.FlxObject;
 import flixel.FlxSprite;
@@ -10,6 +11,8 @@ import flixel.util.FlxMath;
 import flixel.util.FlxPath;
 import flixel.util.FlxPoint;
 import flixel.util.FlxVelocity;
+import flixel.util.loaders.TexturePackerData;
+import util.GAssets;
 
 /**
  * Human characters
@@ -33,7 +36,15 @@ class Human extends FlxGroup
 		super();
 		
 		sprite = new FlxSprite();
-		sprite.makeGraphic(32, 74, 0xfff3c487);
+		//sprite.makeGraphic(32, 74, 0xfff3c487);
+		
+		sprite.loadImageFromTexture(new TexturePackerData(GAssets.getFile("human", GAssets.LOC_IMGS, "json"), GAssets.getFile("human")), false, false, "human_base.png");
+		sprite.animation.addByNames("idle", ["human_base.png"], 0, false);
+		sprite.animation.addByNames("cry", ["human_cry.png"], 0, false);
+		sprite.animation.addByNames("scold", ["human_scold.png"], 0, false);
+		sprite.animation.addByNames("walk", ["human_walk1.png", "human_walk2.png"], 10, true);
+		
+		sprite.animation.play("idle");
 		
 		waypoints = new Array<FlxPoint>();
 		

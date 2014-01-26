@@ -55,10 +55,13 @@ class Player extends FlxGroup
 		sprite = new FlxSprite();
 		
 		sprite.loadImageFromTexture(new TexturePackerData(GAssets.getFile("player", GAssets.LOC_IMGS, "json"), GAssets.getFile("player")), false, false, "idle_left1.png");
-		sprite.animation.addByIndicies("idle_left", 	"idle_left", [1, 2], ".png", 10, true);
-		sprite.animation.addByIndicies("idle_right", 	"idle_right", [1, 2], ".png", 10, true);
+		sprite.animation.addByIndicies("idle_left", 	"idle_left", [1, 2], ".png", 5, true);
+		sprite.animation.addByIndicies("idle_right", 	"idle_right", [1, 2], ".png", 5, true);
 		sprite.animation.addByIndicies("run_left", 		"run_left", [1, 2, 3, 4, 5, 6], ".png", 10, true);
 		sprite.animation.addByIndicies("run_right", 	"run_right", [1, 2, 3, 4, 5, 6], ".png", 10, true);
+		sprite.animation.addByIndicies("run_down", 		"run_down", [1, 2], ".png", 10, true);
+		sprite.animation.addByIndicies("run_up", 		"run_up", [1, 2], ".png", 10, true);
+		sprite.animation.addByNames("death", 		["dog_dead.png"], 0, false);
 		
 		//sprite.loadGraphic(GAssets.getFile("player"), true, true, 64, 64);
 		//sprite.animation.add("idle", [0], 0, false);
@@ -120,6 +123,7 @@ class Player extends FlxGroup
 				sprite.acceleration.y = SPEED_Y;
 				updateOrientation = true;
 				newOrientation = 4;
+				newAnim = "run_down";
 			}
 			else if (FlxG.keyboard.anyPressed(["UP"]))
 			{
@@ -127,6 +131,7 @@ class Player extends FlxGroup
 				sprite.acceleration.y = -SPEED_Y;
 				updateOrientation = true;
 				newOrientation = 0;
+				newAnim = "run_up";
 			}
 			
 			if (FlxG.keyboard.anyPressed(["LEFT"]))

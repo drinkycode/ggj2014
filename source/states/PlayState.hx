@@ -31,9 +31,12 @@ class PlayState extends FlxState
 	
 	public var state:Int = 2;
 	public var gameTimer:Float = 3 * 60; // Seconds
+	//public var gameTimer:Float = 5; // Seconds
 	
 	public var gui:GameGUI;
 	public var gmap:GameMap;
+	
+	public var badInteractions:Int = 0;
 	
 	private var _ending:Int = -1;
 	
@@ -132,6 +135,8 @@ class PlayState extends FlxState
 				gmap.human.sprite.visible = true;
 				gmap.human.sprite.x = 220;
 				gmap.human.sprite.y = 100;
+				
+				gui.callPopup(220, 100, "Where did Echo go? I'm so alone now...");
 				
 				FlxG.camera.scroll.x = 100;
 				FlxG.camera.scroll.y = 100;
