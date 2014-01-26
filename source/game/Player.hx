@@ -181,6 +181,11 @@ class Player extends FlxGroup
 		{
 			G.playstate.gui.hideInteractionButton();
 		}
+		
+		if ((sprite.velocity.x != 0) || (sprite.velocity.y != 0))
+		{
+			checkTextAreas();
+		}
 	}
 	
 	private function updateMotionExt():Void
@@ -275,6 +280,16 @@ class Player extends FlxGroup
 			Reflect.callMethod(Obj, Reflect.field(Obj, "interact"), []);
 			_interacted = true;
 		}
+	}
+	
+	public function checkTextAreas():Void
+	{
+		//FlxG.overlap(sprite, G.playstate.gmap.gtextareas, triggerTextArea);
+	}
+	
+	private function triggerTextArea(P:Dynamic, Obj:Dynamic):Void
+	{
+		Reflect.callMethod(Obj, Reflect.field(Obj, "trigger"), []);
 	}
 	
 }

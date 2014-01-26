@@ -38,8 +38,6 @@ class LivingRoomTable extends BaseGObject
 	{
 		super.setupSprite();
 		loadGraphic(GAssets.getFile("sidetable"));
-		
-		G.playstate.gmap.addHitbox(x, y, 64, 96);
 	}
 	
 	override private function doInteraction():Void 

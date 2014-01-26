@@ -30,6 +30,8 @@ class BaseGObject extends FlxSprite
 	public var childObjName:String = "";
 	public var childObject:BaseGObject;
 	
+	public var createHitbox:Bool = true;
+	
 	public var interactionCooldown:Float = 3;
 	
 	private var _imageFile:String = "";
@@ -38,7 +40,7 @@ class BaseGObject extends FlxSprite
 	
 	private var _cooldown:Float = 0;
 	
-	public function new(X:Float = 0, Y:Float = 0, ImageFile:String = "", ImageWidth:Int = 0, ImageHeight:Int = 0, InteractionMessage:String = "", PostInteractionMessage = "") 
+	public function new(X:Float = 0, Y:Float = 0, ImageFile:String = "", ImageWidth:Int = 0, ImageHeight:Int = 0, InteractionMessage:String = "", PostInteractionMessage = "", CreateHitbox:Bool = true) 
 	{
 		super(X, Y);
 		
@@ -49,17 +51,35 @@ class BaseGObject extends FlxSprite
 		interactionMessage = InteractionMessage;
 		postInteractionMessage = PostInteractionMessage;
 		
+		createHitbox = CreateHitbox;
+		
 		setupSprite();
+		setupHitbox();
 	}
 	
 	private function setupSprite():Void
 	{
 		if (_imageFile != "")
 		{
-			loadGraphic(GAssets.getFile(_imageFile), true, false, _imageWidth, _imageHeight);
-			animation.add("idle", [0], 0, false);
-			animation.add("interacted", [1], 0, false);
-			animation.play("idle");
+			if ((_imageWidth != 0) && (_imageHeight != 0))
+			{
+				loadGraphic(GAssets.getFile(_imageFile), true, false, _imageWidth, _imageHeight);
+				animation.add("idle", [0], 0, false);
+				animation.add("interacted", [1], 0, false);
+				animation.play("idle");
+			}
+			else
+			{
+				loadGraphic(GAssets.getFile(_imageFile));
+			}
+		}
+	}
+	
+	private function setupHitbox():Void
+	{
+		if (createHitbox && (_imageWidth != 0) && (_imageHeight != 0))
+		{
+			G.playstate.gmap.addHitbox(x, y, _imageWidth, _imageHeight);
 		}
 	}
 	
