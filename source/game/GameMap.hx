@@ -39,7 +39,10 @@ class GameMap extends FlxGroup
 	public function new():Void 
 	{
 		super();
-		
+	}
+	
+	public function create():Void
+	{
 		level = new FlxOgmoLoader(GAssets.getFile("house", GAssets.LOC_DATA, "oel")); 
 		
 		// IMPORTANT: Always collide the map with objects, not the other way around. 
@@ -91,7 +94,7 @@ class GameMap extends FlxGroup
 		addGameObject(new ChewToy(680, 620));
 		
 		addGameObject(new LivingRoomTable(750, 600));
-		addGameObject(new TableJar(770, 590));
+		addGameObject(new TableJar(750, 592));
 		
 		linkGameObjects(); // Links parent-child objects together
 	}
@@ -112,8 +115,12 @@ class GameMap extends FlxGroup
 		var hy:Float = Std.parseFloat(Data.get("y"));
 		var hw:Int = Std.parseInt(Data.get("w"));
 		var hh:Int = Std.parseInt(Data.get("h"));
-		
-		hitboxes.add(Hitbox.create(hx, hy, hw, hh));
+		addHitbox(hx, hy, hw, hh);
+	}
+	
+	public function addHitbox(HX:Float, HY:Float, HW:Int, HH:Int):Void
+	{
+		hitboxes.add(Hitbox.create(HX, HY, HW, HH));
 	}
 	
 	public function loadEntity(EntType:String, Data:Xml):Void

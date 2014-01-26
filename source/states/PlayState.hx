@@ -46,6 +46,8 @@ class PlayState extends FlxState
 		super.create();
 		
 		gmap = new GameMap();
+		gmap.create();
+		
 		gui = new GameGUI();
 		
 		add(gmap);

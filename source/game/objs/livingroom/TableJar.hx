@@ -1,6 +1,9 @@
 package game.objs.livingroom;
 
+import flixel.FlxSprite;
+import flixel.animation.FlxAnimationController;
 import game.objs.BaseGObject;
+import util.GAssets;
 
 /**
  * Jar on top of table
@@ -23,14 +26,17 @@ class TableJar extends BaseGObject
 	{
 		super.setupSprite();
 		
-		makeGraphic(10, 10, 0xffffffff);
-		color = 0xff0000;
+		loadGraphic(GAssets.getFile("flower_vase"), true, false, 64, 128);
+		animation.add("idle", [0], 0, false);
+		animation.add("broken", [1], 0, false);
+		
+		animation.play("idle");
 	}
 	
 	override private function doInteraction():Void 
 	{
 		super.doInteraction();
-		color = 0x000000;
+		animation.play("broken");
 	}
 	
 }
