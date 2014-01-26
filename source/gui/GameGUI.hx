@@ -58,6 +58,11 @@ class GameGUI extends FlxGroup
 		_textbox.show(Message);
 	}
 	
+	public function hideTextbox():Void
+	{
+		_textbox.hide();
+	}
+	
 	public function callPopup(X:Float, Y:Float, Message:String, Duration:Float = 5):Void
 	{
 		_popup.show(X, Y, Message, Duration);

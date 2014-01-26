@@ -52,10 +52,7 @@ class PlayState extends FlxState
 		
 		// Set a background color
 		FlxG.cameras.bgColor = 0xff131c1b;
-		// Show the mouse (in case it hasn't been disabled)
-		#if !FLX_NO_MOUSE
-		FlxG.mouse.show();
-		#end
+		FlxG.mouse.hide();
 		
 		super.create();
 		
@@ -161,6 +158,7 @@ class PlayState extends FlxState
 		FlxG.camera.fade(0xff000000, 1.5, true, gotoEnding, true);
 		
 		gmap.stopCameraFollow();
+		gui.hideTextbox();
 		
 		gmap.player.ending = true;
 		
