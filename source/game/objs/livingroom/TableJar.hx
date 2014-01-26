@@ -15,7 +15,7 @@ class TableJar extends BaseGObject
 	
 	public function new(X:Float = 0, Y:Float = 0) 
 	{
-		super(X, Y);
+		super(X, Y, "flower_vase", 64, 128);
 		objName = "table_jar";
 		interactionMessage = "Broke jar";
 		postInteractionMessage = "thing broke master upset";
@@ -25,18 +25,11 @@ class TableJar extends BaseGObject
 	override private function setupSprite():Void 
 	{
 		super.setupSprite();
-		
-		loadGraphic(GAssets.getFile("flower_vase"), true, false, 64, 128);
-		animation.add("idle", [0], 0, false);
-		animation.add("broken", [1], 0, false);
-		
-		animation.play("idle");
 	}
 	
 	override private function doInteraction():Void 
 	{
 		super.doInteraction();
-		animation.play("broken");
 	}
 	
 }

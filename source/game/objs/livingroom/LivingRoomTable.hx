@@ -62,7 +62,6 @@ class LivingRoomTable extends BaseGObject
 		{
 			_fxShakeDuration -= FlxG.elapsed;
 			x = _x + (FlxRandom.float() * _fxShakeIntensity * width * 2 - _fxShakeIntensity * width);
-			//_fxShakeOffset.y = (FlxRandom.float() * _fxShakeIntensity * height * 2 - _fxShakeIntensity * height);
 		}
 	}
 	

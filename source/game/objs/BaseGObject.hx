@@ -2,6 +2,7 @@ package game.objs;
 
 import flixel.FlxG;
 import flixel.FlxSprite;
+import util.GAssets;
 
 /**
  * Base game object
@@ -31,17 +32,32 @@ class BaseGObject extends FlxSprite
 	
 	public var interactionCooldown:Float = 3;
 	
+	private var _imageFile:String = "";
+	private var _imageWidth:Int = 0;
+	private var _imageHeight:Int = 0;
+	
 	private var _cooldown:Float = 0;
 	
-	public function new(X:Float = 0, Y:Float = 0) 
+	public function new(X:Float = 0, Y:Float = 0, ImageFile:String = "", ImageWidth:Int = 0, ImageHeight:Int = 0) 
 	{
 		super(X, Y);
+		
+		_imageFile = ImageFile;
+		_imageWidth = ImageWidth;
+		_imageHeight = ImageHeight;
+		
 		setupSprite();
 	}
 	
 	private function setupSprite():Void
 	{
-		
+		if (_imageFile != "")
+		{
+			loadGraphic(GAssets.getFile(_imageFile), true, false, _imageWidth, _imageHeight);
+			animation.add("idle", [0], 0, false);
+			animation.add("interacted", [1], 0, false);
+			animation.play("idle");
+		}
 	}
 	
 	override public function destroy():Void 
@@ -101,6 +117,11 @@ class BaseGObject extends FlxSprite
 		if (interactionMessage != "")
 		{
 			G.playstate.gui.callTextbox(interactionMessage);
+		}
+		
+		if (_imageFile != "")
+		{
+			animation.play("interacted");
 		}
 	}
 	
