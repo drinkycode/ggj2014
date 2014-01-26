@@ -25,11 +25,16 @@ class GameMap extends FlxGroup
 	public var level:FlxOgmoLoader;
 	
 	public var player:Player;
+	public var human:Human;
+	
 	public var tilemap:FlxTilemap;
 	public var gobjs:FlxGroup;
 	
 	public var cameraFollow:FlxObject;
 	public var hitboxes:FlxGroup;
+	
+	public var useHitboxes:Bool = true;
+	public var numGameObjs:Int = 0;
 	
 	public function new():Void 
 	{
@@ -68,6 +73,14 @@ class GameMap extends FlxGroup
 		
 		add(tilemap);
 		add(gobjs);
+		
+		
+		human = new Human(1800, 900);
+		
+		human.addWaypoint(1300, 900);
+		
+		
+		add(human);
 		add(player);
 		
 		add(hitboxes);
@@ -77,7 +90,7 @@ class GameMap extends FlxGroup
 		addGameObject(new LivingRoomTable(750, 600));
 		addGameObject(new TableJar(770, 590));
 		
-		linkGameObjects();
+		linkGameObjects(); // Links parent-child objects together
 	}
 	
 	override public function destroy():Void
@@ -111,6 +124,8 @@ class GameMap extends FlxGroup
 				//add player to group or playstate
 				player = new Player(ex, ey);
 				
+			case "human":
+				
 			case "rocket":
 				
 			case "star":
@@ -129,6 +144,7 @@ class GameMap extends FlxGroup
 	private function addGameObject(Obj:BaseGObject):Void
 	{
 		gobjs.add(Obj);
+		numGameObjs++;
 	}
 	
 	private function linkGameObjects():Void
@@ -167,6 +183,10 @@ class GameMap extends FlxGroup
 		cameraFollow.y = player.sprite.y + 0;
 		
 		//FlxG.collide(tilemap, player);
-		FlxG.collide(hitboxes, player.sprite);
+		
+		if (useHitboxes)
+		{
+			FlxG.collide(hitboxes, player.sprite);
+		}
 	}	
 }

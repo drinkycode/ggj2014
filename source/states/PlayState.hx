@@ -7,6 +7,8 @@ import flixel.FlxState;
 import flixel.group.FlxGroup;
 import flixel.system.frontEnds.CameraFrontEnd;
 import flixel.system.frontEnds.SoundFrontEnd;
+import flixel.system.input.keyboard.FlxKey;
+import flixel.system.input.keyboard.FlxKeyboard;
 import flixel.text.FlxText;
 import flixel.ui.FlxButton;
 import flixel.util.FlxMath;
@@ -68,6 +70,11 @@ class PlayState extends FlxState
 	override public function update():Void
 	{
 		super.update();
+		
+		if (FlxG.keyboard.anyJustPressed(["ONE"]))
+		{
+			gmap.useHitboxes = !gmap.useHitboxes;
+		}
 		
 		if (state == 1) // Intro
 		{
