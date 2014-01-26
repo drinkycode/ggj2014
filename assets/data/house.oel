@@ -65,8 +65,16 @@
     <rect x="1984" y="1664" w="64" h="320" />
   </collide>
   <entities>
-    <player id="0" x="448" y="384" />
+    <player id="0" x="704" y="352" />
     <sidetable id="1" x="672" y="832" />
     <vase id="2" x="672" y="832" />
+    <toilet id="3" x="320" y="416" />
+    <sink id="4" x="512" y="256" />
+    <bathtub id="5" x="320" y="288" />
+    <kid_toilet id="6" x="768" y="1152" />
+    <kid_bathtub id="7" x="768" y="1280" />
+    <kid_sink id="8" x="960" y="1088" />
+    <bath_mat id="9" x="352" y="320" />
+    <kid_bath_mat id="10" x="800" y="1216" />
   </entities>
 </level>

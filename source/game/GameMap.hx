@@ -135,8 +135,6 @@ class GameMap extends FlxGroup
 	{
 		var ex:Float = Std.parseFloat(Data.get("x"));
 		var ey:Float = Std.parseFloat(Data.get("y"));
-		var ewidth:Int = Std.parseInt(Data.get("width"));
-		var eheight:Int = Std.parseInt(Data.get("height"));
 		
 		switch (EntType.toLowerCase())	
 		{
@@ -145,52 +143,52 @@ class GameMap extends FlxGroup
 				player = new Player(ex, ey);
 				
 			case "dog_bed":
-				addGameObject(new BaseGObject(ex, ey, EntType, ewidth, eheight, "me awake", "no tired"));
+				addGameObject(new BaseGObject(ex, ey, EntType, 64, 64, "me awake", "no tired"));
 				
 			case "bed":
-				addGameObject(new BaseGObject(ex, ey, EntType, ewidth, eheight, "no master", "bed cold"));
+				addGameObject(new BaseGObject(ex, ey, EntType, 64, 64, "no master", "bed cold"));
 				
 			case "clothes_a":
-				addGameObject(new BaseGObject(ex, ey, EntType, ewidth, eheight, "master's smell", "master's smell"));
+				addGameObject(new BaseGObject(ex, ey, EntType, 64, 64, "master's smell", "master's smell"));
 				
 			case "clothes_b":
-				addGameObject(new BaseGObject(ex, ey, EntType, ewidth, eheight, "young master smell", "young master smell"));
+				addGameObject(new BaseGObject(ex, ey, EntType, 64, 64, "young master smell", "young master smell"));
 				
 			case "chew_toy_a":
-				addGameObject(new BaseGObject(ex, ey, EntType, ewidth, eheight, "my friend", "my friend"));
+				addGameObject(new BaseGObject(ex, ey, EntType, 64, 64, "my friend", "my friend"));
 				
 			case "chew_toy_b":
-				addGameObject(new BaseGObject(ex, ey, EntType, ewidth, eheight, "my enemy", "my enemy"));
+				addGameObject(new BaseGObject(ex, ey, EntType, 64, 64, "my enemy", "my enemy"));
 				
 			case "toilet":
-				addGameObject(new BaseGObject(ex, ey, EntType, ewidth, eheight, "drink water", "very tasty"));
+				addGameObject(new BaseGObject(ex, ey, EntType, 64, 64, "drink water", "very tasty"));
 				
 			case "bathtub":
-				addGameObject(new BaseGObject(ex, ey, EntType, ewidth, eheight, "no wet now", "i hate tub"));
+				addGameObject(new BaseGObject(ex, ey, EntType, 128, 64, "no wet now", "i hate tub"));
 				
 			case "sink":
-				addGameObject(new BaseGObject(ex, ey, EntType, ewidth, eheight));
+				addGameObject(new BaseGObject(ex, ey, "bathroom_sink"));
 				
 			case "bath_mat":
-				addGameObject(new BaseGObject(ex, ey, EntType, ewidth, eheight));
+				addGameObject(new BaseGObject(ex, ey, "bathroom_mat"));
 						
 			case "kid_toilet":
-				addGameObject(new BaseGObject(ex, ey, EntType, ewidth, eheight, "drink water", "very tasty"));
+				addGameObject(new BaseGObject(ex, ey, EntType, 64, 64, "drink water", "very tasty"));
 				
 			case "kid_bathtub":
-				addGameObject(new BaseGObject(ex, ey, EntType, ewidth, eheight, "no wet now", "i hate tub"));
+				addGameObject(new BaseGObject(ex, ey, EntType, 128, 64, "no wet now", "i hate tub"));
 				
 			case "kid_sink":
-				addGameObject(new BaseGObject(ex, ey, EntType, ewidth, eheight));
+				addGameObject(new BaseGObject(ex, ey, EntType));
 				
 			case "kid_bath_mat":
-				addGameObject(new BaseGObject(ex, ey, EntType, ewidth, eheight));
+				addGameObject(new BaseGObject(ex, ey, EntType));
 				
 			case "picture_a":
-				addGameObject(new BaseGObject(ex, ey, EntType, ewidth, eheight, "look like master and young master", "look like master and young master"));
+				addGameObject(new BaseGObject(ex, ey, EntType, 64, 64, "look like master and young master", "look like master and young master"));
 				
 			case "picture_b":
-				addGameObject(new BaseGObject(ex, ey, EntType, ewidth, eheight));
+				addGameObject(new BaseGObject(ex, ey, EntType));
 				
 			case "sidetable":
 				addGameObject(new LivingRoomTable(ex, ey));
@@ -199,22 +197,22 @@ class GameMap extends FlxGroup
 				addGameObject(new TableJar(ex, ey));
 				
 			case "kid_bed":
-				addGameObject(new BaseGObject(ex, ey, EntType, ewidth, eheight, "young master no here", "young master no here"));
+				addGameObject(new BaseGObject(ex, ey, EntType, 64, 64, "young master no here", "young master no here"));
 				
 			case "stuffed_animal":
-				addGameObject(new BaseGObject(ex, ey, EntType, ewidth, eheight, "where young master", "no tell me"));
+				addGameObject(new BaseGObject(ex, ey, EntType, 64, 64, "where young master", "no tell me"));
 				
 			case "toy":
-				addGameObject(new BaseGObject(ex, ey, EntType, ewidth, eheight, "where young master", "young master upset"));
+				addGameObject(new BaseGObject(ex, ey, EntType, 64, 64, "where young master", "young master upset"));
 				
 			case "ducky":
-				addGameObject(new BaseGObject(ex, ey, EntType, ewidth, eheight, "ducky friend", "no tell me"));
+				addGameObject(new BaseGObject(ex, ey, EntType, 64, 64, "ducky friend", "no tell me"));
 				
 			case "dog_bowl":
-				addGameObject(new BaseGObject(ex, ey, EntType, ewidth, eheight, "master give food!", "i ate it"));
+				addGameObject(new BaseGObject(ex, ey, EntType, 64, 64, "master give food!", "i ate it"));
 				
 			case "water_bowl":
-				addGameObject(new BaseGObject(ex, ey, EntType, ewidth, eheight, "water here too", "more tasty"));
+				addGameObject(new BaseGObject(ex, ey, EntType, 64, 64, "water here too", "more tasty"));
 				
 			case "dining_table":
 				addGameObject(new KitchenTable(ex, ey));
@@ -223,7 +221,7 @@ class GameMap extends FlxGroup
 				addGameObject(new Apple(ex, ey));
 				
 			case "chair":
-				addGameObject(new BaseGObject(ex, ey, EntType, ewidth, eheight, "", ""));
+				addGameObject(new BaseGObject(ex, ey, EntType, 64, 64, "", ""));
 				
 			case "tv_table":
 				addGameObject(new TVTable(ex,ey));
@@ -232,10 +230,10 @@ class GameMap extends FlxGroup
 				addGameObject(new TV(ex,ey));
 				
 			case "couch":
-				addGameObject(new BaseGObject(ex, ey, EntType, ewidth, eheight, "where is master", "no master upset"));
+				addGameObject(new BaseGObject(ex, ey, EntType, 64, 64, "where is master", "no master upset"));
 				
 			case "recliner":
-				addGameObject(new BaseGObject(ex, ey, EntType, ewidth, eheight, "master not here", "me upset"));
+				addGameObject(new BaseGObject(ex, ey, EntType, 64, 64, "master not here", "me upset"));
 				
 			case "coffee_table":
 				addGameObject(new CoffeeTable(ex, ey));
@@ -244,7 +242,7 @@ class GameMap extends FlxGroup
 				addGameObject(new Books(ex, ey));
 				
 			case "tree":
-				addGameObject(new BaseGObject(ex, ey, EntType, ewidth, eheight, "", ""));
+				addGameObject(new BaseGObject(ex, ey, EntType, 64, 64, "", ""));
 							
 			default:
 				throw "Unrecognized actor type '" + EntType + "' detected in level file.";
