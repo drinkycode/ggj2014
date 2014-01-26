@@ -45,6 +45,9 @@ class Player extends FlxGroup
 	
 	private var _interacted:Bool = false; // Helper bool flag
 	private var _pressed:Bool = false;
+	
+	private var _playingActionAnim:Bool = false;
+	
 	private var _notMoveTimer:Float = 0;
 	
 	public function new(X:Float = 0, Y:Float = 0) 
@@ -63,15 +66,18 @@ class Player extends FlxGroup
 		sprite.loadImageFromTexture(new TexturePackerData(GAssets.getFile("player", GAssets.LOC_IMGS, "json"), GAssets.getFile("player")), true, false, "idle_left1.png");
 		sprite.animation.addByIndicies("idle_left", 	"idle_left", [1, 2], ".png", 5, true);
 		sprite.animation.addByIndicies("idle_right", 	"idle_right", [1, 2], ".png", 5, true);
+		sprite.animation.addByIndicies("idle_up", 		"run_up", [1], ".png", 0, false);
+		sprite.animation.addByIndicies("idle_down", 	"run_down", [1], ".png", 0, false);
+		
 		sprite.animation.addByIndicies("run_left", 		"run_left", [1, 2, 3, 4, 5, 6], ".png", 10, true);
 		sprite.animation.addByIndicies("run_right", 	"run_right", [1, 2, 3, 4, 5, 6], ".png", 10, true);
 		sprite.animation.addByIndicies("run_down", 		"run_down", [1, 2], ".png", 10, true);
 		sprite.animation.addByIndicies("run_up", 		"run_up", [1, 2], ".png", 10, true);
 		
-		sprite.animation.addByIndicies("action_up", 	"action_up", [1, 2], ".png", 10, false);
-		sprite.animation.addByIndicies("action_down", 	"action_down", [1, 2], ".png", 10, false);
-		sprite.animation.addByIndicies("action_right", 	"action_right", [1, 2], ".png", 10, false);
-		sprite.animation.addByIndicies("action_left", 	"action_right", [1, 2], ".png", 10, false);
+		sprite.animation.addByIndicies("action_up", 	"action_up", [1, 2], ".png", 5, false);
+		sprite.animation.addByIndicies("action_down", 	"action_down", [1, 2], ".png", 5, false);
+		sprite.animation.addByIndicies("action_right", 	"action_right", [1, 2], ".png", 5, false);
+		sprite.animation.addByIndicies("action_left", 	"action_left", [1, 2], ".png", 5, false);
 		
 		sprite.animation.addByIndicies("hug", 	"human_hug", [1, 2], ".png", 5, true);
 		
@@ -149,7 +155,7 @@ class Player extends FlxGroup
 		var newAnim:String = "";
 		var facingOffset:Int = 0;
 		
-		if (allowInput)
+		if (allowInput && !_playingActionAnim)
 		{
 			if (FlxG.keyboard.anyPressed(["DOWN"]))
 			{
@@ -242,7 +248,15 @@ class Player extends FlxGroup
 		
 		if (newAnim == "")
 		{
-			if (facing == FlxObject.LEFT)
+			if (orientation == 0)
+			{
+				newAnim = "idle_up";
+			}
+			else if (orientation == 4)
+			{
+				newAnim = "idle_down";
+			}
+			else if (facing == FlxObject.LEFT)
 			{
 				if (moving)
 				{
@@ -271,7 +285,14 @@ class Player extends FlxGroup
 		super.update();
 		updateMotionExt();
 		
-		if (newAnim != "")
+		if (_playingActionAnim)
+		{
+			if (sprite.animation.finished)
+			{
+				_playingActionAnim = false;
+			}
+		}
+		else if (newAnim != "")
 		{
 			sprite.animation.play(newAnim);
 		}
@@ -423,6 +444,26 @@ class Player extends FlxGroup
 			if (_pressed)
 			{
 				Reflect.callMethod(Obj, Reflect.field(Obj, "interact"), []);
+				
+				var actionAnim:String = "action_right";
+				if (orientation == 0)
+				{
+					actionAnim = "action_up";
+				}
+				else if (orientation == 2)
+				{
+					actionAnim = "action_right";
+				}
+				else if (orientation == 4)
+				{
+					actionAnim = "action_down";
+				}
+				else if (orientation == 6)
+				{
+					actionAnim = "action_left";
+				}
+				sprite.animation.play(actionAnim);
+				_playingActionAnim = true;
 			}
 			G.playstate.gui.showInteractionButton(Obj.x + (Obj.width / 2), Obj.y);
 			_interacted = true;
