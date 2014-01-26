@@ -1,21 +1,20 @@
-package game.objs.livingroom;
-
+package game.objs.kitchen;
 import flixel.FlxSprite;
 import flixel.animation.FlxAnimationController;
 import game.objs.BaseGObject;
 import util.GAssets;
 
 /**
- * tv on top of tv table
+ * Jar on top of table
  * 
  * @author Michael Lee
  */
-class TV extends BaseGObject
+class Apple extends BaseGObject
 {
 	
 	public function new(X:Float = 0, Y:Float = 0) 
 	{
-		super(X, Y, "tv", 64, 128, "people in here", "master not here");
+		super(X, Y, "apple", 64, 128, "food?", "i eat");
 		canInteract = false;
 	}
 	

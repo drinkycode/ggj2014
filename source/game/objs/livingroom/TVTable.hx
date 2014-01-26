@@ -1,4 +1,4 @@
-package game.objs.kitchen;
+package game.objs.livingroom;
 
 import flixel.FlxG;
 import flixel.FlxSprite;
@@ -12,7 +12,7 @@ import util.GAssets;
  * 
  * @author Michael Lee
  */
-class KitchenTable extends BaseGObject
+class TVTable extends BaseGObject
 {
 	
 	private var _x:Float;
@@ -23,11 +23,11 @@ class KitchenTable extends BaseGObject
 	{
 		super(X, Y);
 		
-		objName = "dining_table";
+		objName = "tv_table";
 		preInteractionMessage = "*shake table*";
-		postInteractionMessage = "food?";
+		postInteractionMessage = "thing fell off";
 		requiredCalls = 3;
-		childObjName = "apple";
+		childObjName = "tv";
 		
 		interactionCooldown = 1;
 		
@@ -37,7 +37,7 @@ class KitchenTable extends BaseGObject
 	override private function setupSprite():Void 
 	{
 		super.setupSprite();
-		loadGraphic(GAssets.getFile("dining_table"));
+		loadGraphic(GAssets.getFile("tv_table"));
 		
 		G.playstate.gmap.addHitbox(x, y, 64, 96);
 	}
