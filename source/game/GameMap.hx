@@ -144,6 +144,8 @@ class GameMap extends FlxGroup
 		var ex:Float = Std.parseFloat(Data.get("x"));
 		var ey:Float = Std.parseFloat(Data.get("y"));
 		
+		var o:BaseGObject;
+		
 		switch (EntType.toLowerCase())	
 		{
 			case "player":
@@ -169,22 +171,24 @@ class GameMap extends FlxGroup
 				addGameObject(new BaseGObject(ex, ey, EntType, 64, 64, "my enemy", "my enemy"));
 				
 			case "toilet":
-				addGameObject(new BaseGObject(ex, ey, EntType, 0, 0, "drink water", "very tasty"));
+				o = new BaseGObject(ex, ey, EntType, 0, 0, "drink water", "very tasty", false);
+				o.setupHitbox(40, 48, 12, 16);
+				addGameObject(o);
 				
 			case "bathtub":
-				addGameObject(new BaseGObject(ex, ey, EntType, 0, 0, "no wet now", "i hate tub"));
+				addGameObject(new BaseGObject(ex, ey, EntType, 0, 0, "no wet now", "i hate tub", true, 128, 64));
 				
 			case "sink":
-				addGameObject(new BaseGObject(ex, ey, "bathroom_sink"));
+				addGameObject(new BaseGObject(ex, ey, "bathroom_sink", 0, 0, "" ,"", true, 64, 128));
 				
 			case "bath_mat":
 				addGameObject(new BaseGObject(ex, ey, "bathroom_mat"));
-						
+				
 			case "kid_toilet":
 				addGameObject(new BaseGObject(ex, ey, EntType, 0, 0, "drink water", "very tasty"));
 				
 			case "kid_bathtub":
-				addGameObject(new BaseGObject(ex, ey, EntType, 0, 0, "no wet now", "i hate tub"));
+				addGameObject(new BaseGObject(ex, ey, EntType, 0, 0, "no wet now", "i hate tub", true, 128, 64));
 				
 			case "kid_sink":
 				addGameObject(new BaseGObject(ex, ey, EntType));
