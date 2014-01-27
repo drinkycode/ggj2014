@@ -37,6 +37,7 @@ class PlayState extends FlxState
 	
 	public var gui:GameGUI;
 	public var gmap:GameMap;
+	public var hometext:FlxText;
 	
 	public var badInteractions:Int = 0;
 	
@@ -76,6 +77,12 @@ class PlayState extends FlxState
 		
 		gmap.player.allowInput = false;
 		FlxG.sound.playMusic(GAssets.getFile("sneaky_adventure", GAssets.LOC_MUSIC, "mp3"), 0.5);
+		
+		hometext = new FlxText(0, 30, FlxG.width, "Echo, I'm home!");
+		hometext.setFormat(GAssets.getFile("HelvetiHand", GAssets.LOC_DATA, "ttf"), 20, 0xffffff, "center", FlxText.BORDER_OUTLINE, 0x000000, true);
+		hometext.scrollFactor.x = hometext.scrollFactor.y = 0;
+		hometext.visible = false;
+		add(hometext);
 	}
 	
 	/**
@@ -131,7 +138,7 @@ class PlayState extends FlxState
 				{
 					_ending = 3;
 				}
-				
+				hometext.visible = true;
 				FlxG.camera.fade(0xff000000, 1.5, false, onFadeComplete, true);
 			}
 		}
@@ -149,6 +156,7 @@ class PlayState extends FlxState
 	
 	private function onFadeComplete():Void
 	{
+		hometext.visible = false;
 		if (FlxG.sound.music != null)
 		{
 			FlxG.sound.music.stop();

@@ -31,7 +31,7 @@ class MenuState extends FlxState
 		
 		
 		super.create();
-		var text:FlxText = new FlxText(0, FlxG.height/3, FlxG.width, "Press X to Start");
+		var text:FlxText = new FlxText(0, FlxG.height/3, FlxG.width, "Press X to Start\nArrow Keys to move");
 			text.setFormat(GAssets.getFile("awesome", GAssets.LOC_DATA, "ttf"), 16, 0xffffff, "center", FlxText.BORDER_OUTLINE, 0x000000, true);
 		
 		var title:FlxSprite = new FlxSprite();
