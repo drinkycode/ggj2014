@@ -129,16 +129,18 @@ class PlayState extends FlxState
 				else if (!gmap.player.movedOnce)
 				{
 					_ending = 4;
+					hometext.visible = true;
 				}
 				else if (badInteractions <= 6)
 				{
 					_ending = 2;
+					hometext.visible = true;
 				}
 				else
 				{
 					_ending = 3;
+					hometext.visible = true;
 				}
-				hometext.visible = true;
 				FlxG.camera.fade(0xff000000, 1.5, false, onFadeComplete, true);
 			}
 		}
