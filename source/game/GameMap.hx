@@ -52,7 +52,7 @@ class GameMap extends FlxGroup
 	
 	public function create():Void
 	{
-		level = new FlxOgmoLoader(GAssets.getFile("house", GAssets.LOC_DATA, "oel")); 
+		level = new FlxOgmoLoader(GAssets.getFile("newhouse", GAssets.LOC_DATA, "oel")); 
 		
 		// IMPORTANT: Always collide the map with objects, not the other way around. 
 		// This prevents odd collision errors (collision separation code off by 1 px). FlxG.collide(map, obj, notifyCallback);
@@ -88,8 +88,8 @@ class GameMap extends FlxGroup
 		
 		cameraFollow = new FlxObject(0, 0, 1, 1);
 		
-		FlxG.worldBounds.set(0, 0, 2048, 2048);
-		FlxG.camera.setBounds(0, 0, 2048, 2048);
+		FlxG.worldBounds.set(0, 0, 1600, 1600);
+		FlxG.camera.setBounds(0, 0, 1600, 1600);
 		FlxG.camera.follow(cameraFollow, FlxCamera.STYLE_TOPDOWN, new FlxPoint(0, 0), 2);
 		
 		add(tilemap);

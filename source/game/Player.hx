@@ -332,7 +332,7 @@ class Player extends FlxGroup
 			}
 		}
 		
-		if (sprite.x >= 2048)
+		if (sprite.x >= 1600)
 		{
 			G.playstate.forceEnding = 1;
 		}

@@ -26,15 +26,18 @@ class MenuState extends FlxState
 		// Set a background color
 		FlxG.cameras.bgColor = 0xff131c1b;
 		// Show the mouse (in case it hasn't been disabled)
-		#if !FLX_NO_MOUSE
-		FlxG.mouse.show();
-		#end
+		
+		FlxG.mouse.hide();
+		
 		
 		super.create();
+		var text:FlxText = new FlxText(0, FlxG.height/3, FlxG.width, "Press X to Start");
+			text.setFormat(GAssets.getFile("awesome", GAssets.LOC_DATA, "ttf"), 16, 0xffffff, "center", FlxText.BORDER_OUTLINE, 0x000000, true);
 		
 		var title:FlxSprite = new FlxSprite();
 		title.loadGraphic(GAssets.getFile("title"));
 		add(title);
+		add(text);
 	}
 	
 	/**
@@ -51,7 +54,7 @@ class MenuState extends FlxState
 	 */
 	override public function update():Void
 	{
-		if (FlxG.mouse.justPressed || FlxG.keyboard.anyJustPressed(["X", "UP", "DOWN", "LEFT", "RIGHT"]))
+		if (FlxG.mouse.justPressed || FlxG.keyboard.anyJustPressed(["X"]))
 		{
 			playGame();
 		}

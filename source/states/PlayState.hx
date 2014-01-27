@@ -162,6 +162,8 @@ class PlayState extends FlxState
 		
 		gmap.player.ending = true;
 		
+		var endx:Float;
+		var endy:Float;
 		// Setup endings
 		switch (_ending) 
 		{
@@ -169,42 +171,51 @@ class PlayState extends FlxState
 			case 1: 
 				gmap.player.sprite.visible = false;
 				
-				positionHuman(1732, 1484);
+				endx = 1280;
+				endy = 992;
+				
+				positionHuman(endx, endy);
 				gmap.human.sprite.facing = FlxObject.RIGHT;
 				gmap.human.sprite.animation.play("idle");
 				
-				FlxG.camera.scroll.x = 1520;
-				FlxG.camera.scroll.y = 1360;
-				
+				FlxG.camera.scroll.x = endx - 212;
+				FlxG.camera.scroll.y = endy - 124;
+			
 				callHumanPopup("ECHO? ECHO!", 6.5);
 				
 			// Good ending
 			case 2: 
-				positionPlayer(1554, 948);
+				endx = 1056;
+				endy = 960;
+				
+				positionPlayer(endx, endy);
 				gmap.player.sprite.animation.play("idle_right");
 				gmap.player.facing = FlxObject.RIGHT;
 				
-				positionHuman(1582, 904);
+				positionHuman(endx+28, endy-44);
 				gmap.human.sprite.facing = FlxObject.LEFT;
 				gmap.human.sprite.animation.play("idle");
 				
-				FlxG.camera.scroll.x = 1340;
-				FlxG.camera.scroll.y = 750;
+				FlxG.camera.scroll.x = endx - 214;
+				FlxG.camera.scroll.y = endy - 198;
 				
 				callHumanPopup("Echo come here!", 4.5);
 				
 			// Bad ending
 			case 3:
-				positionPlayer(1454, 544);
+				endx = 1120;
+				endy = 544;
+				
+				positionPlayer(endx, endy);
 				gmap.player.sprite.animation.play("idle_right");
 				gmap.player.facing = FlxObject.RIGHT;
 				
-				positionHuman(1500, 500);
+				positionHuman(endx+46, endy-44);
 				gmap.human.sprite.facing = FlxObject.LEFT;
 				gmap.human.sprite.animation.play("scold");
 				
-				FlxG.camera.scroll.x = 1340;
-				FlxG.camera.scroll.y = 340;
+				FlxG.camera.scroll.x = endx - 114;
+				FlxG.camera.scroll.y = endy - 204;
 				
 			// Death ending
 			case 4:
@@ -213,7 +224,7 @@ class PlayState extends FlxState
 				gmap.player.active = false;
 				gmap.player.sprite.animation.play("dead");
 				
-				positionHuman(710, 312);
+				positionHuman(250, 433);
 				gmap.human.sprite.facing = FlxObject.LEFT;
 				gmap.human.sprite.animation.play("cry");
 				
@@ -353,7 +364,7 @@ class PlayState extends FlxState
 	
 	private function runawayEnding1(T:FlxTween = null):Void
 	{
-		callHumanPopup("Where did Echo go?", 5);
+		callHumanPopup("Echo where are you??", 5);
 	}
 	private function runawayEnding2(T:FlxTween = null):Void
 	{
